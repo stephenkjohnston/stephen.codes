@@ -1,0 +1,57 @@
+---
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import { SEO } from "astro-seo";
+import readingTime from "reading-time";
+import Layout from "layouts/Layout.astro";
+
+type Article = CollectionEntry<"articles">;
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  return articles.map((article: Article) => ({
+    params: {
+      slug: article.slug,
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const article = await getEntry("articles", slug);
+
+if (!article) {
+  return Astro.redirect("/404"); // Handle 404 for invalid slugs
+}
+
+const { Content } = await article.render();
+const publishedDate = new Date(article?.data.pubDate);
+const formattedDate = publishedDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+  timeZone: "UTC",
+});
+const stats = readingTime(article?.body);
+const readingTimeInMinutes = Math.ceil(stats.minutes);
+---
+
+<SEO title={article.data.title} />
+<Layout>
+  <h1>{article?.data.title}</h1>
+  <p class="article__subheader">
+    {formattedDate} • {readingTimeInMinutes} min
+  </p>
+  <Content />
+</Layout>
+<style>
+  .article__subheader {
+    margin: 0;
+    font-size: clamp(0.8rem, 4vw, 1rem);
+    color: var(--clr-gray-100);
+    font-style: italic;
+
+    &--link {
+      color: var(--link-color);
+    }
+  }
+</style>

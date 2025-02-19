@@ -1,3 +1,5 @@
+@use "reset";
+@use "variables";
 @use "theme";
 
 body {
@@ -14,5 +16,16 @@ body {
         "footer";
     grid-template-rows: auto minmax(0, 1fr) 5rem;
     grid-template-columns: minmax(0, 1fr);
-    min-height: 100vh;
+    height: 100vh;
+    letter-spacing: -.5px;
+    text-rendering: optimizeSpeed;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--link-primary);
+
+    &:hover {
+        color: var(--link-primary-hover);
+    }
 }

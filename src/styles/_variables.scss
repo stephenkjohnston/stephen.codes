@@ -1,3 +1,24 @@
 :root {
+    // Colors
+    --clr-white: #ffffff;
+    --clr-gray-10: #f4f4f4;
+    --clr-gray-100: #161616;
+    --clr-blue-60: #0f62fe;
+    --clr-blue-70: #0043ce;
+    --clr-orange-300: #ffa154;
+    --clr-purple-300: #cd9ef7;
 
+    // Tokens
+    --background: var(--clr-gray-10);
+    --text-primary: var(--clr-gray-100);
+    --link-primary: var(--clr-blue-60);
+    --link-primary-hover: var(--clr-blue-70);
+    --tag-html: var(--clr-purple-300);
+    --tag-html-text: var(--clr-gray-100);
+
+    // Typography
+    --ff-primary: "IBM Plex Mono", serif;
+
+    --fw-700: 700;
+    --fw-400: 400;
 }

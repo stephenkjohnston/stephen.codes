@@ -1,0 +1,62 @@
+---
+const { title, url, tag, date } = Astro.props;
+const tagName = tag.toLowerCase();
+---
+
+<li aria-label={title} class="link">
+  <div class="link__header">
+    <a href={url} class="link__title" aria-label={`Go to ${title}`}>
+      <h3>{title}</h3>
+    </a>
+    <time datetime={date.toISOString()} class="link__date">
+      {
+        new Date(date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          timeZone: "UTC",
+        })
+      }
+    </time>
+  </div>
+</li>
+
+<style lang="scss">
+  .link {
+    margin-block-end: 1rem;
+    padding-block: 0.625rem;
+    border-bottom: 1px dashed var(--clr-gray-100);
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+
+      @media (max-width: 36rem) {
+        flex-direction: column;
+      }
+
+      h3 {
+        margin: 0;
+      }
+    }
+
+    &__tag {
+      padding: 0.25rem 0.625rem;
+      border-radius: 0.25rem;
+      &[data-tag-name="html"] {
+        background-color: var(--tag-html);
+        color: var(--tag-html-text);
+      }
+    }
+  }
+  // .recent__link {
+  //   display: flex;
+  //   justify-content: space-between;
+
+  //   &__title {
+  //     margin: 0;
+  //   }
+
+  //   }
+  // }
+</style>

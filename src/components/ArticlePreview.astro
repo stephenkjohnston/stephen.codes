@@ -1,0 +1,72 @@
+---
+import readingTime from "reading-time";
+import { getEntry } from "astro:content";
+const { article, showExcept } = Astro.props;
+
+// Calculate reading time
+const currentArticle = await getEntry("articles", article.slug);
+const stats = readingTime(currentArticle?.body ?? "");
+const readingTimeInMinutes = Math.ceil(stats.minutes);
+const publishedDate = new Date(currentArticle?.data.pubDate);
+const formattedDate = publishedDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+  timeZone: "UTC",
+});
+---
+
+<article class="article-preview">
+  <a href={`/articles/${currentArticle?.slug}`}>
+    <header class="article-preview__header">
+      <h2 class="article-preview__title">
+        {currentArticle?.data?.title}
+      </h2>
+      <p class="article-preview__subheader">
+        {formattedDate} • {readingTimeInMinutes} min • {
+          currentArticle?.data?.tag
+        }
+      </p>
+    </header>
+  </a>
+</article>
+<style>
+  .article-preview {
+    margin-block-end: 1rem;
+    padding-block: 0.625rem;
+    border-bottom: 1px dashed var(--clr-gray-100);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    a {
+      text-decoration: none;
+      color: var(--link-primary);
+    }
+  }
+
+  .article-preview__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .article-preview__title {
+    margin: 0;
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    font-weight: bold;
+  }
+
+  .article-preview__subheader {
+    margin: 0;
+    font-size: clamp(0.8rem, 4vw, 1rem);
+    color: var(--clr-gray-100);
+    font-style: italic;
+  }
+
+  .article-preview__excerpt {
+    margin: 0;
+    font-size: clamp(0.8rem, 4vw, 1rem);
+    color: var(--clr-gray-100);
+  }
+</style>

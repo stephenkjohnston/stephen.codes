@@ -1,0 +1,62 @@
+---
+
+---
+
+<header class="header">
+  <a class="header__skip-nav" href="#main-content">Skip to Main Content</a>
+  <button
+    class="header__hamburger"
+    aria-label="Toggle Menu"
+    aria-expanded="false"
+    aria-controls="global-navigation"
+  >
+    <span></span>
+  </button>
+  <a class="header__brand" href="/" aria-label="Stephen Johnston"
+    >Stephen<span>Johnston</span></a
+  >
+  <nav class="header__nav" id="nav-menu" aria-label="Main navigation">
+    <ul class="header__nav-menu">
+      <li
+        class="header__nav-item"
+        aria-current={Astro.url.pathname === "/" ? "page" : undefined}
+      >
+        <a class="header__nav-link" href="/">#home</a>
+      </li>
+      <li
+        class="header__nav-item"
+        aria-current={Astro.url.pathname.includes("articles")
+          ? "page"
+          : undefined}
+      >
+        <a class="header__nav-link" href="/articles">#articles</a>
+      </li>
+      <li
+        class="header__nav-item"
+        aria-current={Astro.url.pathname === "/about-me" ? "page" : undefined}
+      >
+        <a class="header__nav-link" href="/about-me">#about-me</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<script>
+  const hamburger = document.querySelector(".header__hamburger");
+  const navigationMenu = document.querySelector("#nav-menu");
+  if (hamburger && navigationMenu) {
+    hamburger.addEventListener("click", () => {
+      const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute(
+        "aria-expanded",
+        `${!isExpanded ? "true" : "false"}`
+      );
+      navigationMenu.classList.toggle("header__nav--expanded");
+
+      if (!isExpanded) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+      }
+    });
+  }
+</script>

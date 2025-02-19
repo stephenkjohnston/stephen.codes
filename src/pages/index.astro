@@ -1,7 +1,43 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from "astro:env/client";
+import { SEO } from "astro-seo";
+
+import HomepageHero from "components/HomepageHero.astro";
+import Layout from "../layouts/Layout.astro";
+import HomepageRecentAritcles from "components/HomepageRecentAritcles.astro";
+
+import SocialBackground from "assets/images/social-background.png";
+import SiteFavicon from "assets/images/favicon-32x32.png";
 ---
 
+<SEO
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  openGraph={{
+    basic: {
+      title: `${SITE_TITLE}`,
+      type: "website",
+      image: `${SocialBackground.src}`,
+    },
+  }}
+  twitter={{
+    creator: "@stephencodes",
+  }}
+  extend={{
+    // extending the default link tags
+    link: [{ rel: "icon", href: `${SiteFavicon.src}` }],
+    // extending the default meta tags
+    meta: [
+      {
+        name: "twitter:image",
+        content: `${SocialBackground.src}`,
+      },
+      { name: "twitter:title", content: `${SITE_TITLE}` },
+      { name: "twitter:description", content: `${SITE_DESCRIPTION}` },
+    ],
+  }}
+/>
 <Layout>
-	Hello
+  <HomepageHero />
+  <HomepageRecentAritcles />
 </Layout>
