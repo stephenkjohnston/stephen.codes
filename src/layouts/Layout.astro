@@ -1,10 +1,12 @@
 ---
-import { MODE } from "astro:env/client";
+import { MODE, GTM_ID } from "astro:env/client";
 import GlobalHeader from "components/GlobalHeader.astro";
 import GlobalFooter from "components/GlobalFooter.astro";
 
 import "styles/main.scss";
 import GoogleAnalytics from "components/GoogleAnalytics.astro";
+import GoogleTagManager from "components/GoogleTagManager.astro";
+import GoogleTagManagerBody from "components/GoogleTagManagerBody.astro";
 ---
 
 <!doctype html>
@@ -21,8 +23,14 @@ import GoogleAnalytics from "components/GoogleAnalytics.astro";
       rel="stylesheet"
     />
     {MODE === "production" && <GoogleAnalytics />}
+    <!-- Google Tag Manager -->
+    {MODE === "production" && <GoogleTagManager />}
+    <!-- End Google Tag Manager -->
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    {MODE === "production" && <GoogleTagManagerBody />}
+    <!-- End Google Tag Manager (noscript) -->
     <div id="application">
       <GlobalHeader />
       <main id="main-content">

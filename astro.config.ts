@@ -25,6 +25,11 @@ export default defineConfig({
         optional: false,
         default: "Stephen Johnston's personal website",
       }),
+      GTM_ID: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
     },
   },
 });
