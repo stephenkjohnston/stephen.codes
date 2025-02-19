@@ -3,7 +3,7 @@ title: "Introduction to COBOL"
 url: "/articles/introduction-to-cobol"
 pubDate: "2025-02-13"
 tag: "cobol"
-excerpt: "In this article, I attempt to cover the basics of COBOL and part of its history. COBOL, despite its age, remains highly relevant, which is one of the primary reasons I've been exploring it."
+excerpt: "Discover COBOL basics, history, and relevance in this article. Learn why this enduring language still matters in modern tech."
 ---
 ## The Problem
 As businesses began relying more heavily on computers for data processing—such as payroll, inventory, banking, and more—in the 1950s, it became clear that change was needed. At the time, each computer had its own proprietary programming language, which was often hardware-specific. As a result, sharing programs between different systems was incredibly difficult. It's also important to note that programming languages at the time were highly mathematical, making them inaccessible to non-technical users.

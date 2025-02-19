@@ -1,4 +1,5 @@
 ---
+import { SITE_TITLE } from "astro:env/client";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 import { SEO } from "astro-seo";
 import readingTime from "reading-time";
@@ -35,7 +36,10 @@ const stats = readingTime(article?.body);
 const readingTimeInMinutes = Math.ceil(stats.minutes);
 ---
 
-<SEO title={article.data.title} />
+<SEO
+  title={`${SITE_TITLE} &ndash; ${article.data.title}`}
+  description={article.data.excerpt}
+/>
 <Layout>
   <h1>{article?.data.title}</h1>
   <p class="article__subheader">
