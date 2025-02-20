@@ -26,7 +26,7 @@ Since COBOL dates back to the era of punched cards—where data was physically e
 * Columns 73-80 - known as the Identification Area, are rarely used in modern COBOL programming.
 
 ### The Structure of a COBOL program
-Because COBOL is English-like, perhaps it comes as no surprise that a COBOL program is structured much like a document, with divisions, sections, paragraphs, sentences, and characters. Let's explore these a little more.
+Because COBOL is English-like, perhaps it comes as no surprise that a COBOL program is structured much like a document, with divisions, sections, paragraphs, sentences, and statements. Let's explore these a little more.
 
 * Divisions: Major segments of a COBOL program that categorize different aspects like program identification, environment setup, data definitions, and procedural logic.
 * Sections: Group related functionality within divisions.
