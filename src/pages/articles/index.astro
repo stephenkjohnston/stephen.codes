@@ -6,6 +6,11 @@ import AritlcePreiew from "components/ArticlePreview.astro";
 import Layout from "layouts/Layout.astro";
 
 const articles = await getCollection("articles");
+const recentArticles = articles
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  )
 ---
 
 <SEO
@@ -21,7 +26,7 @@ const articles = await getCollection("articles");
     > to get future posts straight to your inbox.
   </p>
   <div class="articles">
-    {articles.map((article) => <AritlcePreiew article={article} />)}
+    {recentArticles.map((article) => <AritlcePreiew article={article} />)}
   </div>
 </Layout>
 <style>
