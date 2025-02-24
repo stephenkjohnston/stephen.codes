@@ -69,6 +69,7 @@ If you're like me, reading about something is fine and dandy, but seeing the cod
        
 ```
 **Output:**
+
 ```
 Salary: 50000
 ```
@@ -88,6 +89,7 @@ Salary: 50000
        
 ```
 **Output:**
+
 ```
 Employee Name: John Doe
 ```
@@ -96,6 +98,7 @@ Employee Name: John Doe
 For this example we're going to go over a couple ways to accomplish the task at hand. In COBOL, you can assign values to a group field directly with `MOVE`, but you need to account for the full length of subfields, or you can move data directly into the group using MOVE ... TO ... IN. In larger COBOL applications, you might encounter multiple groups with fields of the same name (e.g., EMPLOYEE-NAME in different groups). Using MOVE ... TO IN ensures values are assigned to the correct field, avoiding potential bugs or confusion. You can also use `OF` instead of `IN` as a synonym when referencing subfields — e.g., `NAME OF EMPLOYEE-DETAILS`. Let's take a look at a couple examples:
 
 **MOVE ... TO**
+
 This pair of statements allows you to assign values to individual fields within a group.
 
 ```cobol
@@ -118,6 +121,7 @@ This pair of statements allows you to assign values to individual fields within 
 In this example, the string `"Jane Smith     56789"` is padded with spaces to match the 20-character length of `EMPLOYEE-NAME`. The first 20 characters fill `EMPLOYEE-NAME`, and `"56789"` goes to `EMPLOYEE-ID`. Without padding, some compilers might space-fill `EMPLOYEE-NAME` and leave `EMPLOYEE-ID` undefined or zeroed out.
 
 **MOVE ... TO ... IN**
+
 This group of statements allows you to move data directly into the group, even if they share similar names. While I won't say never, I will say it shouldn't happen within smaller COBOL program, but if you work in a larger COBOL program you're probably going to see this.
 
 ```cobol
@@ -144,6 +148,7 @@ This group of statements allows you to move data directly into the group, even i
 ```
 
 **MOVE ... TO ... OF**
+
 Here's the same example using OF instead of IN, showing they work interchangeably:
 
 ```cobol
@@ -193,6 +198,7 @@ If you want to store a date in a structured way, you can use a grouped field to 
 ```
 
 **Date as Numeric Field (ISO Format)**
+
 Using YYYYMMDD (e.g., 19850715 for July 15, 1985) avoids confusion — unlike MMDDYYYY or DDMMYYYY, where 07012025 could be July 1st or January 7th depending on the region. 
 
 ```cobol
@@ -209,6 +215,7 @@ Using YYYYMMDD (e.g., 19850715 for July 15, 1985) avoids confusion — unlike MM
 ```
 
 **OUTPUT**
+
 ```
 Birth Date (YYYYMMDD): 19850715
 ```
@@ -234,6 +241,7 @@ If you want to display a date with slashes (e.g., YYYY/MM/DD) from an ISO format
 In this example, the PIC 9999/99/99 clause formats the date with slashes for display. The raw numeric value 19850815 is transformed into 1985/08/15.
 
 **OUTPUT**
+
 ```
 Birth Date: 1985/08/15
 ```
