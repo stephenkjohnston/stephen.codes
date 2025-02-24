@@ -6,7 +6,6 @@ import topicsData from "data/topics.json";
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { Topics } from "types/Topic.types";
 import ArticlePreview from "components/ArticlePreview.astro";
-import { undefined } from "astro:schema";
 type Article = CollectionEntry<"articles">;
 
 export async function getStaticPaths() {
