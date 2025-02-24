@@ -143,6 +143,27 @@ This group of statements allows you to move data directly into the group, even i
        
 ```
 
+**MOVE ... TO ... OF**
+Here's the same example using OF instead of IN, showing they work interchangeably:
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. MULTIPLE-GROUPS-OF.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 EMPLOYEE-DETAILS.
+          05 NAME PIC X(20).
+       01 MANAGER-DETAILS.
+          05 NAME PIC X(20).
+       PROCEDURE DIVISION.
+           MOVE "John Doe" TO NAME OF EMPLOYEE-DETAILS.
+           DISPLAY "Employee Name: " NAME OF EMPLOYEE-DETAILS.
+           MOVE "Jane Smith" TO NAME OF MANAGER-DETAILS.
+           DISPLAY "Manager Name: " NAME OF MANAGER-DETAILS.
+           STOP RUN.
+       END PROGRAM MULTIPLE-GROUPS-OF.
+```
+
 ### Example 4: Dates
 Another common example we'd find in a business application might be a date. Now, this is one place where COBOL, at least in all my research, seems to be lacking. COBOL doesn't natively support a dedicated **DATETIME** field type, so we need to handle dates ourselves. For consistency, I recommend storing dates in ISO format (YYYYMMDD) — it's unambiguous and sorts easily in files. Here are two approaches:
 
