@@ -5,6 +5,7 @@ pubDate: "2025-02-20"
 tag: "cobol"
 url: "/articles/cobol-data-types-variables"
 ---
+
 ## Data Types in COBOL
 The COBOL standard categorizes data based on its purpose into five distinct types. These are:
 
@@ -18,33 +19,33 @@ The COBOL standard categorizes data based on its purpose into five distinct type
 The **Alphanumeric Edited** and **Numeric Edited** data types can be a bit tricky at first — but simply put, it's COBOL's way of saying, "Let's make this data look fancy!" They're designed for formatting data for display, like adding commas to numbers, currency symbols, or even hyphens in text.
 
 ## Variables in COBOL
-In COBOL, all variables are defined in the `DATA DIVISION`, which is where your COBOL program defines and stores all the data it will use. COBOL variables are hierarchical and are made up of level numbers, `PICTURE` (or `PIC`) clauses, and optional default value (more on this later on):
-1. A **LEVEL-NUMBER**, which is how we determine if it's an individual field, group item, or elementary item. So, what the differences? They are:
-   * **01** Indicates that this is a top level item. It can be either standalone or the start of a group item. I'd like point out that anything starting with a ZERO is pronounced "OH" followed by the level number (e.g., OH-ONE, OH-TWO).
+In COBOL, all variables are defined in the `DATA DIVISION`, which is where your COBOL program defines and stores all the data it will use. COBOL variables are hierarchical and are made up of level numbers, `PICTURE` (or `PIC`) clauses, and optional default values (more on this later):
+1. A **LEVEL-NUMBER**, which determines if it's an individual field, group item, or elementary item. So, what's the difference? They are:
+   * **01** - Indicates a top-level item. It can be standalone or the start of a group item. Fun fact: anything starting with a zero is pronounced "OH" followed by the level number (e.g., OH-ONE, OH-TWO).
    * **02 - 49** - Indicates subordinate levels. These are used within groups to break down data into smaller, more manageable chunks — think of an **OBJECT** in modern programming languages.
-   * **66** - This is used for what's known as RENAMES. I've not used this yet, but it seems similar to creating a view in SQL, it allows you to create an alternative view of the same data.
-   * **77** - Indicates a standalone item which doesn't need to be not part of a group.
-   * **88** - Most often used for condition names. They're incredibly useful for making your code more readable. The closest comparison I can think of might be an ENUM in modern languages. However, you can't really access it like like an ENUM (e.g., ORDER-STATUS.NEW-ORDER). Instead, you use the condition name in logical statements.
-2. A **VARIABLE NAME**, refers to the name we'll use to access this item later on in the program. Like in every programming language it has some rules; one of which goes against everything I was thought about variables 😀. Getting back on track now, these rules are:
+   * **66** - Used for what's known as RENAMES. I've not used this yet, but it seems similar to creating a view in SQL, allowing you to create an alternative view of the same data.
+   * **77** - Indicates a standalone item that doesn't need to be part of a group.
+   * **88** - Most often used for condition names. They're incredibly useful for making your code more readable. The closest comparison might be an ENUM in modern languages, though you can't access it like one (e.g., ORDER-STATUS.NEW-ORDER). Instead, you use the condition name in logical statements.
+2. A **VARIABLE NAME**, the name we'll use to access this item later in the program. Like in every programming language, it has some rules — one of which goes against everything I was taught about variables 😀. These rules are:
    * **Length** - A variable name can be as short as 1 character (please don't do this 😱—it's terrible for readability!!) and as long as 30 characters.
-   * **Allowed Characters** - Pretty standard stuff here, they can include letters (A-Z a-z), numbers (0-9), and hypens (-). 
-   * **Starting & Ending Characters** - In COBOL they can start and end with a letter or a number; that's right, a number!. However, because COBOL is not totally insane, you cannot start or end your variable names with a hypen. At least they choose to put some restrictions on the names 🤣.
+   * **Allowed Characters** - Pretty standard stuff here: letters (A-Z, a-z), numbers (0-9), and hyphens (-).
+   * **Starting & Ending Characters** - In COBOL, they can start and end with a letter or a number — that's right, a number! However, you cannot start or end with a hyphen. At least they put some restrictions on the names 🤣.
    * **No Reserved Words** - This one makes sense. Don't use reserved words (e.g., DISPLAY, ACCEPT, MOVE).
-3. A **PICTURE (or PIC) Clause** - A PICTURE (or PIC) Clause - This is where all kinds of magic happens. This is how we define the type, size, and display format of a variable, using symbols (e.g., A, 9, X). Formatting is actually one of the neatest tricks of COBOL. I can't tell you how many times I've pulled my hair out trying to make something look a certain way when it's displayed. Well, COBOL does the heavy lifting for you—once you wrap your head around how it works! We'll dive deeper into this shortly.
-4. A  **VALUE Clause** - This is where you can set an initial value for your variable. It's also optional.
+3. A **PICTURE (or PIC) Clause** - This is where the magic happens. It defines the type, size, and display format of a variable using symbols (e.g., A, 9, X). Formatting is one of COBOL's neatest tricks. I can't tell you how many times I've pulled my hair out trying to make something look a certain way when it's displayed. Well, COBOL does the heavy lifting for you — once you wrap your head around how it works! We'll dive deeper into this shortly.
+4. A **VALUE Clause** - This is where you can set an initial value for your variable. It's optional.
 
 ### A PICTURE Is Worth A Thousand Words
-As mentioned earlier, the **PICTURE** clause allows you to define the structure of your data and format it in a way that makes you happy. While you might find references to the full keyword **PICTURE** in older code, most examples you'll encounter today use the abbreviated keyword **PIC**. I think it really comes down to either personal preference or your company's programming style guide. That said, the TL;DR on the PICTURE clause is that it's a blueprint for how your data should appear.
+As mentioned earlier, the **PICTURE** clause allows you to define the structure of your data and format it in a way that makes you happy. While you might find references to the full keyword **PICTURE** in older code, most examples today use the abbreviated **PIC**. It really comes down to personal preference or your company's programming style guide. The TL;DR on the PICTURE clause is that it's a blueprint for how your data should appear.
 
-Now, like any blueprint the **PICTURE** clause contains some special symbols that at first clance will make you go "HUH!". I'll do my best to make explain them though, and while there are more than listed here, I'm only going to touch on the most common symbols. With symbols you can either use a single character and tell it the length between parenthesis (e.g., PIC 9(5)), or your can long hand it, like: `PIC 99999`. I don't recommend taking the long route though.
+Like any blueprint, the **PICTURE** clause uses special symbols that might make you go "HUH!" at first glance. I'll do my best to explain them, and while there are more than listed here, I'm focusing on the most common ones. With symbols, you can either use a single character and specify the length in parentheses (e.g., `PIC 9(5)`), or write it out longhand like `PIC 99999`. I don't recommend the long route, though — it's just more typing!
 
 #### Common Symbols
 The following are probably the most commonly used symbols based on what I've learned so far.
 
-1. **9** - This symbol is pretty self explanitory and represents a number field. Example: `PIC 9(5)`, defines a 5-digit numeric field.
-2. **A** - This respresents an alphabetic field. Example: `PIC A(10)`, defines a 10-digit numeric field.
-3. **X** - This represents an alphanumeric field. Example: `PIC X(10)`, defines a 10-digit alphanumeric field.
-4. **V** - This is where things get a little interesting. This represents an an implied decimal point. Example: `PIC 9(5)V99`, defines a 7-digit numberic field with two decimal places.
+1. **9** - This symbol is pretty self-explanatory and represents a numeric field. Example: `PIC 9(5)` defines a 5-digit numeric field.
+2. **A** - This represents an alphabetic field. Example: `PIC A(10)` defines a 10-character field that can only contain alphabetic characters (A-Z). Note that in practice, `PIC X` is often preferred over `PIC A` because it's more flexible, allowing alphanumeric characters (letters, numbers, and special characters).
+3. **X** - This represents an alphanumeric field. Example: `PIC X(10)` defines a 10-character alphanumeric field.
+4. **V** - This is where things get interesting. It represents an implied decimal point. Example: `PIC 9(5)V99` defines a 7-digit numeric field with two decimal places.
 5. **S** - This indicates a signed number (e.g., -5.00, +5.00). I've not used this one yet.
 
 ## Assigning Values to Variables
@@ -69,7 +70,7 @@ If you're like me, reading about something is fine and dandy, but seeing the cod
 ```
 **Output:**
 ```
-Salary: 5000
+Salary: 50000
 ```
 
 ### Example 2: Assigning a Value to an Alphanumeric Field
@@ -92,7 +93,7 @@ Employee Name: John Doe
 ```
 
 ### Example 3: Assigning a Value to a Grouped Field
-For this example we're going to go over a couple ways to accomplish the task at hand. In COBOL, you can assign values to individual fields within a group using MOVE ... TO, or you can move data directly into the group using MOVE ... TO IN. In larger COBOL applications, you might encounter multiple groups with fields of the same name (e.g., EMPLOYEE-NAME in different groups). Using MOVE ... TO IN ensures values are assigned to the correct field, avoiding potential bugs or confusion. Let's take a look at a couple examples:
+For this example we're going to go over a couple ways to accomplish the task at hand. In COBOL, you can assign values to a group field directly with `MOVE`, but you need to account for the full length of subfields, or you can move data directly into the group using MOVE ... TO ... IN. In larger COBOL applications, you might encounter multiple groups with fields of the same name (e.g., EMPLOYEE-NAME in different groups). Using MOVE ... TO IN ensures values are assigned to the correct field, avoiding potential bugs or confusion. You can also use `OF` instead of `IN` as a synonym when referencing subfields — e.g., `NAME OF EMPLOYEE-DETAILS`. Let's take a look at a couple examples:
 
 **MOVE ... TO**
 This pair of statements allows you to assign values to individual fields within a group.
@@ -106,13 +107,15 @@ This pair of statements allows you to assign values to individual fields within 
           05 EMPLOYEE-NAME PIC X(20).
           05 EMPLOYEE-ID   PIC 9(5).
        PROCEDURE DIVISION.
-           MOVE "Jane Smith56789" TO EMPLOYEE-DETAILS.
+           MOVE "Jane Smith     56789" TO EMPLOYEE-DETAILS.
            DISPLAY "Employee Name: " EMPLOYEE-NAME.
            DISPLAY "Employee ID: " EMPLOYEE-ID.
            STOP RUN.
        END PROGRAM EXP03A.
        
 ```
+
+In this example, the string `"Jane Smith     56789"` is padded with spaces to match the 20-character length of `EMPLOYEE-NAME`. The first 20 characters fill `EMPLOYEE-NAME`, and `"56789"` goes to `EMPLOYEE-ID`. Without padding, some compilers might space-fill `EMPLOYEE-NAME` and leave `EMPLOYEE-ID` undefined or zeroed out.
 
 **MOVE ... TO ... IN**
 This group of statements allows you to move data directly into the group, even if they share similar names. While I won't say never, I will say it shouldn't happen within smaller COBOL program, but if you work in a larger COBOL program you're probably going to see this.
@@ -141,7 +144,7 @@ This group of statements allows you to move data directly into the group, even i
 ```
 
 ### Example 4: Dates
-Another common example we'd find in a business application might be a date. Now, this is one place where COBOL, at least in all my research, seems to be lacking. The COBOL Standard itself does not natively support a dedicated **DATETIME** field type. So, if we want to store a date, we need to do the work ourselves. Here are a couple of examples of formatting a date.
+Another common example we'd find in a business application might be a date. Now, this is one place where COBOL, at least in all my research, seems to be lacking. COBOL doesn't natively support a dedicated **DATETIME** field type, so we need to handle dates ourselves. For consistency, I recommend storing dates in ISO format (YYYYMMDD) — it's unambiguous and sorts easily in files. Here are two approaches:
 
 **Date as Grouped Field**
 
@@ -149,7 +152,7 @@ If you want to store a date in a structured way, you can use a grouped field to 
 
 ```cobol
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. CBLDATES.
+       PROGRAM-ID. CBLDATES1.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        01 BIRTH-DATE.
@@ -164,32 +167,60 @@ If you want to store a date in a structured way, you can use a grouped field to 
            DISPLAY "Month: " BIRTH-MONTH
            DISPLAY "Day: " BIRTH-DAY
            STOP RUN.
-       END PROGRAM CBLDATES.
+       END PROGRAM CBLDATES1.
 
 ```
 
-
-**Date as Individual Edited Field**
-
-If you want to store and display a date in a specific format (e.g., MM/DD/YYYY), you can use an Alphanumeric Edited field. Here's an example:
+**Date as Numeric Field (ISO Format)**
+Using YYYYMMDD (e.g., 19850715 for July 15, 1985) avoids confusion — unlike MMDDYYYY or DDMMYYYY, where 07012025 could be July 1st or January 7th depending on the region. 
 
 ```cobol
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. CBLDATES.
+       PROGRAM-ID. CBLDATES2.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 BIRTH-DATE PIC 99/99/9999.
+       01 BIRTH-DATE PIC 9(8).
        PROCEDURE DIVISION.
-           MOVE 08151985 TO BIRTH-DATE
-           DISPLAY BIRTH-DATE
+           MOVE 19850715 TO BIRTH-DATE
+           DISPLAY "Birth Date (YYYYMMDD): " BIRTH-DATE
            STOP RUN.
-       END PROGRAM CBLDATES.
+       END PROGRAM CBLDATES2.
+```
+
+**OUTPUT**
+```
+Birth Date (YYYYMMDD): 19850715
+```
+
+**Date as Individual Edited Field**
+
+If you want to display a date with slashes (e.g., YYYY/MM/DD) from an ISO format input, you can use an Alphanumeric Edited field. Here's an example:
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. CBLDATES3.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 BIRTH-DATE PIC 9999/99/99.
+       PROCEDURE DIVISION.
+           MOVE 19850815 TO BIRTH-DATE
+           DISPLAY "Birth Date: " BIRTH-DATE
+           STOP RUN.
+       END PROGRAM CBLDATES3.
 
 ```
 
-In this example, the **PICTURE** clause defines the format of the date, with slashes (/) inserted at fixed positions. The MOVE statement is then used to assign a raw date to **BIRTH-DATE**, and COBOL, in turn, works its magic and formats the date as: `08/15/1985`.
+In this example, the PIC 9999/99/99 clause formats the date with slashes for display. The raw numeric value 19850815 is transformed into 1985/08/15.
+
+**OUTPUT**
+```
+Birth Date: 1985/08/15
+```
 
 ## Summary
 In this article, we explored the fundamentals of COBOL data types and variables, including how to define and format them using PICTURE clauses. We also looked at practical examples of assigning values to variables and formatting data for display. By mastering these concepts, you'll be well-equipped to handle data effectively in COBOL programs, whether you're working with numeric calculations, alphanumeric strings, or formatted displays.
 
 If you're an experienced COBOL developer and spot any inaccuracies or areas where I could improve my explanations, I'd greatly appreciate your feedback! And if you're new to COBOL but found this article interesting, I'd love to hear from you as well. Your thoughts and questions are always welcome—I enjoy learning and growing alongside others in this journey!
+
+## Acknowledgments
+Big thanks to `harrywwc`, a knowledgeable COBOL enthusiast who provided invaluable feedback on this article, helping me refine the details and make it more accurate. Your insights were spot on!

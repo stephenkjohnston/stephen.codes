@@ -9,7 +9,7 @@ excerpt: "Discover COBOL basics, history, and relevance in this article. Learn w
 As businesses began relying more heavily on computers for data processing—such as payroll, inventory, banking, and more—in the 1950s, it became clear that change was needed. At the time, each computer manufacturer used its own proprietary programming language, which was often tied to specific hardware. For instance, languages like FORTRAN and Assembly required a strong mathematical background, making them inaccessible to non-technical users.
 
 ## The Solution
-Recognizing the inefficiency and cost of porting programs across systems, the U.S. Department of Defense (DoD) spearheaded efforts to create a standardized programming language that could be used universally. With this goal in mind, a group of experts gathered at the Conference on Data Systems Languages (CODASYL) in 1959. Among them was [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper), a pioneering computer scientist who invented the first compiler.
+Recognizing the inefficiency and cost of porting programs across systems, the U.S. Department of Defense (DoD) spearheaded efforts to create a standardized programming language that could be used universally. With this goal in mind, a group of experts gathered at the Conference on Data Systems Languages (CODASYL) in 1959. Among them was [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper), a pioneering computer scientist who was a driving force behind the development of the first compiler, playing a pivotal role in its creation alongside other contributors.
 
 Out of this conference came the COmmon Business-Oriented Language (COBOL), a revolutionary language designed to meet the needs of business data processing. Among the features that made COBOL groundbreaking was its English-like syntax, which allowed non-technical people to read, understand, and even write programs. This was similar to how modern drag-and-drop website builders have democratized—or, some might argue, disrupted—web development today.
 
@@ -17,7 +17,7 @@ Out of this conference came the COmmon Business-Oriented Language (COBOL), a rev
 Now that we've learned a bit about COBOL and some of the problems it solved, we'll take a look at the structure of a COBOL program.
 
 ### Columns in COBOL
-Since COBOL dates back to the era of punched cards—where data was physically encoded on cards—it’s no surprise that its code is organized into specific column-based areas, each serving a unique purpose.
+Since COBOL dates back to the era of punched cards—where data was physically encoded on cards—it's no surprise that its code is organized into specific column-based areas, each serving a unique purpose.
 
 * Columns 1-6 - known as the Sequence Number Area, are often ignored in modern COBOL implementations.
 * Column 7 - Column 7, known as the Indicator Area, is primarily used for comments (marked with *) or left blank for regular code lines in modern COBOL programming.
@@ -52,7 +52,7 @@ The ENVIRONMENT DIVISION is divided into two sections:
 * INPUT-OUTPUT SECTION - Defines files and I/O devices, controlling how data is read from or written to these resources.
 
 #### DATA DIVISION
-This is where your COBOL program defines and stores all the data it will use. It’s like the program’s "storage room" for variables, records, and files.
+This is where your COBOL program defines and stores all the data it will use. It's like the program's "storage room" for variables, records, and files.
 
 The DATA DIVISION is divided into the following sections:
 
@@ -101,5 +101,7 @@ Finally, we instruct COBOL that immediately after it displays Hello World, we wa
 ## Summary
 In this article, I've described the history and reasoning behind COBOL, the structure of COBOL, and shown you how to write a basic program using COBOL.
 
-As I continue to learn COBOL, I welcome any feedback or corrections. Please let me know, and I’ll update the article accordingly.
+As I continue to learn COBOL, I welcome any feedback or corrections. Please let me know, and I'll update the article accordingly. 
 
+## Acknowledgments
+Big thanks to `harrywwc`, a knowledgeable COBOL enthusiast who provided invaluable feedback on this article, helping me refine the details and make it more accurate. Your insights were spot on!
