@@ -1,0 +1,30 @@
+---
+import { SITE_TITLE } from "astro:env/client";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { SEO } from "astro-seo";
+import AritlcePreiew from "components/ArticlePreview.astro";
+import Layout from "layouts/Layout.astro";
+
+import topicsData from "data/topics.json";
+const topics = Object.values(topicsData);
+---
+
+<SEO
+  title={`${SITE_TITLE} &ndash; Topics`}
+  description="A list of topics I have written about. Everything from Front-End Development to COBOL."
+/>
+<Layout>
+  <h1>Topics</h1>
+  <p>
+    This is a list of topics I have written about. Everything from Front-End
+    Development to COBOL.
+  </p>
+  <ul class="topics">
+    {topics.map(topic => (<li><a href={`/topics/${topic.slug}`}>{topic.title}</a></li>))}
+  </ul>
+</Layout>
+<style>
+  .articles {
+    margin-block: 1rem;
+  }
+</style>

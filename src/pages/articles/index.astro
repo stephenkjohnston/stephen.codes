@@ -3,14 +3,15 @@ import { SITE_TITLE } from "astro:env/client";
 import { getCollection } from "astro:content";
 import { SEO } from "astro-seo";
 import AritlcePreiew from "components/ArticlePreview.astro";
+import topicsData from "data/topics.json";
 import Layout from "layouts/Layout.astro";
 
 const articles = await getCollection("articles");
-const recentArticles = articles
-  .sort(
-    (a, b) =>
-      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-  )
+const recentArticles = articles.sort(
+  (a, b) =>
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+const topics = Object.values(topicsData);
 ---
 
 <SEO
@@ -25,6 +26,9 @@ const recentArticles = articles
       target="_blank">newsletter</a
     > to get future posts straight to your inbox.
   </p>
+  <p class="topics">
+    Topics:{topics.map(topic => (<a href={`/topics/${topic.slug}`}} class="topics__link" aria-label={`View All ${topic.title} Topics`}>{topic.title}</a>))}
+  </p>
   <div class="articles">
     {recentArticles.map((article) => <AritlcePreiew article={article} />)}
   </div>
@@ -32,5 +36,11 @@ const recentArticles = articles
 <style>
   .articles {
     margin-block: 1rem;
+  }
+
+  .topics {
+    a {
+      padding-inline: .625rem;
+    }
   }
 </style>
