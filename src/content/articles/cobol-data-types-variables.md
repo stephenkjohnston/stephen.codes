@@ -1,6 +1,6 @@
 ---
 title: "COBOL Fundamentals: Data Types & Variables"
-excerpt: ""
+excerpt: "Explore COBOL data types and variables in this guide. Learn numeric, alphanumeric, and group variable declarations for effective COBOL programming."
 pubDate: "2025-02-20"
 tag: "cobol"
 url: "/articles/cobol-data-types-variables"
