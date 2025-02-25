@@ -19,10 +19,12 @@ export async function getStaticPaths() {
 
 const { topic } = Astro.params;
 const articles = await getCollection("articles");
-const sortedArticles = articles.sort(
-  (a, b) =>
-    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-);
+const sortedArticles = articles
+  .filter((sortedTopic) => sortedTopic.data.tag === topic)
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  );
 const topics: Topics = topicsData;
 const currentTopic = topics[topic] ?? undefined;
 ---
@@ -46,7 +48,7 @@ const currentTopic = topics[topic] ?? undefined;
     </div>
   </section>
   <div class="articles">
-    {articles.map((article) => <ArticlePreview article={article} />)}
+    {sortedArticles.map((article) => <ArticlePreview article={article} />)}
   </div>
 </Layout>
 <style lang="scss">

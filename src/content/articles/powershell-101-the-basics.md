@@ -1,0 +1,115 @@
+---
+title: "PowerShell 101: The Basics"
+url: "/articles/powershell-101-the-basics"
+pubDate: "2025-02-24"
+tag: "powershell"
+excerpt: "Learn PowerShell basics with this beginner’s guide. Discover simple commands like Get-Process and variables to start scripting fast."
+---
+PowerShell is a scripting language developed by Microsoft. It provides a way to automate repetitive or tedious tasks. 
+
+## Running PowerShell on Windows
+It is important to note that when you search for PowerShell on windows, there’s another application which will show up called "Windows PowerShell ISE”. The ISE stands for Integrated Scripting Environment. This is an advanced tool that provides a user interface for writing and testing scripts. If you’re just starting out or if you’re running simple commands, the regular “Windows PowerShell” application should be sufficient.
+
+1. Press the **Windows Key** and type **PowerShell**.
+1. In the search results, you should see an application called **Windows PowerShell**.
+1. Right click on the icon, and click **Run as Administrator**. You will be prompted to confirm you want to do this. Click "Yes" and the PowerShell console will open.
+
+### What is a cmdlet?
+A cmdlet (pronounced "command-let") is a lightweight command used by the PowerShell environment used to perform an action. Cmdlets are named using a verb-noun pair. An example of common verbs are:
+
+1. **Get** - Retrieve information
+1. **Set**  - Change or update information
+1. **New** - Create something
+1. **Remove** - Remove something
+
+Two helpful cmdlets to remember are: Get-Command and Get-Help.
+
+#### Get-Command
+This cmdlet helps you with discovering and understanding the available commands.
+
+By default when you run Get-Command it returns ever cmdlets, functions, and aliases that are installed on the computer. 
+
+```
+$ Get-Command
+CommandType     Name             Version   Source
+-----------     ----             -------   ------
+Cmdlet          Add-Content      3.1.0.0   Microsoft.PowerShell.Management
+Cmdlet          Add-History      3.1.0.0   Microsoft.PowerShell.Core
+Cmdlet          Add-Member       3.1.0.0   Microsoft.PowerShell.Utility
+Cmdlet          Add-Type         3.1.0.0   Microsoft.PowerShell.Utility
+```
+
+You can also narrow your results by using parameters. A parameter in PowerShell is prefixed by a hyphen (-). 
+
+```
+# Filter by verb
+
+$ Get-Command -Verb Get 
+CommandType     Name        Version    Source
+-----------     ----        -------    ------
+Cmdlet          Get-Acl     3.1.0.0    Microsoft.PowerShell.Security
+Cmdlet          Get-Alias   3.1.0.0    Microsoft.PowerShell.Utility
+
+# Filter by noun
+
+$ Get-Command -Noun Process
+CommandType     Name            Version    Source
+-----------     ----            -------    ------
+Cmdlet          Debug-Process   3.1.0.0    Microsoft.PowerShell.Management
+Cmdlet          Get-Process     3.1.0.0    Microsoft.PowerShell.Management
+
+# Filter by module
+
+$ Get-Command -Module Pester
+CommandType     Name         Version    Source
+-----------     ----         -------    ------
+Function        AfterAll      3.4.0      Pester
+Function        AfterEach     3.4.0      Pester
+```
+
+#### Get-Help
+This cmdlet is a built-in user manual and provides you a quick reference for a command or concept. As an example, let's say you want to display some text on screen. The command to do this is Write-Host.
+
+```
+$ Get-Help Write-Host
+
+NAME
+    Write-Host
+
+SYNOPSIS
+    Writes customized output to a host.
+
+
+SYNTAX
+    Write-Host [[-Object] <System.Object>] [-BackgroundColor {Black | DarkBlue | DarkGreen | DarkCyan | DarkRed | DarkMagenta | DarkYellow | Gray | DarkGray | Blue | Green | Cyan | Red | Magenta | Yellow |
+    White}] [-ForegroundColor {Black | DarkBlue | DarkGreen | DarkCyan | DarkRed | DarkMagenta | DarkYellow | Gray | DarkGray | Blue | Green | Cyan | Red | Magenta | Yellow | White}] [-NoNewline] [-Separator
+    <System.Object>] [<CommonParameters>]
+
+[...]
+```
+
+By default it will return a lot of information. While this does give us a good understanding of what the command does, it unfortunately does not show us how to use it. Not to worry. You can get this information by providing the a parameter called -Examples.
+
+```
+$ Get-Help Write-Host -Examples
+NAME
+    Write-Host
+
+SYNOPSIS
+    Writes customized output to a host.
+
+
+    -- Example 1: Write to the console without adding a new line --
+
+    Write-Host "no newline test " -NoNewline
+    Write-Host "second string"
+```
+
+While this shows us the examples it's not easy to read lots of text in a terminal. Fortunately, Get-Help provides a parameter called -Online. When you pass this parameter it will open a new browser tab to the online documentation.
+
+![Online documentation for the Get-Help commandlet.](assets/images/articles/powershell-101-the-basics/powershell-online-help-screen.png)
+
+## Summary
+
+PowerShell is an powerful tool when it comes to automating repetitive or complicated tasks. This was just a very basic introduction, and there is much more to learn.
+

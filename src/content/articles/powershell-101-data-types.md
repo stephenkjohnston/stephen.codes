@@ -1,0 +1,47 @@
+---
+title: "PowerShell 101: Data Types"
+url: "/articles/powershell-101-data-types"
+pubDate: "2025-02-24"
+tag: "powershell"
+excerpt: "Explore PowerShell data types for beginners—strings, integers, booleans, and arrays—explained simply to boost your scripting skills."
+---
+A data type allows us to classify the value a variable holds.  This covers some of the most common data types used.
+
+## Variables
+A variable is like a box. You can put something in. You can take something out. You can event change the contents of the box. 
+
+In PowerShell, a variable is created using a $ symbol followed by the name of the variable (e.g., $firstName = "Stephen"). 
+
+Depending on what you're doing you may need one or many variables.
+
+### Strings
+A string is similar to a sentence. It's a series of letters, numbers, symbols, and spaces. In PowerShell, the sentence is contained within two double quotes "".
+
+```powershell
+$FirstName = "Stephen"
+```
+
+### Integers
+An integer is like the number of video games you have. It's a whole number.
+
+```powershell
+$TotalVideoGames = 10
+```
+
+### Boolean
+A boolean is a like a light switch which only has two states on or off. If you're new to programming, the terms used are True (on) and False (off). In PowerShell there are several ways we can make a boolean, but for the purposes of this article we'll focus on the built-in constants $true and $false.
+
+```powershell
+$CanPlay   = $true
+$HasMoney  = $false
+$IsEnabled = $true
+```
+
+### Arrays
+An array is like a book shelf. Each spot on the bookshelf holds one book. You can add a book, you can remove a book, and you count how many books are on the shelf. 
+
+```powershell
+$Authors = @("Harold Bell Wright", "Patrick F. McManus", "Michael Connelly")
+```
+
+In programming when you count an array it normally starts at 0. So, Harold Bell Wright is at position 0, and Patrick F. McManus is at position 1.
