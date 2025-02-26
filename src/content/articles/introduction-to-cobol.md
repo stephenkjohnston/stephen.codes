@@ -68,7 +68,7 @@ If you have prior programming experience, this program will look familiar. It's 
 
 We start by declaring our IDENTIFICATION DIVISION followed by a PROGRAM-ID, which is the only required paragraph in this division.
 
-Next, we declare the PROCEDURE DIVISION, which is where the action happens. To display output, we use the DISPLAY statement, which writes to the output device. While this is typically a terminal screen today, it was often a printer in the past.
+Next, we declare the PROCEDURE DIVISION, which is where the action happens. To display output, we use the DISPLAY verb, which writes to the output device. While this is typically a terminal screen today, it was often a printer in the past.
 
 Finally, we instruct COBOL that immediately after it displays Hello World, we want to stop everything, and that's done with the STOP RUN statement.
 
@@ -90,7 +90,7 @@ Finally, we instruct COBOL that immediately after it displays Hello World, we wa
       *******************************************************************
        PROCEDURE DIVISION.
 
-      * The DISPLAY statement prints the contents to the output device,
+      * The DISPLAY verb prints the contents to the output device,
       * in this case, the console window.
            DISPLAY 'Hello, World'.
 

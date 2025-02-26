@@ -99,7 +99,7 @@ For this example we're going to go over a couple ways to accomplish the task at 
 
 **MOVE ... TO**
 
-This pair of statements allows you to assign values to individual fields within a group.
+This statement allows you to assign values to individual fields within a group.
 
 ```cobol
        IDENTIFICATION DIVISION.
@@ -122,7 +122,7 @@ In this example, the string `"Jane Smith     56789"` is padded with spaces to ma
 
 **MOVE ... TO ... IN**
 
-This group of statements allows you to move data directly into the group, even if they share similar names. While I won't say never, I will say it shouldn't happen within smaller COBOL program, but if you work in a larger COBOL program you're probably going to see this.
+This statement allows you to move data directly into the group, even if they share similar names. While I won't say never, I will say it shouldn't happen within smaller COBOL program, but if you work in a larger COBOL program you're probably going to see this.
 
 ```cobol
        IDENTIFICATION DIVISION.

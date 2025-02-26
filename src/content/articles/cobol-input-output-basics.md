@@ -11,13 +11,13 @@ We've covered the [history](/articles/introduction-to-cobol) of <abbr title="COm
 ## What we'll be doing?
 In this article, we'll create a simple COBOL program that prompts the user to enter their name and responds with a friendly Hello, {NAME}. One of the great things about COBOL is that you don't need to be a nuclear physicist to understand it — its clear, English-like syntax keeps things straightforward. 
 
-To build this program, we'll use two key COBOL statements:
+To build this program, we'll use two key COBOL verbs:
 
 1. **ACCEPT** – which pauses the program, waiting for the user to type some input and press Enter.  
 2. **DISPLAY** – which, as the name suggests, outputs text to the screen for the user to see.
 
 ## You just have to ACCEPT it!
-The ACCEPT statement is a bit like the Batphone in the world of COBOL. When it "rings," the program — our very own Bruce Wayne—drops everything, perks up, and listens intently to what the user has to say. It's followed by a reference to a variable, like `USER-NAME`, where the entered data gets stored. Think of it as an automated version of this:
+The ACCEPT verb is a bit like the Batphone in the world of COBOL. When it "rings," the program — our very own Bruce Wayne—drops everything, perks up, and listens intently to what the user has to say. It's followed by a reference to a variable, like `USER-NAME`, where the entered data gets stored. Think of it as an automated version of this:
 
 
 ```cobol
@@ -26,7 +26,7 @@ The ACCEPT statement is a bit like the Batphone in the world of COBOL. When it "
     MOVE "Stephen" TO USER-NAME.
 ```
 
-So instead of having to manually assigning "Stephen" to `USER-NAME` using the `MOVE` statement, `ACCEPT` waits for use to enter a piece of information and then automagically assigns that value to the variable for us. This isn't unique to COBOL, though—other languages have their own ways of doing the same thing. In C#, for example, you'd write:
+So instead of having to manually assigning "Stephen" to `USER-NAME` using the `MOVE` verb, `ACCEPT` waits for use to enter a piece of information and then automagically assigns that value to the variable for us. This isn't unique to COBOL, though—other languages have their own ways of doing the same thing. In C#, for example, you'd write:
 
 ```csharp
 string userName = Console.ReadLine();
@@ -70,7 +70,7 @@ As the name implies, DISPLAY is how we show stuff on the screen. So, let's put i
 Here's the breakdown of what the program is doing:
 
 1. We declare a 30-character variable called CUST-NAME, pre-populated with spaces at runtime using that VALUE SPACES trick we talked about.  
-1. Next, we use the DISPLAY statement to ask the user, "Please enter your name: ", followed by some COBOL magica WITH NO ADVANCING — fancy talk for keeping the input right next to the prompt.  
+1. Next, we use the DISPLAY verb to ask the user, "Please enter your name: ", followed by some COBOL magica WITH NO ADVANCING — fancy talk for keeping the input right next to the prompt.  
 1. Then, we pull off what's known as string concatenation, combining "Hello, " with `CUST-NAME` to greet the user (e.g., Hello, Stephen).  
 1. Finally, we hit STOP RUN—telling COBOL, "That's a wrap, shut it down!"
 
