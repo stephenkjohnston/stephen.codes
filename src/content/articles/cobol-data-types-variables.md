@@ -19,7 +19,7 @@ The COBOL standard categorizes data based on its purpose into five distinct type
 The **Alphanumeric Edited** and **Numeric Edited** data types can be a bit tricky at first — but simply put, it's COBOL's way of saying, "Let's make this data look fancy!" They're designed for formatting data for display, like adding commas to numbers, currency symbols, or even hyphens in text.
 
 ## Variables in COBOL
-In COBOL, all variables are defined in the `DATA DIVISION`, which is where your COBOL program defines and stores all the data it will use. COBOL variables are hierarchical and are made up of level numbers, `PICTURE` (or `PIC`) clauses, and optional default values (more on this later):
+In COBOL, all variables are defined in the `DATA DIVISION`, which is where your COBOL program defines and stores all the data it will use, under the `WORKING-STORAGE SECTION`. COBOL variables are hierarchical and are made up of level numbers, `PICTURE` (or `PIC`) clauses, and optional default values (more on this later):
 1. A **LEVEL-NUMBER**, which determines if it's an individual field, group item, or elementary item. So, what's the difference? They are:
    * **01** - Indicates a top-level item. It can be standalone or the start of a group item. Fun fact: anything starting with a zero is pronounced "OH" followed by the level number (e.g., OH-ONE, OH-TWO).
    * **02 - 49** - Indicates subordinate levels. These are used within groups to break down data into smaller, more manageable chunks — think of an **OBJECT** in modern programming languages.
