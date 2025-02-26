@@ -1,0 +1,80 @@
+---
+title: "COBOL Fundamentals: Input and Output"
+excerpt: "Learn COBOL input and output with ACCEPT and DISPLAY. A beginner-friendly guide with examples to start coding interactively in minutes."
+pubDate: "2025-02-25"
+tag: "cobol"
+url: "/articles/cobol-input-output-basics"
+---
+## Recap
+We've covered the [history](/articles/introduction-to-cobol) of <abbr title="COmmon Business Oriented Language">COBOL</abbr> and covered the basics of [data types](/articles/cobol-data-types-variables). Now, let's shift gears and have some fun with a hands-on example. 
+
+## What we'll be doing?
+In this article, we'll create a simple COBOL program that prompts the user to enter their name and responds with a friendly Hello, {NAME}. One of the great things about COBOL is that you don't need to be a nuclear physicist to understand it — its clear, English-like syntax keeps things straightforward. 
+
+To build this program, we'll use two key COBOL statements:
+
+1. **ACCEPT** – which pauses the program, waiting for the user to type some input and press Enter.  
+2. **DISPLAY** – which, as the name suggests, outputs text to the screen for the user to see.
+
+## You just have to ACCEPT it!
+The ACCEPT statement is a bit like the Batphone in the world of COBOL. When it "rings," the program — our very own Bruce Wayne—drops everything, perks up, and listens intently to what the user has to say. It's followed by a reference to a variable, like `USER-NAME`, where the entered data gets stored. Think of it as an automated version of this:
+
+
+```cobol
+    01 USER-NAME    PIC X(30) VALUE SPACES.
+    [...]
+    MOVE "Stephen" TO USER-NAME.
+```
+
+So instead of having to manually assigning "Stephen" to `USER-NAME` using the `MOVE` statement, `ACCEPT` waits for use to enter a piece of information and then automagically assigns that value to the variable for us. This isn't unique to COBOL, though—other languages have their own ways of doing the same thing. In C#, for example, you'd write:
+
+```csharp
+string userName = Console.ReadLine();
+```
+
+In both snippets, they grab the user input and assign it to a variable, but with different syntax. COBOL just does it better and easier with a simpler syntax… in my opinion 🤣.
+
+Now, if you're awake and paying attention, you might have noticed something intriguing in the COBOL code above:
+
+```COBOL
+    01 USER-NAME    PIC X(30) VALUE SPACES.
+```
+
+To the right of the variable and **PICTURE** clause, we've got **VALUE** followed by the word **SPACES**. In COBOL, **VALUE** is how we tell the compiler we're preassigning a value to this variable when the program starts. But **SPACES**? No, we're not talking living spaces, it's just a bit of COBOL magic — a figurative constant. I won't dive too deep into the weeds here, but think of it like a handy shortcut other languages use (e.g., Math.PI in JavaScript), but arguably more interesting. COBOL even has pairs for most of these constants—like SPACE and SPACES — because why settle for one when you can have options?
+
+The TL;DR, as you might've guessed (COBOL's syntax isn't exactly a mystery novel), is that **SPACES** fills the variable with... you guessed it spaces. Since `USER-NAME` is `PIC X(30)`, that's 30 spaces, ready and waiting. It's a clean slate for whatever the user types!
+
+## Time to Say Hello with DISPLAY!
+Alright, in the words of Elvis, "A little less conversation, a little more action, please!" — it's time to write the program! We've got ACCEPT in our batbelt, and now it's time to turn on that DISPLAY. 
+
+As the name implies, DISPLAY is how we show stuff on the screen. So, let's put it all together. Here's the full COBOL program:
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. GREET-USER.
+       
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 CUST-NAME    PIC X(30) VALUE SPACES.
+       
+       PROCEDURE DIVISION.
+       MAIN-LOGIC.
+           DISPLAY "Please enter your name: " WITH NO ADVANCING
+           ACCEPT CUST-NAME
+           DISPLAY "Hello, " CUST-NAME
+           STOP RUN.
+       END PROGRAM GREET-USER.
+```
+
+### The Breakdown 
+Here's the breakdown of what the program is doing:
+
+1. We declare a 30-character variable called CUST-NAME, pre-populated with spaces at runtime using that VALUE SPACES trick we talked about.  
+1. Next, we use the DISPLAY statement to ask the user, "Please enter your name: ", followed by some COBOL magica WITH NO ADVANCING — fancy talk for keeping the input right next to the prompt.  
+1. Then, we pull off what's known as string concatenation, combining "Hello, " with `CUST-NAME` to greet the user (e.g., Hello, Stephen).  
+1. Finally, we hit STOP RUN—telling COBOL, "That's a wrap, shut it down!"
+
+While not necessarily required in this program, you might've spotted the words MAIN-LOGIC in some COBOL examples floating around. That's a paragraph name — it's like a label for grouping code. It's 💯 optional, especially in a bite-sized program like ours, but it's handy for clarity and keeping logic organized so folks don't get lost. We'll dig deeper into paragraphs in a later article, so stay tuned! For now, if you're coming from C# land, it's akin to `#region` and `#endregion`, which group logic for clarity — though COBOL paragraphs can also be executed with `PERFORM` (again, more on that later!), unlike `#region`.
+
+## Summary
+In this article, we met `DISPLAY` and `ACCEPT`, took some fun detours, and built a simple, interactive COBOL program. Up next: conditionals, loops, and arithmetic—stay tuned!
