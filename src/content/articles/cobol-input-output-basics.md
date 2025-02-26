@@ -70,7 +70,7 @@ As the name implies, DISPLAY is how we show stuff on the screen. So, let's put i
 Here's the breakdown of what the program is doing:
 
 1. We declare a 30-character variable called CUST-NAME, pre-populated with spaces at runtime using that VALUE SPACES trick we talked about.  
-1. Next, we use the DISPLAY verb to ask the user, "Please enter your name: ", followed by some COBOL magica WITH NO ADVANCING — fancy talk for keeping the input right next to the prompt.  
+1. Next, we use the DISPLAY verb to ask the user, "Please enter your name: ", followed by some COBOL magic WITH NO ADVANCING — fancy talk for keeping the input right next to the prompt.  
 1. Then, we pull off what's known as string concatenation, combining "Hello, " with `CUST-NAME` to greet the user (e.g., Hello, Stephen).  
 1. Finally, we hit STOP RUN—telling COBOL, "That's a wrap, shut it down!"
 
