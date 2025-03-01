@@ -1,5 +1,5 @@
 ---
-title: "COBOL Fundamentals: Input and Output"
+title: "Learn COBOL: ACCEPT & DISPLAY Basics"
 excerpt: "Learn COBOL input and output with ACCEPT and DISPLAY. A beginner-friendly guide with examples to start coding interactively in minutes."
 pubDate: "2025-02-25"
 tag: "cobol"
@@ -17,7 +17,7 @@ To build this program, we'll use two key COBOL verbs:
 2. **DISPLAY** – which, as the name suggests, outputs text to the screen for the user to see.
 
 ## You just have to ACCEPT it!
-The ACCEPT verb is a bit like the Batphone in the world of COBOL. When it "rings," the program — our very own Bruce Wayne—drops everything, perks up, and listens intently to what the user has to say. It's followed by a reference to a variable, like `USER-NAME`, where the entered data gets stored. Think of it as an automated version of this:
+The `ACCEPT` verb is a bit like the Batphone in the world of COBOL. When it "rings," the program — our very own Bruce Wayne—drops everything, perks up, and listens intently to what the user has to say. It's followed by a reference to a variable, like `USER-NAME`, where the entered data gets stored. Think of it as an automated version of this:
 
 
 ```cobol

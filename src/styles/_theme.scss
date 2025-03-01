@@ -68,6 +68,20 @@
   @media (max-width: 47.5rem) {
     padding: 1.5rem 1.45rem;
   }
+
+  code {
+    background: #e6e6e6;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: var(--fw-700);
+  }
+
+  pre {
+    code {
+      background: inherit;
+      color: inherit;
+    }
+  }
 }
 
 .recent__links {
