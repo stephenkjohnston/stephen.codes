@@ -3,9 +3,12 @@ import { defineConfig, envField } from "astro/config";
 
 import mdx from "@astrojs/mdx";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  site: 'https://stephen.codes',
+  integrations: [mdx(), sitemap()],
   env: {
     schema: {
       MODE: envField.string({
