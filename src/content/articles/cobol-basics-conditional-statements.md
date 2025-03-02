@@ -3,7 +3,7 @@ title: "Learn COBOL: Conditional Statements"
 excerpt: "Learn to boss COBOL with conditional statements -- the secret sauce for controlling your code's flow!"
 pubDate: "2025-03-01"
 tag: "cobol"
-url: "/articles/cobol-control-flow-basics"
+url: "/articles/cobol-basics-conditional-statements"
 ---
 ## Who's the boss?
 There comes a time in every programmer's life when you decided to put your foot down. To do this means understanding what's called *conditional logic*.  We'll explore advanced condition handling in a future article, but for now, let's kick off with three beginner-friendly examples: IF conditions, Relation conditions, and Sign conditions.
@@ -28,7 +28,7 @@ IF AGE < 18
 END-IF
 ```
 
-So why is COBOL verbose? As noted in my [Introduction to COBOL](/articles/introduction-to-cobol), 1950s languages favored math whizzes. COBOL flipped that with an English-like syntax that business folks uneasy with < (less than) or > (greater than) could use. One thing I didn't hit on in that article: COBOL wasn't the first to do this. An earlier language, [FLOW-MATIC](https://en.wikipedia.org/wiki/FLOW-MATIC), accomplished this, which our familiar friend, Grace Hopper, helped create as well. I've included a funny quote from her, which I found in the Wiki article, below:
+So why is COBOL verbose? As noted in my [Introduction to COBOL](/articles/introduction-to-cobol), 1950s languages favored math whizzes. COBOL flipped that with an English-like syntax that business folks happier with < (less than) or > (greater than) could use. One thing I didn't hit on in that article: COBOL wasn't the first to do this. An earlier language, [FLOW-MATIC](https://en.wikipedia.org/wiki/FLOW-MATIC), accomplished this, which our familiar friend, Grace Hopper, helped create as well. I've included a funny quote from her, which I found in the Wiki article, below:
 
 > "I used to be a mathematics professor. At that time I found there were a certain number of students who could not learn mathematics. I then was charged with the job of making it easy for businessmen to use our computers. I found it was not a question of whether they could learn mathematics or not, but whether they would. […] They said, 'Throw those symbols out—I do not know what they mean, I have not time to learn symbols.' I suggest a reply to those who would like data processing people to use mathematical symbols that they make the first attempt to teach those symbols to vice-presidents 
 or a colonel or admiral. I assure you that I tried it."
