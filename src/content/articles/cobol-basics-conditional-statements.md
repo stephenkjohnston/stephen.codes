@@ -1,0 +1,102 @@
+---
+title: "Learn COBOL: Conditional Statements"
+excerpt: "Learn to boss COBOL with conditional statements -- the secret sauce for controlling your code's flow!"
+pubDate: "2025-03-01"
+tag: "cobol"
+url: "/articles/cobol-control-flow-basics"
+---
+## Who's the boss?
+There comes a time in every programmer's life when you decided to put your foot down. To do this means understanding what's called *conditional logic*.  We'll explore advanced condition handling in a future article, but for now, let's kick off with three beginner-friendly examples: IF conditions, Relation conditions, and Sign conditions.
+
+### It IS NOT Complicated.
+Even IF you're NOT a programmer, you already use these ideas daily — like deciding if it's coffee (or tea... or tee) time, comparing prices, or checking your bank balance. Ready to take control? Let's dive in!
+
+### To Be VERBOSE... or NOT To Be VERBOSE
+COBOL chooses both! Unlike Hamlet, who rambled and put you to sleep, COBOL hands you options. Want to check if one number's less than another? Here's the wordy way:
+
+```
+IF AGE IS LESS THAN 18
+    DISPLAY "Sorry, you cannot vote."
+END-IF
+```
+
+And here's the short way:
+
+```
+IF AGE < 18
+    DISPLAY "Sorry, you cannot vote."
+END-IF
+```
+
+So why is COBOL verbose? As noted in my [Introduction to COBOL](/articles/introduction-to-cobol), 1950s languages favored math whizzes. COBOL flipped that with an English-like syntax that business folks uneasy with < (less than) or > (greater than) could use. One thing I didn't hit on in that article: COBOL wasn't the first to do this. An earlier language, [FLOW-MATIC](https://en.wikipedia.org/wiki/FLOW-MATIC), accomplished this, which our familiar friend, Grace Hopper, helped create as well. I've included a funny quote from her, which I found in the Wiki article, below:
+
+> "I used to be a mathematics professor. At that time I found there were a certain number of students who could not learn mathematics. I then was charged with the job of making it easy for businessmen to use our computers. I found it was not a question of whether they could learn mathematics or not, but whether they would. […] They said, 'Throw those symbols out—I do not know what they mean, I have not time to learn symbols.' I suggest a reply to those who would like data processing people to use mathematical symbols that they make the first attempt to teach those symbols to vice-presidents 
+or a colonel or admiral. I assure you that I tried it."
+
+And now that I've practice being verbose, let's get this show on the road!
+
+## IF ... Kids Are Fighting ... Then
+We've all been there. You're driving along, your favorite song comes on, but instead of hear it, all you hear is your oldest kid belting out the death metal song "she's staring at me" over... and over... If you have a decision to make. Let's see if COBOL can help.
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. KIDS-FIGHT.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  KIDS-FIGHTING    PIC X(3)   VALUE "YES".
+
+       PROCEDURE DIVISION.
+           IF KIDS-FIGHTING = "YES"
+               DISPLAY "Turn up the radio!"
+           ELSE
+               DISPLAY "Enjoy the song."
+           END-IF
+           STOP RUN.
+
+```
+
+## Relations ... Sometimes You Can Choose
+You're rolling toward home after an epic road trip, miles ticking down, but hours of backseat chaos have shredded your patience — and you may need to "stop for gas" soon. COBOL rolls up to compare: got enough grit left, or is it fresh air o'clock?
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. KIDS-FIGHT-MORE.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  HOURS-LEFT    PIC 9(2)   VALUE 8.
+       01  PATIENCE-LEFT   PIC 9(2) VALUE 2.
+
+       PROCEDURE DIVISION.
+           IF HOURS-LEFT > PATIENCE-LEFT
+               DISPLAY "Gas break — save me!"
+           ELSE
+               DISPLAY "I'm fine—keep cruising!"
+           END-IF
+           STOP RUN.
+```
+
+## Signs... and Wonders
+Your bank account's doing as well as that last "funny" dad joke you told, and you're hoping for a wonder to dodge the overdraft wolves. COBOL struts in to eyeball the signs — broke as a joke or flush by some cosmic fluke?
+
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. BANK-SIGNS.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  ACCOUNT-BALANCE    PIC S9(4)V99   VALUE -12.34.
+
+       PROCEDURE DIVISION.
+           IF ACCOUNT-BALANCE IS NEGATIVE
+               DISPLAY "Gone faster than a skunk who ate beans in a phone booth!"
+           ELSE
+               DISPLAY "Where'd THAT come from?!"
+           END-IF
+           STOP RUN.
+```
+
+## Summary
+By now, you should grasp the basics of COBOL's conditional logic — IF, Relation, and Sign conditions that let you boss your code around. Hopefully, you're ready to take control. Until next time, may the code be with you!
