@@ -1,30 +1,23 @@
 ---
-import { SITE_TITLE } from "astro:env/client";
-import { getCollection, type CollectionEntry } from "astro:content";
-import { SEO } from "astro-seo";
-import AritlcePreiew from "components/ArticlePreview.astro";
-import Layout from "layouts/Layout.astro";
-
-import topicsData from "data/topics.json";
-const topics = Object.values(topicsData);
+import BaseLayout from "layouts/BaseLayout.astro";
+import topics from "data/topics";
+import { slugify } from "utils/slugify";
 ---
 
-<SEO
-  title={`${SITE_TITLE} &ndash; Topics`}
-  description="A list of topics I have written about. Everything from Front-End Development to COBOL."
-/>
-<Layout>
+<BaseLayout>
   <h1>Topics</h1>
   <p>
-    This is a list of topics I have written about. Everything from Front-End
-    Development to COBOL.
+    This is my Topics page! I've got a lot of interests and write about all
+    sorts of nonsense, from Front-End Development to COBOL and everything in
+    between... but mostly COBOL at the moment.
   </p>
-  <ul class="topics">
-    {topics.map(topic => (<li><a href={`/topics/${topic.slug}`}>{topic.title}</a></li>))}
+  <ul>
+    {
+      topics.map((topic) => (
+        <li>
+          <a href={`/topics/${slugify(topic.name)}`}>{topic.name}</a>
+        </li>
+      ))
+    }
   </ul>
-</Layout>
-<style>
-  .articles {
-    margin-block: 1rem;
-  }
-</style>
+</BaseLayout>

@@ -1,11 +1,14 @@
 ---
-import { SITE_TITLE } from "astro:env/client";
+import { TITLE } from "astro:env/client";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 import { SEO } from "astro-seo";
-import readingTime from "reading-time";
-import Layout from "layouts/Layout.astro";
 
+import ArticleLayout from "layouts/ArticleLayout.astro";
 type Article = CollectionEntry<"articles">;
+
+import SocialBackground from "assets/images/social-background.png";
+import { DESCRIPTION } from "astro:env/client";
+import ArticleHero from "components/Article/ArticleHero.astro";
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
@@ -17,45 +20,44 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-
 const article = await getEntry("articles", slug);
 
 if (!article) {
-  return Astro.redirect("/404"); // Handle 404 for invalid slugs
+  return Astro.redirect("/404");
 }
-
+const { body } = article;
+const { title, description, publishDate, topic, series } = article?.data;
 const { Content } = await article.render();
-const publishedDate = new Date(article?.data.pubDate);
-const formattedDate = publishedDate.toLocaleDateString("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-  timeZone: "UTC",
-});
-const stats = readingTime(article?.body);
-const readingTimeInMinutes = Math.ceil(stats.minutes);
 ---
 
 <SEO
-  title={`${SITE_TITLE} &ndash; ${article.data.title}`}
-  description={article.data.excerpt}
+  title={title}
+  description={description}
+  openGraph={{
+    basic: {
+      title: `${TITLE} - ${title}`,
+      type: "website",
+      image: `${SocialBackground.src}`,
+    },
+  }}
+  ,
+  twitter={{
+    card: "summary_large_image",
+    creator: "@stephencodes",
+    site: "@stephencodes",
+    title: "Stephen Johnston",
+    description,
+    image: SocialBackground.src,
+    imageAlt: DESCRIPTION,
+  }}
 />
-<Layout>
-  <h1>{article?.data.title}</h1>
-  <p class="article__subheader">
-    {formattedDate} • {readingTimeInMinutes} min
-  </p>
+<ArticleLayout>
+  <ArticleHero
+    title={title}
+    body={body}
+    publishDate={publishDate}
+    topic={topic}
+    series={series}
+  />
   <Content />
-</Layout>
-<style lang="scss">
-  .article__subheader {
-    margin: 0;
-    font-size: clamp(0.8rem, 4vw, 1rem);
-    color: var(--clr-gray-100);
-    font-style: italic;
-
-    &--link {
-      color: var(--link-color);
-    }
-  }
-</style>
+</ArticleLayout>

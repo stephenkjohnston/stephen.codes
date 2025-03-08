@@ -1,0 +1,70 @@
+---
+import Tag from "components/shared/Tag.astro";
+import readingTime from "reading-time";
+import formateDate from "utils/formatDate";
+
+interface Props {
+  title: string;
+  body: string;
+  publishDate: Date;
+  topic: string;
+  series?: string;
+}
+
+const { title, body, topic, publishDate, series } = Astro.props;
+
+const readingTimeStats = readingTime(body);
+const totalReadingTime = Math.ceil(readingTimeStats.minutes);
+const formattedDate = formateDate(publishDate);
+---
+
+<section class="article-hero">
+  {series && <span class="article-hero-eyebrow">Series: {series}</span>}
+  <h1 class="article-hero-title">{title}</h1>
+  <div class="article-hero-metadata">
+    <span>Date: {formattedDate}</span>
+    <span>Read Time: {totalReadingTime} minutes</span>
+    <span
+      >Topic: <Tag
+        label={topic}
+        link={`/topics/${topic.toLowerCase()}`}
+      /></span
+    >
+  </div>
+</section>
+<style lang="scss">
+  .article-hero-title {
+    position: relative;
+    margin-block: 0;
+
+    &::before {
+      content: "===================================================================================================================";
+      position: absolute;
+      bottom: -1rem;
+      left: 0;
+      right: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 1rem;
+    }
+  }
+
+  .article-hero-metadata {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-block: 0.625rem 0.3125rem;
+    border-bottom: 0.125rem dashed var(--text-primary);
+
+    @media (min-width: 48rem) {
+      flex-direction: inherit;
+      gap: 1rem;
+    }
+  }
+
+  .article-hero-eyebrow {
+    text-transform: uppercase;
+    font-weight: var(--fw-700);
+    color: var(--clr-blue-70);
+  }
+</style>

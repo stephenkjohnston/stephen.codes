@@ -1,9 +1,13 @@
 ---
-import { GTM_ID } from "astro:env/client";
+interface Props {
+  gtmId: string;
+}
+
+const { gtmId } = Astro.props;
 ---
 
 <Fragment>
-  <script is:inline define:vars={{ tagId: GTM_ID }}>
+  <script is:inline define:vars={{ tagId: gtmId }}>
     (function (w, d, s, l, i) {
       w[l] = w[l] || [];
       w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });

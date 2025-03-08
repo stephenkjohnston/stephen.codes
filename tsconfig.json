@@ -5,6 +5,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "jsx": "preserve",
-    "jsxImportSource": "astro"
+    "jsxImportSource": "astro",
+    "verbatimModuleSyntax": true
   }
 }

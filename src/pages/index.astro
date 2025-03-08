@@ -1,43 +1,15 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from "astro:env/client";
-import { SEO } from "astro-seo";
+import BaseLayout from "layouts/BaseLayout.astro";
+import ContentList from "components/Content/ContentList.astro";
+import { getCollection } from "astro:content";
+import LandingPageHero from "components/LandingPage/LandingPageHero.astro";
 
-import HomepageHero from "components/HomepageHero.astro";
-import Layout from "../layouts/Layout.astro";
-import HomepageRecentAritcles from "components/HomepageRecentAritcles.astro";
-
-import SocialBackground from "assets/images/social-background.png";
-import SiteFavicon from "assets/images/favicon-32x32.png";
+const articles = (await getCollection("articles"))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 4);
 ---
 
-<SEO
-  title={`${SITE_TITLE} &ndash; Front-End Engineer by trade, Mainframe Developer in training.`}
-  description={SITE_DESCRIPTION}
-  openGraph={{
-    basic: {
-      title: `${SITE_TITLE}`,
-      type: "website",
-      image: `${SocialBackground.src}`,
-    },
-  }}
-  twitter={{
-    creator: "@stephencodes",
-  }}
-  extend={{
-    // extending the default link tags
-    link: [{ rel: "icon", href: `${SiteFavicon.src}` }],
-    // extending the default meta tags
-    meta: [
-      {
-        name: "twitter:image",
-        content: `${SocialBackground.src}`,
-      },
-      { name: "twitter:title", content: `${SITE_TITLE}` },
-      { name: "twitter:description", content: `${SITE_DESCRIPTION}` },
-    ],
-  }}
-/>
-<Layout>
-  <HomepageHero />
-  <HomepageRecentAritcles />
-</Layout>
+<BaseLayout>
+  <LandingPageHero />
+  <ContentList title="recent-articles" link="/articles/" items={articles} />
+</BaseLayout>

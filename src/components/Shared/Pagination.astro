@@ -1,0 +1,45 @@
+---
+import type { Page } from "astro";
+
+interface Props {
+  page: Page;
+  base: string;
+}
+
+const { page, base } = Astro.props;
+
+const firstItem = page.start + 1;
+const lastItem = page.end + 1;
+const totalItems = page.total;
+---
+
+<nav class="pagination">
+  <a href={page.url.prev} aria-disabled={!page.url.prev}>&lt; prev</a>
+  {
+    (
+      <span>
+        <span>
+          {firstItem} - {lastItem} / {totalItems}
+        </span>
+      </span>
+    )
+  }
+  <a href={page.url.next} aria-disabled={!page.url.next}>next &gt;</a>
+</nav>
+<style lang="scss">
+  .pagination {
+    margin-block-start: 1rem;
+    border-top: 2px dashed var(--clr-gray-100);
+    padding: 0.625rem;
+    display: flex;
+    place-content: center;
+    gap: 10px;
+
+    a {
+      &[aria-disabled="true"] {
+        color: var(--clr-gray-100);
+        opacity: 0.5;
+      }
+    }
+  }
+</style>

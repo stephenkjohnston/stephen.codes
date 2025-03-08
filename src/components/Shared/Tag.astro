@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  link: string;
+}
+
+const { label, link } = Astro.props;
+---
+
+<a class="tag" href={link} data-topic={label}>&lt;{label}&gt;</a>
+<style lang="scss">
+  .tag {
+    font-size: var(--fs-base);
+  }
+</style>

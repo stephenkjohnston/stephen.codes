@@ -1,9 +1,7 @@
 ---
-import Layout from "./Layout.astro";
-const { frontmatter } = Astro.props;
-const { title } = frontmatter;
+import BaseLayout from "./BaseLayout.astro";
 ---
 
-<Layout>
-  <h1>{title}</h1>
-</Layout>
+<BaseLayout pageType="article">
+  <slot />
+</BaseLayout>

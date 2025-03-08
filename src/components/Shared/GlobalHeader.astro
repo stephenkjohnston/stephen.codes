@@ -1,0 +1,248 @@
+---
+
+---
+
+<header class="header">
+  <button
+    class="hamburger"
+    aria-label="Toggle Menu"
+    aria-expanded="false"
+    aria-controls="global-navigation"
+  >
+    <span></span>
+  </button>
+  <a class="header-brand" href="/">
+    Stephen<span>Johnston</span>
+  </a>
+  <nav class="header-navigation" id="global-navigation">
+    <ul>
+      <li aria-current={Astro.url.pathname === "/" ? "page" : undefined}>
+        <a href="/">#home</a>
+      </li>
+      <li
+        aria-current={Astro.url.pathname.includes("articles")
+          ? "page"
+          : undefined}
+      >
+        <a href="/articles">#articles</a>
+      </li>
+      <li
+        aria-current={Astro.url.pathname === "/about-me/" ? "page" : undefined}
+      >
+        <a href="/about-me/">#about-me</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<script lang="ts">
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navigation = document.querySelector(".header-navigation");
+    const shade = document.createElement("div");
+    shade.className = "shade";
+    shade.style.top = navigation.offsetHeight + "px";
+
+    document.body.appendChild(shade);
+
+    const toggleMenu = () => {
+      if (hamburger && navigation) {
+        const expanded = hamburger.getAttribute("aria-expanded") === "true";
+        const newState = String(!expanded);
+        hamburger.setAttribute("aria-expanded", newState);
+        navigation.classList.toggle("expanded");
+        document.body.classList.toggle("menu-expanded", !expanded);
+      }
+    };
+
+    if (hamburger && navigation) {
+      hamburger.addEventListener("click", toggleMenu);
+      hamburger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleMenu();
+        }
+      });
+
+      shade.addEventListener("click", toggleMenu);
+    }
+  });
+</script>
+
+<style lang="scss">
+  .header {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    grid-template-areas: "hamburger brand";
+    padding: 1rem 0;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--clr-gray-10);
+
+    @media (min-width: 48rem) {
+      display: grid;
+      grid-template-areas: "brand navigation";
+      grid-template-columns: auto 1fr;
+      justify-content: space-between;
+    }
+  }
+
+  /* = Header Brand 
+   -------------------------------------------------------*/
+  .header-brand {
+    width: 100%;
+    text-align: center;
+    grid-area: brand;
+    font-weight: var(--fw-700);
+    font-size: var(--fs-lg);
+    color: var(--brand-text-primary);
+    transition: opacity 0.25s ease-in-out;
+    text-decoration: none;
+
+    @media (min-width: 48rem) {
+      text-align: left;
+    }
+
+    span {
+      display: inline;
+      color: var(--brand-text-accent);
+    }
+  }
+
+  /* = Header Navigation 
+   -------------------------------------------------------*/
+  .header-navigation {
+    display: none;
+
+    @media (min-width: 48rem) {
+      display: flex;
+      grid-area: navigation;
+      justify-content: flex-end;
+    }
+
+    &.expanded {
+      display: block;
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      z-index: 9;
+
+      ul {
+        display: flex;
+        padding: 1rem;
+        flex-direction: column;
+        border: 2px solid var(--clr-gray-100);
+        box-shadow: 0.625rem 0.625rem 0 0 var(--clr-gray-100);
+        background-color: var(--clr-white);
+        counter-reset: item 0;
+
+        li {
+          position: relative;
+          counter-increment: item;
+
+          &::before {
+            position: absolute;
+            left: 0;
+            content: "(" counter(item) ")";
+            margin-inline-end: 0.5rem;
+            color: var(--clr-gray-100);
+          }
+
+          a {
+            display: block;
+            text-indent: 2rem;
+          }
+        }
+      }
+    }
+
+    ul {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        a {
+          text-decoration: none;
+        }
+
+        &[aria-current="page"] {
+          a {
+            color: var(--link-primary);
+            text-decoration: wavy underline;
+          }
+        }
+      }
+    }
+  }
+
+  /* = Hamburger 
+   -------------------------------------------------------*/
+  .hamburger {
+    position: relative;
+    cursor: pointer;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    grid-area: hamburger;
+
+    @media (min-width: 48rem) {
+      display: none;
+    }
+
+    &[aria-expanded="true"] {
+      background: transparent;
+
+      span {
+        background-color: transparent;
+
+        &::before,
+        &::after {
+          top: 0;
+          background-color: var(--clr-white);
+        }
+
+        &::before {
+          transform: rotate(45deg);
+        }
+
+        &::after {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    span {
+      display: flex;
+      background: var(--clr-gray-100);
+      width: 1.875rem;
+      height: 0.125rem;
+      transition: all ease 0.25s;
+      position: relative;
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        width: 1.875rem;
+        height: 0.125rem;
+        background: var(--clr-gray-100);
+        height: 2px;
+        transition: all 0.2s ease;
+      }
+
+      &::before {
+        top: 0.625rem;
+      }
+
+      &::after {
+        top: -0.625rem;
+      }
+    }
+  }
+</style>

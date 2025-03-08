@@ -1,0 +1,73 @@
+---
+import { TITLE, DESCRIPTION, GTM_ID, MODE } from "astro:env/client";
+import { SEO } from "astro-seo";
+import GlobalHeader from "components/shared/GlobalHeader.astro";
+import GlobalFooter from "components/shared/GlobalFooter.astro";
+
+import "styles/main.scss";
+import GoogleTagManager from "components/Shared/GoogleTagManager.astro";
+
+const googleTagManagerScript = `
+<noscript
+    ><iframe
+      src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden"></iframe></noscript
+  >`;
+const { pageType = "page" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEO
+      title={TITLE}
+      ,
+      description={DESCRIPTION}
+      ,
+      charset="utf-8"
+      ,
+      extend={{
+        meta: [
+          {
+            name: "viewport",
+            content: "width=device-width, initial-scale=1",
+          },
+          {
+            name: "generator",
+            content: Astro.generator,
+          },
+        ],
+        link: [
+          {
+            rel: "preconnect",
+            href: "https://fonts.googleapis.com",
+          },
+          {
+            rel: "preconnect",
+            href: "https://fonts.gstatic.com",
+            crossOrigin: "",
+          },
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap",
+          },
+          {
+            rel: "sitemap",
+            href: "/sitemap-index.xml",
+          },
+        ],
+      }}
+    />
+    {MODE === "production" && GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
+  </head>
+  <body data-page-type={pageType}>
+    {MODE === "production" && <Fragment set:html={googleTagManagerScript} />}
+    <GlobalHeader />
+    <main>
+      <slot />
+    </main>
+    <GlobalFooter />
+  </body>
+</html>

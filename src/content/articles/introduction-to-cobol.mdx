@@ -1,17 +1,18 @@
 ---
-title: "Introduction to COBOL"
-url: "/articles/introduction-to-cobol"
-pubDate: "2025-02-13"
-tag: "cobol"
-excerpt: "Discover COBOL basics, history, and relevance in this article. Learn why this enduring language still matters in modern tech."
+title: Introduction to COBOL
+description: |
+    Explore COBOL's history, program structure, and a simple 'Hello World' example in this article. Learn the basics of this key language!
+publishDate: 2025-02-13 00:00:00
+topic: cobol
+series: Learn COBOL
 ---
 ## The Problem
-As businesses began relying more heavily on computers for data processing—such as payroll, inventory, banking, and more—in the 1950s, it became clear that change was needed. At the time, each computer manufacturer used its own proprietary programming language, which was often tied to specific hardware. For instance, languages like FORTRAN and Assembly required a strong mathematical background, making them inaccessible to non-technical users.
+As businesses began relying more heavily on computers for data processing—such as payroll, inventory, and banking—in the 1950s, it became clear that change was necessary. At the time, each computer manufacturer used its own proprietary programming language, often tied to specific hardware. Additionally, early languages like [FORTRAN](https://en.wikipedia.org/wiki/Fortran) and [Assembly Language](https://en.wikipedia.org/wiki/Assembly_language) were designed for scientific and engineering applications, respectively, and made it less approachable to business folks uneasy with mathematical symbols (e.g., &lt;, &gt;, &ne;).
 
 ## The Solution
 Recognizing the inefficiency and cost of porting programs across systems, the U.S. Department of Defense (DoD) spearheaded efforts to create a standardized programming language that could be used universally. With this goal in mind, a group of experts gathered at the Conference on Data Systems Languages (CODASYL) in 1959. Among them was [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper), a pioneering computer scientist who was a driving force behind the development of the first compiler, playing a pivotal role in its creation alongside other contributors.
 
-Out of this conference came the COmmon Business-Oriented Language (COBOL), a revolutionary language designed to meet the needs of business data processing. Among the features that made COBOL groundbreaking was its English-like syntax, which allowed non-technical people to read, understand, and even write programs. This was similar to how modern drag-and-drop website builders have democratized—or, some might argue, disrupted—web development today.
+This conference birthed COBOL (Common Business-Oriented Language), a pioneering language designed for business data processing. Its English-like syntax — though not the first (see [FLOW-MATIC](https://en.wikipedia.org/wiki/FLOW-MATIC)), made programming accessible to non-technical users, empowering them to read, understand, and even write code. This innovation is aking to how today's drag-and-drop website builders have removed barriers to web development.
 
 ## The Structure of a COBOL program
 Now that we've learned a bit about COBOL and some of the problems it solved, we'll take a look at the structure of a COBOL program.
@@ -19,20 +20,20 @@ Now that we've learned a bit about COBOL and some of the problems it solved, we'
 ### Columns in COBOL
 Since COBOL dates back to the era of punched cards—where data was physically encoded on cards—it's no surprise that its code is organized into specific column-based areas, each serving a unique purpose.
 
-* Columns 1-6 - known as the Sequence Number Area, are often ignored in modern COBOL implementations.
-* Column 7 - Column 7, known as the Indicator Area, is primarily used for comments (marked with *) or left blank for regular code lines in modern COBOL programming.
-* Columns 8-11: Area A (Margin A) - Used for division headers, section headers, paragraph names, and level indicators.
-* Columns 12-72: Area B (Margin B) - Contains the actual COBOL statements, data definitions, and procedural code.
-* Columns 73-80 - known as the Identification Area, are rarely used in modern COBOL programming.
+* **Columns 1-6**: known as the Sequence Number Area, are often ignored in modern COBOL implementations.
+* **Column 7**: Column 7, known as the Indicator Area, is primarily used for comments (marked with *) or left blank for regular code lines in modern COBOL programming.
+* **Columns 8-11**: Area A (Margin A) - Used for division headers, section headers, paragraph names, and level indicators.
+* **Columns 12-72**: Area B (Margin B) - Contains the actual COBOL statements, data definitions, and procedural code.
+* **Columns 73-80**: known as the Identification Area, are rarely used in modern COBOL programming.
 
 ### The Structure of a COBOL program
 Because COBOL is English-like, perhaps it comes as no surprise that a COBOL program is structured much like a document, with divisions, sections, paragraphs, sentences, and statements. Let's explore these a little more.
 
-* Divisions: Major segments of a COBOL program that categorize different aspects like program identification, environment setup, data definitions, and procedural logic.
-* Sections: Group related functionality within divisions.
-* Paragraphs: Small blocks of code within sections for specific tasks.
-* Sentences: Groups of statements that perform operations within paragraphs.
-* Statements: Individual commands or instructions within sentences.
+* **Divisions**: Major segments of a COBOL program that categorize different aspects like program identification, environment setup, data definitions, and procedural logic.
+* **Sections**: Group related functionality within divisions.
+* **Paragraphs**: Small blocks of code within sections for specific tasks.
+* **Sentences**: Groups of statements that perform operations within paragraphs.
+* **Statements**: Individual commands or instructions within sentences.
 
 ### The Four Divisions of a COBOL program
 Every COBOL program consists of four divisions; however, only two are required to write a basic COBOL program: the IDENTIFICATION DIVISION and the PROCEDURE DIVISION.
@@ -48,17 +49,17 @@ This division, which follows the IDENTIFICATION DIVISION, describes the system e
 
 The ENVIRONMENT DIVISION is divided into two sections:
 
-* CONFIGURATION SECTION - Describes the system environment.
-* INPUT-OUTPUT SECTION - Defines files and I/O devices, controlling how data is read from or written to these resources.
+* **CONFIGURATION SECTION** - Describes the system environment.
+* **INPUT-OUTPUT SECTION** - Defines files and I/O devices, controlling how data is read from or written to these resources.
 
 #### DATA DIVISION
 This is where your COBOL program defines and stores all the data it will use. It's like the program's "storage room" for variables, records, and files.
 
 The DATA DIVISION is divided into the following sections:
 
-1. FILE SECTION - Defines the structure of files used for input/output.
-1. WORKING-STORAGE SECTION - Stores temporary data and variables used during program execution.
-1. LINKAGE SECTION - Defines data shared between programs (used in subprograms).
+1. **FILE SECTION** - Defines the structure of files used for input/output.
+1. **WORKING-STORAGE SECTION** - Stores temporary data and variables used during program execution.
+1. **LINKAGE SECTION** - Defines data shared between programs (used in subprograms).
 
 #### PROCEDURE DIVISION
 The PROCEDURE DIVISION is mandatory for any COBOL program, as it contains the logic and operations that bring the program to life. This is where you define the logic, operations, and all the processing that will occur happens.

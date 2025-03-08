@@ -1,0 +1,131 @@
+body {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    grid-template-rows: auto minmax(0, 1fr) 5rem;
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: clamp(1rem, 5vw, 2rem);
+    background-color: var(--background);
+    font-family: var(--ff-primary);
+    color: var(--text-primary);
+    font-size: var(--fs-base);
+    min-height: 100vh;
+    letter-spacing: -.5px;
+    text-rendering: optimizeSpeed;
+
+    @media (min-width: 48rem) {
+        margin-inline: auto;
+        max-width: 48rem;
+    }
+
+    &.menu-expanded {
+        overflow: hidden;
+
+        .shade {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .header,
+        .footer {
+            background: transparent;
+        }
+    }
+
+    &[data-page-type="page"] {
+        line-height: 1.5;
+    }
+
+    &[data-page-type="article"] {
+        line-height: 1.75;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-block: 1rem 0;
+        }
+
+        p {
+            margin-block: 0 1rem;
+        }
+    }
+}
+
+a {
+    color: var(--link-primary);
+
+    &:hover {
+        color: var(--link-primary-hover);
+    }
+
+    &:visited {
+        color: var(--link-visited);
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: var(--fw-700);
+}
+
+h1 {
+    font-size: clamp(1.375rem, 5vw, 2rem);
+}
+
+h2 {
+    font-size: clamp(1.125rem, 5vw, 1.5rem);
+}
+
+h3 {
+    font-size: clamp(1rem, 5vw, 1.125rem);
+}
+
+h4 {
+    font-size: clamp(.875rem, 5vw, 1rem);
+}
+
+h5 {
+    font-size: clamp(.75rem, 5vw, .875rem);
+}
+
+h6 {
+    font-size: clamp(.75rem, 5vw, .875rem);
+}
+
+.shade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+}
+
+main {
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+ul:not(nav ul) {
+    margin-block: 1.5rem;
+    padding-inline-start: 1rem;
+    list-style-type: "* ";
+}
+
+.astro-code {
+    &:not([data-language="cobol"]) {
+        padding: 1rem;
+    }
+}

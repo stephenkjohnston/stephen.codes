@@ -1,14 +1,14 @@
 ---
-import { SITE_TITLE } from "astro:env/client";
-import Layout from "layouts/Layout.astro";
+import { TITLE } from "astro:env/client";
+import BaseLayout from "layouts/BaseLayout.astro";
 import { SEO } from "astro-seo";
 ---
 
 <SEO
-  title={`${SITE_TITLE} &ndash; The Beared Gentleman Developer from WA`}
+  title={`${TITLE} &ndash; The Beared Gentleman Developer from WA`}
   description="Software developer passionate about efficient apps, front-end development, and COBOL. I love blending code, creativity, and problem-solving."
 />
-<Layout>
+<BaseLayout>
   <h1>Howdy, I'm Stephen 👋👋</h1>
 
   <p>
@@ -38,4 +38,4 @@ import { SEO } from "astro-seo";
     to reach me is via <a href="mailto:stephenjohnston@protonmail.com">email</a
     >.
   </p>
-</Layout>
+</BaseLayout>

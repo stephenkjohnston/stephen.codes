@@ -1,0 +1,46 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { TITLE } from "astro:env/client";
+import { SEO } from "astro-seo";
+
+import ContentList from "components/Content/ContentList.astro";
+import Pagination from "components/Shared/Pagination.astro";
+import BaseLayout from "layouts/BaseLayout.astro";
+
+export async function getStaticPaths({ paginate }) {
+  const articles = await getCollection("articles");
+  return paginate(articles, {
+    pageSize: 8,
+  });
+}
+
+interface Props {
+  page: Page<CollectionEntry<"articles">>;
+}
+
+const { page } = Astro.props;
+const articles = page.data;
+---
+
+<SEO
+  title={`${TITLE} &ndash; Articles`}
+  description="A collection of articles I have written on everything from Front-End Development to COBOL."
+/>
+<BaseLayout>
+  <h1>My Articles</h1>
+  <p>
+    Well, shoot, you've gone and found it—my super-secret, not-so-camouflaged
+    corner of the cosmos. Expect ramblings on coding doodads and
+    thing-a-ma-bobs, plus last-minute detours more hair raising than a grandpa
+    flooring it for Ruby Tuesday's through a tangle of lanes. You've been
+    warned!
+  </p>
+  {
+    Array.isArray(articles) && articles.length > 0 && (
+      <ContentList items={articles} />
+    )
+  }
+  <Pagination base="articles" page={page} />
+</BaseLayout>

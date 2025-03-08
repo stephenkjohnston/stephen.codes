@@ -1,0 +1,58 @@
+---
+import { type CollectionEntry } from "astro:content";
+type ContentItem = CollectionEntry<"articles">;
+import formatDate from "utils/formatDate";
+
+interface Props {
+  item: ContentItem;
+}
+
+const { item } = Astro.props;
+const { publishDate, title, topic } = item.data;
+---
+
+<article class="content-list-item">
+  <time>
+    {formatDate(publishDate)}
+  </time>
+  <h3>
+    <a href={`/${item.collection}/${item.slug}`}>{title}</a>
+  </h3>
+  <span>
+    &lt;<a href={`/topics/${topic.toLowerCase()}`}>{topic}</a>&gt;
+  </span>
+</article>
+<style lang="scss">
+  .content-list-item {
+    display: grid;
+    grid-template-areas: "date topic" "title title";
+    grid-template-columns: auto 1fr;
+
+    @media (min-width: 48rem) {
+      grid-template-areas: "date title topic";
+      grid-template-columns: 7.5rem auto 7.5rem;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    time {
+      grid-area: date;
+    }
+
+    h3 {
+      margin: 0;
+      text-align: left;
+      grid-area: title;
+    }
+
+    span {
+      grid-area: topic;
+      text-align: right;
+      text-transform: uppercase;
+
+      @media (min-width: 48rem) {
+        text-align: center;
+      }
+    }
+  }
+</style>
