@@ -3,17 +3,16 @@ import { TITLE } from "astro:env/client";
 import { SEO } from "astro-seo";
 import BaseLayout from "layouts/BaseLayout.astro";
 import getKilobitCollectionLanguages from "utils/getKilobitCollectionLanguages";
-import getRecentKilobitsByLanguages from "utils/getRecentKilobitsByLanguages";
 import { slugify } from "utils/slugify";
+import getKilobitsByLanguages from "utils/getKilobitsByLanguage";
 
 const kilobitLanguages = await getKilobitCollectionLanguages();
 const recentKilobitsByLang = await Promise.all(
   kilobitLanguages.map(async (lang) => ({
     language: lang,
-    kilobits: await getRecentKilobitsByLanguages(lang),
+    kilobits: await getKilobitsByLanguages(lang, 4),
   }))
 );
-console.log({ recentKilobitsByLang });
 ---
 
 <SEO
