@@ -15,7 +15,7 @@ import { slugify } from "utils/slugify";
     {
       topics.map((topic) => (
         <li>
-          <a href={`/topics/${slugify(topic.name)}`}>{topic.name}</a>
+          <a href={`/articles/topics/${slugify(topic.name)}`}>{topic.name}</a>
         </li>
       ))
     }
