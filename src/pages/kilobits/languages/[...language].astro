@@ -1,0 +1,43 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { TITLE } from "astro:env/client";
+import { SEO } from "astro-seo";
+import BaseLayout from "layouts/BaseLayout.astro";
+import TopicHeader from "components/Shared/TopicHeader.astro";
+import getKilobitCollectionLanguages from "utils/getKilobitCollectionLanguages";
+import formatLanguage from "utils/formatLanguage";
+
+interface Props {
+  page: Page<CollectionEntry<"articles">>;
+}
+
+export const getStaticPaths = async () => {
+  const kilobitLanguages = await getKilobitCollectionLanguages();
+
+  return kilobitLanguages.map((kbLanguage) => ({
+    params: { language: kbLanguage },
+  }));
+};
+
+const { language } = Astro.params;
+const { page } = Astro.props;
+
+console.log({ page });
+const formattedLanguageTitle = formatLanguage(language);
+const pageTitle = `${formattedLanguageTitle} Coding Tips: Short & Practical`;
+const summary = `A collection of byte-sized coding tips and tricks for ${formattedLanguageTitle}.`;
+---
+
+<SEO
+  title={`${pageTitle} Coding Tips: Short & Practical &ndash; ${TITLE}`}
+  description={`Explore short, practical ${formattedLanguageTitle} coding tips and tricks, updated weekly with concise examples for developers.`}
+/>
+<BaseLayout>
+  <TopicHeader
+    title={String(formattedLanguageTitle)}
+    link="/kilobits/languages"
+    linkText="Kilobits"
+    summary={summary}
+  />
+</BaseLayout>

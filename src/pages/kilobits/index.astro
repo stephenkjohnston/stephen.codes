@@ -2,6 +2,18 @@
 import { TITLE } from "astro:env/client";
 import { SEO } from "astro-seo";
 import BaseLayout from "layouts/BaseLayout.astro";
+import getKilobitCollectionLanguages from "utils/getKilobitCollectionLanguages";
+import getRecentKilobitsByLanguages from "utils/getRecentKilobitsByLanguages";
+import { slugify } from "utils/slugify";
+
+const kilobitLanguages = await getKilobitCollectionLanguages();
+const recentKilobitsByLang = await Promise.all(
+  kilobitLanguages.map(async (lang) => ({
+    language: lang,
+    kilobits: await getRecentKilobitsByLanguages(lang),
+  }))
+);
+console.log({ recentKilobitsByLang });
 ---
 
 <SEO
@@ -11,8 +23,21 @@ import BaseLayout from "layouts/BaseLayout.astro";
 <BaseLayout>
   <h1>Kilobits</h1>
   <p>
-    Fresh, byte-sized coding tips and tricks hit the page weekly — <a href="/kilobits/languages/html" aria-label="HTML coding tips">HTML</a>, 
-<a href="/kilobits/languages/css" aria-label="CSS coding tips">CSS</a>, 
-<a href="/kilobits/languages/js" aria-label="JS coding tips">JS</a>, and beyond!
+    Fresh, byte-sized coding tips and tricks hit the page weekly — HTML, CSS,
+    JS, and beyond!
   </p>
+  {
+    recentKilobitsByLang.map(({ language, kilobits }) => (
+      <h2>
+        &lbrack;
+        <a href={`/kilobits/languages/${slugify(language)}`}>{language}</a>
+        &rbrack;
+      </h2>
+      <ul>
+        {kilobits.map(recentKilobit => (
+          <li><a href={`/kilobits/languages/${recentKilobit.slug}`}>{recentKilobit.data.title}</a></li>
+        ))}
+      </ul>
+    ))
+  }
 </BaseLayout>

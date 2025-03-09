@@ -1,4 +1,6 @@
 ---
+import { TITLE, DESCRIPTION } from "astro:env/client";
+import { SEO } from "astro-seo";
 import BaseLayout from "layouts/BaseLayout.astro";
 import ContentList from "components/Content/ContentList.astro";
 import { getCollection } from "astro:content";
@@ -9,6 +11,7 @@ const articles = (await getCollection("articles"))
   .slice(0, 4);
 ---
 
+<SEO title={TITLE} description={DESCRIPTION} />
 <BaseLayout>
   <LandingPageHero />
   <ContentList title="recent-articles" link="/articles/" items={articles} />
