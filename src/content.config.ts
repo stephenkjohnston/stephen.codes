@@ -12,4 +12,13 @@ export const collections = {
       series: z.string().optional(),
     }),
   }),
+  kilobits: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      publishDate: z.coerce.date(),
+      language: z.string(),
+    }),
+  }),
 };
