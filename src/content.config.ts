@@ -13,7 +13,7 @@ export const collections = {
     }),
   }),
   kilobits: defineCollection({
-    type: "content",
+    loader: glob({ pattern: "**/*.(mdx)", base: "./src/pages/kilobits" }),
     schema: z.object({
       title: z.string(),
       description: z.string(),

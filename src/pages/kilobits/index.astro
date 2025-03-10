@@ -13,6 +13,7 @@ const recentKilobitsByLang = await Promise.all(
     kilobits: await getKilobitsByLanguages(lang, 4),
   }))
 );
+
 ---
 
 <SEO
@@ -29,12 +30,12 @@ const recentKilobitsByLang = await Promise.all(
     recentKilobitsByLang.map(({ language, kilobits }) => (
       <h2>
         &lbrack;
-        <a href={`/kilobits/languages/${slugify(language)}`}>{language}</a>
+        <a href={`/kilobits/${slugify(language)}`}>{language}</a>
         &rbrack;
       </h2>
       <ul>
         {kilobits.map(recentKilobit => (
-          <li><a href={`/kilobits/languages/${recentKilobit.slug}`}>{recentKilobit.data.title}</a></li>
+          <li><a href={`/kilobits/${recentKilobit.slug}`}>{recentKilobit.data.title}</a></li>
         ))}
       </ul>
     ))
