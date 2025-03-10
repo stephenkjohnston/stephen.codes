@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 
-export default async function getKilobitsByLanguages(
+export default async function getKilobitsByLanguage(
   language: string,
   limit?: number
 ) {
