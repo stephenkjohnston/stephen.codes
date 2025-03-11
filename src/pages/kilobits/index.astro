@@ -35,7 +35,7 @@ const recentKilobitsByLang = await Promise.all(
       </h2>
       <ul>
         {kilobits.map(recentKilobit => (
-          <li><a href={`/kilobits/${recentKilobit.slug}`}>{recentKilobit.data.title}</a></li>
+          <li><a href={`/kilobits/${recentKilobit.id}`}>{recentKilobit.data.title}</a></li>
         ))}
       </ul>
     ))
