@@ -1,4 +1,5 @@
 ---
+layout: layouts/ArticleLayout.astro
 title: "Learn COBOL: Conditional Statements"
 description: |
     Explore how to boss COBOL with conditional statements -- the secret sauce for controlling your code's flow!
@@ -15,7 +16,7 @@ Even IF you're NOT a programmer, you already use these ideas daily — like deci
 ### To Be VERBOSE... or NOT To Be VERBOSE
 COBOL chooses both! Unlike Hamlet, who rambled and put you to sleep, COBOL hands you options. Want to check if one number's less than another? Here's the wordy way:
 
-```
+```cobol
 IF AGE IS LESS THAN 18
     DISPLAY "Sorry, you cannot vote."
 END-IF
@@ -23,7 +24,7 @@ END-IF
 
 And here's the short way:
 
-```
+```cobol
 IF AGE < 18
     DISPLAY "Sorry, you cannot vote."
 END-IF

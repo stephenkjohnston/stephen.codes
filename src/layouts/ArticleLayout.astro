@@ -1,7 +1,35 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import { TITLE, DESCRIPTION } from "astro:env/client";
+import { SEO } from "astro-seo";
+const { frontmatter } = Astro.props;
+
+import SocialBackground from "assets/images/social-background.png";
+const title = `${frontmatter.title} &ndash; ${TITLE}`;
+const description = frontmatter.description;
 ---
 
+<SEO
+  title={title}
+  description={description}
+  openGraph={{
+    basic: {
+      title: `${TITLE} - ${title}`,
+      type: "website",
+      image: `${SocialBackground.src}`,
+    },
+  }}
+  ,
+  twitter={{
+    card: "summary_large_image",
+    creator: "@stephencodes",
+    site: "@stephencodes",
+    title: "Stephen Johnston",
+    description,
+    image: SocialBackground.src,
+    imageAlt: DESCRIPTION,
+  }}
+/>
 <BaseLayout pageType="article">
   <slot />
 </BaseLayout>
