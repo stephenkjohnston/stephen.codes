@@ -3,7 +3,40 @@ layout: layouts/KilobitLayout.astro
 title: "HTML <mark> Tag: Highlight Text Easily"
 description: |
     Use the HTML <mark> tag to spotlight important text — easy, no-effort highlighting!
-publishDate: 2025-03-08 00:00:00
+publishDate: 2025-03-11 00:00:00
 language: html
 ---
+import LivePreview from 'components/shared/LivePreview.astro';
+
 # HTML `<mark>` Tag: Highlight Text Easily
+Ever have something to say that's so important you want it to jump off the page? Fortunately, <abbr title="Hyper Text Markup Language">HTML</abbr> comes with a convenient yellow highlighter... seriously... it's yellow. The `<mark>` tag is used to visually draw attention to a piece of text.
+
+## How to use the `<mark>` tag
+To use this, simply wrap the content you want highlighted with the `<mark>` tag.
+
+```html
+The quick brown fox <mark>jumped</mark> over...
+```
+
+When rendered in the browser, the above example looks like this. Notice the word "jumped" is highlighted with yellow.
+
+<LivePreview>
+The quick brown fox <mark>jumped</mark> over...
+</LivePreview>
+
+## Mark My Words: When to Use `<mark>`
+Great! Now that you know about HTML's highlighter and how to use it, **when should you reach for the `<mark>` tag**?
+
+* **Highlighting search terms** in search results.
+* **Drawing attention to key points** in documentation or tutorials.
+* **Marking up important content** in user-generated text (e.g., comments or reviews).
+
+## What About Other Attention-Grabbing Tags?
+While the `<mark>` tag is great for highlighting important text, it's not the only option for grabbing attention. In fact, there are the `<b>`, `<strong>`, and `<em>` tags too.
+
+### When to use other attention-grabbing tags?
+Here's a quick guide to help you decide which tag to use, and when:
+
+* The `<b>` tag simply bolds text for **stylistic emphasis** -- no extra meaning here. It's just for looks and has no impact on screen readers.
+* The `<strong>` tag shouts, "Hey, look at me, I'm super important!" -- TL;DR: **It's bold for a reason**. Plus, screen readers emphasize it, so it's perfect for accessibility!
+* The `<em>` tag displays Italic text for **emphasis or tone**.
