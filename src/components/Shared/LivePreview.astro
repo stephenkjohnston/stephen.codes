@@ -1,0 +1,35 @@
+---
+
+---
+
+<div class="live-preview">
+  <slot />
+</div>
+<style lang="scss">
+  .live-preview {
+    margin-block: 1rem;
+    padding: 1rem;
+    border: 1px dashed var(--clr-gray-100);
+    position: relative;
+
+    &::before {
+      background-color: var(--clr-purple-60);
+      border-radius: 0.25em;
+      color: var(--clr-white);
+      content: "Live Preview";
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-400);
+      left: 50%;
+      line-height: 0.75;
+      padding: 0.35em 0.5rem;
+      position: absolute;
+      text-transform: uppercase;
+      top: -0.75rem;
+      transform: translateX(-50%);
+    }
+
+    p {
+      margin-block: 0;
+    }
+  }
+</style>

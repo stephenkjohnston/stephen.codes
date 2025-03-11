@@ -27,6 +27,13 @@
         <a href="/articles">#articles</a>
       </li>
       <li
+        aria-current={Astro.url.pathname.includes("kilobits")
+          ? "page"
+          : undefined}
+      >
+        <a href="/kilobits">#kilobits</a>
+      </li>
+      <li
         aria-current={Astro.url.pathname === "/about-me/" ? "page" : undefined}
       >
         <a href="/about-me/">#about-me</a>

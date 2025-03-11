@@ -2,15 +2,17 @@
 import { type CollectionEntry } from "astro:content";
 import ContentListItem from "./ContentListItem.astro";
 
-type ContentItems = CollectionEntry<"articles">;
+// Define a generic type for the component
+type ContentItems<T extends "articles" | "kilobits"> = CollectionEntry<T>;
 
-interface Props {
+interface Props<T extends "articles" | "kilobits"> {
   title?: string;
   link?: string;
-  items: ContentItems[];
+  items: ContentItems<T>[];
 }
 
-const { title, link, items } = Astro.props;
+// Use the generic type for the props
+const { title, link, items } = Astro.props as Props<"articles" | "kilobits">;
 ---
 
 <section class="content-list">
@@ -42,6 +44,7 @@ const { title, link, items } = Astro.props;
 <style lang="scss">
   .content-list {
     display: flex;
+    margin-block-end: 1rem;
     flex-direction: column;
     max-width: 48rem;
 
