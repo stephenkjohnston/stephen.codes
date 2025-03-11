@@ -5,15 +5,12 @@ import BaseLayout from "layouts/BaseLayout.astro";
 import getKilobitLanguages from "utils/getKilobitLanguages";
 import { slugify } from "utils/slugify";
 import getKilobitsByLanguages from "utils/getKilobitsByLanguage";
+import formatLanguage from "utils/formatLanguage";
 
 const kilobitLanguages = await getKilobitLanguages();
 const recentKilobitsByLang = await Promise.all(
-  kilobitLanguages.map(async (lang) => ({
-    language: lang,
-    kilobits: await getKilobitsByLanguages(lang, 4),
-  }))
+  kilobitLanguages.map(async (lang) => lang)
 );
-
 ---
 
 <SEO
@@ -26,18 +23,13 @@ const recentKilobitsByLang = await Promise.all(
     Fresh, byte-sized coding tips and tricks hit the page weekly — HTML, CSS,
     JS, and beyond!
   </p>
-  {
-    recentKilobitsByLang.map(({ language, kilobits }) => (
-      <h2>
-        &lbrack;
-        <a href={`/kilobits/${slugify(language)}`}>{language}</a>
-        &rbrack;
-      </h2>
-      <ul>
-        {kilobits.map(recentKilobit => (
-          <li><a href={`/kilobits/${recentKilobit.id}`}>{recentKilobit.data.title}</a></li>
-        ))}
-      </ul>
-    ))
-  }
+  <ul>
+    {
+      recentKilobitsByLang.map((language) => (
+        <li>
+          <a href={`/kilobits/${language}`}>{formatLanguage(language)}</a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
