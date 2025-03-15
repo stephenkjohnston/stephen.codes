@@ -52,6 +52,7 @@ const articlePublishDate = article?.data?.publishDate ?? new Date();
     publishDate={articlePublishDate}
     body={articleBody}
     topic={articleTopic}
+    topicLink={`/articles/topics/${articleTopic}`}
     series={articleSeries}
   />
   <slot />
