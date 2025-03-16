@@ -8,10 +8,11 @@ interface Props {
   body: string;
   publishDate: Date;
   topic: string;
+  topicLink: string;
   series?: string;
 }
 
-const { title, body, topic, publishDate, series } = Astro.props;
+const { title, body, topic, topicLink, publishDate, series } = Astro.props;
 
 const readingTimeStats = readingTime(body);
 const totalReadingTime = Math.ceil(readingTimeStats.minutes);
@@ -24,15 +25,13 @@ const formattedDate = formateDate(publishDate);
   <div class="article-hero-metadata">
     <span>Date: {formattedDate}</span>
     <span>Read Time: {totalReadingTime} minutes</span>
-    <span
-      >Topic: <Tag
-        label={topic}
-        link={`/articles/topics/${topic.toLowerCase()}`}
-      /></span
-    >
+    <span>Topic: <Tag label={topic} link={topicLink} /></span>
   </div>
 </section>
 <style lang="scss">
+  .article-hero {
+    margin-block-end: 0.625rem;
+  }
   .article-hero-title {
     position: relative;
     margin-block: 0;

@@ -1,12 +1,27 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
+import { getEntry } from "astro:content";
 import { TITLE, DESCRIPTION } from "astro:env/client";
 import { SEO } from "astro-seo";
+import BaseLayout from "./BaseLayout.astro";
+import ArticleHero from "components/Article/ArticleHero.astro";
+
 const { frontmatter } = Astro.props;
 
 import SocialBackground from "assets/images/social-background.png";
 const title = `${frontmatter.title} &ndash; ${TITLE}`;
 const description = frontmatter.description;
+const article = await getEntry(
+  "kilobits",
+  frontmatter.url.replace("/kilobits/", "")
+);
+
+if (!article) {
+  Astro.redirect("404");
+}
+
+const articleBody = article?.body ?? "";
+const articleTopic = article?.data?.language ?? "";
+const articlePublishDate = article?.data?.publishDate ?? new Date();
 ---
 
 <SEO
@@ -31,5 +46,12 @@ const description = frontmatter.description;
   }}
 />
 <BaseLayout pageType="article">
+  <ArticleHero
+    title={frontmatter.title}
+    publishDate={articlePublishDate}
+    body={articleBody}
+    topic={articleTopic}
+    topicLink={`/kilobits/${articleTopic}`}
+  />
   <slot />
 </BaseLayout>

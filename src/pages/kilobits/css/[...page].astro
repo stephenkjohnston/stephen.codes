@@ -16,7 +16,7 @@ interface Props {
 }
 
 export async function getStaticPaths({ paginate }) {
-  const allKilobitLanguages = (await getKilobitLanguages()).filter(lang => lang === "html");
+  const allKilobitLanguages = await getKilobitLanguages();
   const allKilobitArticles = await getAllKilobitEntries();
 
   const paths = allKilobitLanguages.flatMap((kilobitLanguage) => {
@@ -32,7 +32,7 @@ export async function getStaticPaths({ paginate }) {
       props: {
         title: formatLanguage(kilobitLanguage),
       },
-      pageSize: 8,
+      pageSize: 1,
     });
   });
   return paths;
