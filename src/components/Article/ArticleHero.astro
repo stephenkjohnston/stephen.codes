@@ -25,15 +25,13 @@ const formattedDate = formateDate(publishDate);
   <div class="article-hero-metadata">
     <span>Date: {formattedDate}</span>
     <span>Read Time: {totalReadingTime} minutes</span>
-    <span
-      >Topic: <Tag
-        label={topic}
-        link={topicLink}
-      /></span
-    >
+    <span>Topic: <Tag label={topic} link={topicLink} /></span>
   </div>
 </section>
 <style lang="scss">
+  .article-hero {
+    margin-block-end: 0.625rem;
+  }
   .article-hero-title {
     position: relative;
     margin-block: 0;

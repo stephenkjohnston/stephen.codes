@@ -1,0 +1,64 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "HTML <dialog>: Fast & Easy Modals"
+description: "Create fast, easy modal's using the HTML dialog element, and minimal JavaScript."
+publishDate: 2025-03-15 00:00:00
+language: html
+---
+import LivePreview from 'components/Shared/LivePreview.astro';
+
+Dialogs pop up everywhere on the web. They're like our modern Clippy, dropping helpful tips -- or nudging us to take action. Back in the day, adding a dialog meant digging into our bag-o-libraries, picking whichever was trending, tossing in some JavaScript, and calling it a day. But the web's always evolving, and now we've got simpler ways to keep things lightweight.
+
+## What is the `<dialog>` element?
+
+The `<dialog>` element makes adding modals to our apps quick and easy with minimal JavaScript and CSS. Additionally, it brings some solid accessibility wins — like setting the right ARIA attributes, closing with the <kbd>ESC</kbd> key, and dimming the background to keep focus on track.
+
+## How to use the `<dialog>` element?
+
+We'll start by adding a `<dialog>` tag and we'll give a unique ID, and because the dialog is hidden by default, we'll also pass in the `open` property. 
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="ogNpdWv" data-pen-title="Untitled" data-user="stephenkjohnston" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/stephenkjohnston/pen/ogNpdWv">
+  Untitled</a> by Stephen Johnston (<a href="https://codepen.io/stephenkjohnston">@stephenkjohnston</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+## Making the `<dialog>` interactive
+This is a good start, but natrually, we don't want it to always show. In a real world scenerio, this would only appear when something happened that required our action. In this case we'll just create a button that bekons Clippy.
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="emYyKrN" data-pen-title="HTML Dialog Tag Example 01" data-user="stephenkjohnston" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/stephenkjohnston/pen/emYyKrN">
+  HTML Dialog Tag Example 01</a> by Stephen Johnston (<a href="https://codepen.io/stephenkjohnston">@stephenkjohnston</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+In the code, we wait for the page to load with DOMContentLoaded, then listen for a click on the Clippy Signal button. The Clippyman Phone rings — `showModal()` makes the dialog pop up. Click the button inside, and `close()` hangs it up. Quick and easy! 
+
+## Making the `<dialog>` pretty
+
+Without adding some CSS, the plain `<dialog>` recevies the default browser styling. It's functional, but it ain't pretty. Let's see if we can improve this. To start, we'll add a CSS class, and add some styling to it. About the only unique thing about this process will be taking advantage of a unqiue pseudo-class called `::backdrop`. This is the shade that appears behind the dialog, and it's another convenient feature about using this native `<dialog>` element.
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="dPyJKQZ" data-pen-title="Styling the Dialog Element - Part 1" data-user="stephenkjohnston" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/stephenkjohnston/pen/dPyJKQZ">
+  Styling the Dialog Element - Part 1</a> by Stephen Johnston (<a href="https://codepen.io/stephenkjohnston">@stephenkjohnston</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+As you can see, there isn't too much you need to touch. You may have noticed that you cannot close the dialog when clicking the shade. This is typically a standard feature for most dialogs, so let's add it quickly, and wrap this up.
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="zxYpLOZ" data-pen-title="Styling the Dialog Element - Part 2" data-user="stephenkjohnston" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/stephenkjohnston/pen/zxYpLOZ">
+  Styling the Dialog Element - Part 2</a> by Stephen Johnston (<a href="https://codepen.io/stephenkjohnston">@stephenkjohnston</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+This was tricky since MDN does't cover shade clicks, but after some digging, I found a clever workaround on [DEV](https://dev.to/___whykay/mastering-the-html5-element-a-native-solution-for-modals-3c3j). You'll see I wrapped the content in a `<form>` -- could be any element, really -- but it acts as a safeguard. Click the content, and it stays put. Click outside? Poof!
+
+## Summary
+In this [#kilobit](/kilobits), you got the scoop on the HTML `<dialog>` element — how to interact with it and jazz it up to look pretty!
+
+
