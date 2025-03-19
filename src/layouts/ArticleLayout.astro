@@ -23,6 +23,7 @@ const articleBody = article?.body ?? "";
 const articleTopic = article?.data?.topic ?? "";
 const articleSeries = article?.data?.series ?? "";
 const articlePublishDate = article?.data?.publishDate ?? new Date();
+const articleSocialCard = SocialBackground.src;
 ---
 
 <SEO
@@ -32,7 +33,7 @@ const articlePublishDate = article?.data?.publishDate ?? new Date();
     basic: {
       title: `${TITLE} - ${title}`,
       type: "website",
-      image: `${SocialBackground.src}`,
+      image: articleSocialCard.toString(),
     },
   }}
   ,
@@ -42,7 +43,7 @@ const articlePublishDate = article?.data?.publishDate ?? new Date();
     site: "@stephencodes",
     title: "Stephen Johnston",
     description,
-    image: SocialBackground.src,
+    image: articleSocialCard.toString(),
     imageAlt: DESCRIPTION,
   }}
 />

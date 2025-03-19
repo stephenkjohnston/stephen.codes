@@ -1,0 +1,79 @@
+---
+layout: layouts/ArticleLayout.astro
+title: "Is Array.isArray Still Needed in the TypeScript Era?"
+description: |
+    Explore whether Array.isArray is still relevant in TypeScript. Learn how TypeScript's type system handles arrays and when to use Array.isArray for runtime checks.
+publishDate: 2025-03-18 00:00:00
+topic: javascript
+---
+
+Long, long ago, in the age before TypeScript, typing in JavaScript was a bit like living in the Wild, Wild West. Variables could be anything—a `string`, a `number`, or even a `cactus`—and there was no sheriff to enforce order. But now, TypeScript has ridden into town, bringing strict typing and a sense of lawfulness. So, do we still need old-school tools like `Array.isArray`? The answer is **yes**, and in this article I'll explain why we can't just rely on TypeScript to catch and run the bad types out of town.
+
+## Why `Array.isArray` is still necessary
+At the end of the day, the browser can't natively execute TypeScript code—at least not yet. TypeScript needs to be compiled, or transpiled, back into something the browser can understand, which is plain old JavaScript. During this process, all type annotations are erased. This means that once your code is deployed, you're back in the Wild, Wild West. If a third party suddenly decides to change their response from an Array to an Object or a String, when your code runs, you're going to get a 3 AM nastygram.
+
+**TL;DR:** TypeScript only ensures type safety at compile time, but it can't help you at runtime. That's where `Array.isArray` comes in.
+
+
+## Beware of a special `typeof` JavaScript madness
+While typeof can be very handy for certain things, relying on it is like turning your back on a young kid and trusting it won't cause trouble. In JavaScript, under the hood, arrays are implemented as objects with integer-based keys and a length property. So, because arrays are objects, `typeof []` will return `object`, which can make distinguishing arrays from objects tricky. As you can see in the example below, it's not just arrays—in fact, `typeof null` also returns `object` 🤦‍♂️
+
+```javascript
+const arrayData = [];
+console.log(typeof arrayData) 'object'
+
+const nullData = null;
+console.log(typeof nullData); 'object'
+```
+
+## How `Array.isArray` Saves the Day
+As of July 2015, `Array.isArray` is well supported across devices and browsers. This means we can finally bring order to the object chaos. It's specifically designed to check if a value is an array, and it works reliably at runtime.
+
+```javascript
+console.log(Array.isArray([1, 3, 5])); 'true'
+
+console.log(Array.isArray("[]")); 'false'
+
+console.log(Array.isArray(new Array(5))); 'true'
+
+console.log(Array.isArray(undefined)) 'false'
+
+console.log(Array.isArray({})) 'false'
+```
+## Practical Examples
+When working with asynchronous data, such as API responses, you often encounter the default `Promise<unknown>`. This happens because TypeScript doesn't know what the response will look like—and sometimes neither do we. And to be fair, even if we define a type, the API might change without warning, breaking our assumptions and our hearts, and then we get our 3 AM nastygram. That's where `Array.isArray` can come in handy. It ensures you're dealing with an array before diving into your logic. For this contrived example, let's say our response will look like this:
+
+```json
+{
+    "status": "success",
+    "data": [
+        { "id": 1, "name": "Item 1" },
+        { "id": 2, "name": "Item 2" }
+    ]
+}
+```
+
+Here's how you might handle this scenario:
+
+```javascript
+async function processApiData() {
+    const response = await fetch('https://api.example.com/data').then(res => res.json());
+    const data = response.data;
+
+    if (!Array.isArray(data)) {
+        console.log('Not an array, bailing out!');
+        return;
+    }
+
+    console.log('Got an array, processing:', data);
+}
+
+// Note: In production, add more sophisticated error handling!
+processApiData();
+
+```
+
+## Summary
+So, is `Array.isArray` still needed in the TypeScript era? You bet. TypeScript's sheriff badge might keep types in line at compile time, but once the code hits the browser, it's back to the Wild West. With APIs throwing curveballs and `typeof` playing tricks, `Array.isArray` is the trusty deputy you need to keep your arrays in check at runtime. Saddle up and use it!
+
+Until next time, may the code be with you!
