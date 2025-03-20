@@ -28,9 +28,12 @@ body {
             pointer-events: auto;
         }
 
-        .header,
-        .footer {
+        .header {
             background: transparent;
+        }
+
+        .footer {
+            display: none;
         }
     }
 

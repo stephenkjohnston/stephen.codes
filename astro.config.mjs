@@ -8,6 +8,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://stephen.codes',
   integrations: [mdx(), sitemap()],
+  devToolbar: {
+    enabled: false,
+  },
   env: {
     schema: {
       TITLE: envField.string({

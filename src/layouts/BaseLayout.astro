@@ -3,9 +3,11 @@ import { TITLE, DESCRIPTION, GTM_ID, MODE } from "astro:env/client";
 import { SEO } from "astro-seo";
 import GlobalHeader from "components/shared/GlobalHeader.astro";
 import GlobalFooter from "components/shared/GlobalFooter.astro";
+import GoogleTagManager from "components/Shared/GoogleTagManager.astro";
+
+import siteManifast from "../../public/site.webmanifest";
 
 import "styles/main.scss";
-import GoogleTagManager from "components/Shared/GoogleTagManager.astro";
 
 const googleTagManagerScript = `
 <noscript
@@ -36,6 +38,14 @@ const { pageType = "page" } = Astro.props;
           },
         ],
         link: [
+          {
+            rel: "icon",
+            href: "favicon.svg",
+          },
+          {
+            rel: "manifest",
+            href: "/site.webmanifest",
+          },
           {
             rel: "preconnect",
             href: "https://fonts.googleapis.com",
