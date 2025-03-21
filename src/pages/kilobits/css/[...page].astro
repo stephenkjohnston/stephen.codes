@@ -16,23 +16,23 @@ interface Props {
 }
 
 export async function getStaticPaths({ paginate }) {
-  const allKilobitLanguages = await getKilobitLanguages();
+  const allKilobitLanguages = await getKilobitLanguages()
   const allKilobitArticles = await getAllKilobitEntries();
 
   const paths = allKilobitLanguages.flatMap((kilobitLanguage) => {
     const languageArticles = allKilobitArticles
-      .filter((article) => article.data.language === kilobitLanguage)
+      .filter(article => article.data.language === "css")
       .sort(
         (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
       );
     return paginate(languageArticles, {
       params: {
-        language: kilobitLanguage,
+        language: "css",
       },
       props: {
-        title: formatLanguage(kilobitLanguage),
+        title: formatLanguage("css"),
       },
-      pageSize: 1,
+      pageSize: 8,
     });
   });
   return paths;

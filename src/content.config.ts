@@ -10,6 +10,7 @@ export const collections = {
       publishDate: z.coerce.date(),
       topic: z.string(),
       series: z.string().optional(),
+      status: z.enum(["Publish", "Draft"]),
     }),
   }),
   kilobits: defineCollection({
@@ -19,6 +20,7 @@ export const collections = {
       description: z.string(),
       publishDate: z.coerce.date(),
       language: z.string(),
+      status: z.enum(["Publish", "Draft"]),
     }),
   }),
 };
