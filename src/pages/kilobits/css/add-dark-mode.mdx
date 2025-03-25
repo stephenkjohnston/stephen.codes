@@ -2,11 +2,79 @@
 layout: layouts/KilobitLayout.astro
 title: "A Simple Guide to Dark Mode with CSS"
 description: |
-    Learn how to add dark mode to your website using CSS with this beginner-friendly guide. Step-by-step instructions to make your website moodier than an emo teenager.
+    Use the prefers-color-scheme media query in CSS to add dark mode to your website. 
 publishDate: 2025-03-21 00:00:00
 language: css
 status: Draft
 ---
 import LivePreview from 'components/shared/LivePreview.astro';
 
-Hello
+In this [#kilobit](/kilobits), I'll show you how to add dark mode to your website using CSS and the `prefers-color-scheme` media query. While we won't cover storing user preferences with JavaScript, you'll learn how to adapt your website's appearance to match your visitors' system-wide preferences. Let's dive in!
+
+## Don't Torque Off Your Visitors
+While it might seem obvious, many new developers come out with their guns blazing, making assumptions about what users want. From an accessibility standpoint, we cannot—and should not—make assumptions. Instead, we need to respect user preferences and system settings to create a positive experience.
+
+This is why prefers-color-scheme is so important. It reaches out to the operating system, asks for its preferences, and if the user prefers dark mode, the media query kicks in, changing the website's color palette.
+
+Speaking of the color palette, remember: friends don't let friends break accessibility guidelines. If you decide to implement dark mode, WCAG 2 requires a minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text.
+
+## Setting Up Color Variables with `:root`
+To make our dark mode implementation clean and maintainable, we'll use the [:root](https://developer.mozilla.org/en-US/docs/Web/CSS/:root) pseudo-selector to define [custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*), more often referred to as CSS variables, for our color preferences. This approach allows us to easily update the theme by updating just a few values. Here's how it works:
+
+```css
+:root {
+    --primary-background: hsl(0, 0%, 100%); /* white */
+    --primary-text: hsl(0, 0%, 0%); /* black */
+}
+
+body {
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+}
+```
+
+### Why use `:root` and custom properties?
+The `:root` pseudo-selector targets the highest-level element in the DOM, making the variables globally accessible throughout your stylesheet. We can access the values of these variables with the `var()` function. If you were to implement this without CSS variables, you'd need to duplicate your styles for each theme, making your code harder to maintain. Here's how it might look:
+
+```css
+/* Light mode styles */
+body {
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 0%);
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: hsl(0, 0%, 0%);
+        color: hsl(0, 0%, 100%);
+    }
+}
+```
+
+## Implementing Dark Mode with `prefers-color-scheme`
+To this point we've only implemented light mode. The `prefers-color-scheme` media query makes it super easy implement dark mode. Let's take a look:
+
+```css
+:root {
+    --primary-background: hsl(0, 0%, 100%);
+    --primary-text: hsl(0, 0%, 0%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-background: hsl(0, 0%, 0%);
+        --primary-text: hsl(0, 0%, 100%);
+    }
+}
+
+body {
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+}
+```
+
+## Summary
+This article walks you through implementing dark mode on your website using CSS and the `prefers-color-scheme` media query. By leveraging the `:root` pseudo-selector and CSS variables, you can create a clean, maintainable solution that adapts to your visitors' system-wide preferences without relying on JavaScript.
+
+Until next time, may the code be with you.
