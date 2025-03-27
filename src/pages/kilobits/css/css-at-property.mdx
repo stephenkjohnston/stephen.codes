@@ -1,0 +1,53 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "CSS @property: Smarter CSS Variables"
+description: |
+    The CSS @property rule lets you define custom properties with explicit types, inheritance controls, and default values. 
+publishDate: 2025-03-26 00:00:00
+language: css
+status: Publish
+---
+
+## What is the `@property` rule
+The [`@property`](https://developer.mozilla.org/en-US/docs/Web/CSS/@property) rule has been around for some time, gaining general browser support in July 2024. This at-rule allows you to explicitly define custom CSS properties (variables) with type constraints, inheritance control, and guaranteed initial values (e.g, graceful fallbacks). 
+
+## The Problem
+Regular CSS variables like `--clr-black: hsl(0, 0%, 0%)` give you basic customization but no value protection—you could create a color variable today (`--box-color: blue`), assign it a size value tomorrow (`--box-color: 12px`), and while the browser won't complain, your design will break. This is where @property comes in. Among other things, it enforces strict type controls through mandatory syntax rules and initial values.
+
+**Live Example:**
+
+<p class="codepen" data-height="300" data-default-tab="css,result" data-slug-hash="zxYJKdq" data-pen-title="CSS Type Insafe Variables Example 01" data-preview="true" data-editable="true" data-user="stephenkjohnston" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/stephenkjohnston/pen/zxYJKdq">
+  CSS Type Insafe Variables Example 01</a> by Stephen Johnston (<a href="https://codepen.io/stephenkjohnston">@stephenkjohnston</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+Let's break down what happened. Regular CSS variables don't check value types. When Box B tried to use 12px as a color, the browser couldn't understand it, so it failed silently. While regular CSS variables do support fallbacks (`background-color: var(--box-color, cornflowerblue)`), you would need to manually add a fallback every place you use it—which could become cumbersome to manage as your CSS grows.
+
+## The Solution
+The `@property` fixes this by adding rules to your variables. Declare what type they accept (`<color>`, `<length>`, etc.), set whether they inherit, and provide an initial (fallback) value. Now invalid values like 12px for colors get rejected upfront, and you get automatic fallbacks everywhere—no more adding var(--my-var, default) at every use. 
+
+### How to Register CSS Variables with `@property`
+The almighty `@property` turns your wishy-washy CSS variables into strictly typed powerhouses. Here's all you need to start using it today:
+
+```css
+@property --box-color {
+  syntax: '<color>';                /* Allowed type (e.g., <length>, <percentage>) */
+  inherits: false;                  /* Inheritance control (default: true) */
+  initial-value: cornflowerblue;    /* Required fallback value */
+}
+```
+
+**Live Example:**
+<p class="codepen" data-height="300" data-default-tab="css,result" data-slug-hash="vEYzXPa" data-pen-title="CSS Type Insafe Variables Example 01" data-preview="true" data-editable="true" data-user="stephenkjohnston" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/stephenkjohnston/pen/vEYzXPa">
+  CSS Type Insafe Variables Example 01</a> by Stephen Johnston (<a href="https://codepen.io/stephenkjohnston">@stephenkjohnston</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+## Summary
+This article shows how the `@property` rule gives your CSS variables clear rules and reliable behavior. You'll learn to define what types of values your variables accept, whether they inherit styles, and what fallbacks to use.
+
+Until next time, may the code be with you.
