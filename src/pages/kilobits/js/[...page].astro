@@ -1,0 +1,66 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { TITLE } from "astro:env/client";
+import { SEO } from "astro-seo";
+import Pagination from "components/Shared/Pagination.astro";
+import TopicHeader from "components/Shared/TopicHeader.astro";
+import BaseLayout from "layouts/BaseLayout.astro";
+import formatLanguage from "utils/formatLanguage";
+import getAllKilobitEntries from "utils/getAllKilobitEntries";
+import getKilobitLanguages from "utils/getKilobitLanguages";
+
+interface Props {
+  title: string;
+  page: Page<CollectionEntry<"kilobits">>;
+}
+
+export async function getStaticPaths({ paginate }) {
+  const allKilobitLanguages = await getKilobitLanguages();
+  const allKilobitArticles = await getAllKilobitEntries();
+
+  const paths = allKilobitLanguages.flatMap((kilobitLanguage) => {
+    const languageArticles = allKilobitArticles
+      .filter(article => article.data.language === "js")
+      .sort(
+        (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+      );
+    return paginate(languageArticles, {
+      params: {
+        language: "js",
+      },
+      props: {
+        title: formatLanguage("js"),
+      },
+      pageSize: 8,
+    });
+  });
+  return paths;
+}
+
+const { page, title } = Astro.props;
+const articles = page.data;
+const pageTitle = `${title} Coding Tips: Short & Practical`;
+const summary = `A collection of byte-sized coding tips and tricks for ${title}.`;
+---
+
+<SEO title={`${pageTitle} &ndash; ${TITLE}`} description="" />
+<BaseLayout>
+  <TopicHeader
+    title={title}
+    link="/kilobits"
+    linkText="Kilobits"
+    summary={summary}
+  />
+  {
+    Array.isArray(articles) &&
+      articles.length > 0 &&
+      articles.map((article) => (
+        <article>
+          <h3><a href={`/kilobits/${article.id.replace('.mdx', '')}`}}>{article.data.title}</a></h3>
+          <p>{article.data.description}</p>
+        </article>
+      ))
+  }
+  <Pagination base="articles" page={page} />
+</BaseLayout>

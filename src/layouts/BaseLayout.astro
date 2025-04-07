@@ -5,8 +5,6 @@ import GlobalHeader from "components/shared/GlobalHeader.astro";
 import GlobalFooter from "components/shared/GlobalFooter.astro";
 import GoogleTagManager from "components/Shared/GoogleTagManager.astro";
 
-import siteManifast from "../../public/site.webmanifest";
-
 import "styles/main.scss";
 
 const googleTagManagerScript = `
@@ -40,7 +38,7 @@ const { pageType = "page" } = Astro.props;
         link: [
           {
             rel: "icon",
-            href: "favicon.svg",
+            href: "/favicon.svg",
           },
           {
             rel: "manifest",
