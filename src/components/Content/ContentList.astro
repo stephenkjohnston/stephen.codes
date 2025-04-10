@@ -59,16 +59,6 @@ const { title, link, items } = Astro.props as Props<"articles" | "kilobits">;
         text-transform: lowercase;
       }
 
-      &::before {
-        content: "===================================================================================================================";
-        position: absolute;
-        bottom: -0.875rem;
-        left: 0;
-        right: 0;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
       a {
         padding-inline: 0.25rem;
       }
@@ -86,8 +76,58 @@ const { title, link, items } = Astro.props as Props<"articles" | "kilobits">;
     display: none;
 
     span {
-      &:last-of-type {
-        text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      border-top: 2px dashed var(--clr-gray-100);
+      border-bottom: 2px dashed var(--clr-gray-100);
+      line-height: 2.5;
+
+      &:first-child {
+        padding-inline-start: 10px;
+      }
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: "+|+";
+        word-wrap: break-word;
+        width: 1ch;
+        display: block;
+        line-height: 1.29;
+        background: var(--clr-gray-10);
+      }
+
+      &:nth-child(2n) {
+        &::before,
+        &::after {
+          content: "";
+        }
+      }
+
+      &::before {
+        top: -12px;
+        left: -1px;
+      }
+
+      &::after {
+        bottom: -12px;
+        right: -12px;
+        line-height: 1.35;
+      }
+
+      &:last-child {
+        justify-content: center;
+
+        &::before {
+          left: -12px;
+        }
+
+        &::after {
+          bottom: -12px;
+          right: -1px;
+          line-height: 1.35;
+        }
       }
     }
 
@@ -97,7 +137,6 @@ const { title, link, items } = Astro.props as Props<"articles" | "kilobits">;
       grid-template-columns: 7.5rem auto 7.5rem;
       align-items: center;
       gap: 1rem;
-      border-bottom: 2px dashed var(--clr-gray-100);
       font-weight: var(--fw-700);
       display: grid;
     }
