@@ -12,12 +12,14 @@ status: Publish
 We've covered the [history](/articles/introduction-to-cobol) of <abbr title="COmmon Business Oriented Language">COBOL</abbr> and covered the basics of [data types](/articles/cobol-data-types-variables). Now, let's shift gears and have some fun with a hands-on example. 
 
 ## What we'll be doing?
-In this article, we'll create a simple COBOL program that prompts the user to enter their name and responds with a friendly "Hello, (INSERT YOUR NAME)". One of the great things about COBOL is that you don't need to be a nuclear physicist to understand it — its clear, English-like syntax keeps things straightforward. 
+In this article, we'll create a simple GNU COBOL program that prompts the user to enter their name and responds with a friendly "Hello, (INSERT YOUR NAME)". One of the great things about COBOL is that you don't need to be a nuclear physicist to understand it — its clear, English-like syntax keeps things straightforward. 
+
+As a note, `DISPLAY` and `ACCEPT` do work differently on the mainframe, but for the sake of this article, we'll focus on the GNU COBOL implementation.
 
 To build this program, we'll use two key COBOL verbs:
 
-1. **ACCEPT** – which pauses the program, waiting for the user to type some input and press Enter.  
-2. **DISPLAY** – which, as the name suggests, outputs text to the screen for the user to see.
+1. **ACCEPT** &ndash; which pauses the program, waiting for the user to type some input and press Enter.  
+2. **DISPLAY** &ndash; which, as the name suggests, outputs text to the screen for the user to see.
 
 ## You just have to ACCEPT it!
 The `ACCEPT` verb is a bit like the Batphone in the world of COBOL. When it "rings," the program — our very own Bruce Wayne—drops everything, perks up, and listens intently to what the user has to say. It's followed by a reference to a variable, like `USER-NAME`, where the entered data gets stored. Think of it as an automated version of this:
