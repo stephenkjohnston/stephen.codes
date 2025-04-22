@@ -1,4 +1,7 @@
 {
   "recommendations": ["astro-build.astro-vscode"],
-  "unwantedRecommendations": []
+  "unwantedRecommendations": [
+    "IBM.zopeneditor",
+    "Zowe.vscode-extension-for-zowe"
+  ]
 }
