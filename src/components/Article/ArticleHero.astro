@@ -17,6 +17,7 @@ const { title, body, topic, topicLink, publishDate, series } = Astro.props;
 const readingTimeStats = readingTime(body);
 const totalReadingTime = Math.ceil(readingTimeStats.minutes);
 const formattedDate = formateDate(publishDate);
+console.log("formattedDate", formattedDate);
 ---
 
 <section class="article-hero">

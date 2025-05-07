@@ -134,6 +134,11 @@ ul:not(nav ul) {
 }
 
 .astro-code {
+    code {
+        padding: 0;
+        color: var(--clr-green-30);
+    }
+
     &:not([data-language="cobol"]) {
         padding: 1rem;
     }

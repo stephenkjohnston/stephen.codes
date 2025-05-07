@@ -22,6 +22,7 @@ if (!article) {
 const articleBody = article?.body ?? "";
 const articleTopic = article?.data?.language ?? "";
 const articlePublishDate = article?.data?.publishDate ?? new Date();
+const articleSeries = article?.data?.series ?? "";
 ---
 
 <SEO
@@ -51,6 +52,7 @@ const articlePublishDate = article?.data?.publishDate ?? new Date();
     publishDate={articlePublishDate}
     body={articleBody}
     topic={articleTopic}
+    series={articleSeries}
     topicLink={`/kilobits/${articleTopic}`}
   />
   <slot />

@@ -3,11 +3,11 @@
  * @param date
  * @returns string "Jan 1, 2021"
  */
-export default function formateDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
+export default function formatDate(date: Date): string {
+  const pstDate = new Date(date.toISOString().replace("Z", "-08:00"));
+  return pstDate.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
-    timeZone: "PST",
   });
 }

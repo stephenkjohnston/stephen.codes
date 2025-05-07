@@ -20,6 +20,7 @@ export const collections = {
       description: z.string(),
       publishDate: z.coerce.date(),
       language: z.string(),
+      series: z.string().optional(),
       status: z.enum(["Publish", "Draft"]),
     }),
   }),

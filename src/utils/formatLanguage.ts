@@ -15,5 +15,7 @@ export default function formatLanguage(language: string) {
       return "CSS";
     case "cobol":
       return "COBOL";
+    case "ispf":
+      return "ISPF";
   }
 }
