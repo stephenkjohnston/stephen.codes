@@ -1,0 +1,65 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "ISPF Editor: Insert Line Command"
+description: |
+    New to the ISPF Editor? Learn to quickly add lines to mainframe code using the Insert Line command using this beginner-friendly guide.
+publishDate: 2025-05-06 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Publish
+---
+## The Insert Line Command
+While modern editors are designed for free-form editing, the ISPF editor encourages us to step back and be more intentional. Put another way, while you can smash the return key in rage in VSCode, it's not as easy (see [What about the enter key](#what-about-the-enter-key)) in the ISPF editor. One way it encourages intentional programming through the use of single and double letter commands. One such single letter command is the Insert Line Command. This command lets you insert one or more blank lines. By typing `I` in the line number area, you can precisely place one, or more, blank lines, ensuring deliberate control over your edits.
+
+### How to Insert a Single Line
+Let's say that your code is missing a line. In the REXX code below, we want to insert a line after line 3, which will display a greeting with the persons name. 
+
+**Example:**
+```rexx
+000100 /* REXX */                                                              
+000200 SAY "WHAT IS YOUR NAME?"                                                
+000300 PULL NAME               
+``` 
+
+Here's how to insert a single line in the ISPF editor:
+1. Place your cursor at the start of line number area where you want to insert a line (e.g, `000003`).
+2. Type `I` and press <kbd>Enter</kbd>.
+
+```rexx
+000100 /* REXX */                                                              
+000200 SAY "WHAT IS YOUR NAME?"                                                
+I00300 PULL NAME               
+``` 
+
+You'll notice the new line shows six apostrophes (`''''''`) in the line-number area. Once you type your line and press `Enter`, the line numbers update automatically.
+
+```rexx
+000100 /* REXX */
+000200 SAY "WHAT IS YOUR NAME?"
+000300 PULL NAME
+000400 SAY "HELLO," NAME ", NICE TO MEET YOU!"
+``` 
+### How to Insert Multiple Lines
+Now, let's add documentation to that REXX code--because all developers document their code... right?... right?! Suppose you want to insert four lines after line `000100` for a comment block explaining the program's purpose. The process is similar to inserting a single line, but you can specify the number of lines you want to insert.
+
+1. Place your cursor at the start of the line-number area where you want to insert lines (e.g., 000100).
+2. Type `I3`, and press <kbd>Enter</kbd>.
+
+```rexx
+000100 /* REXX */
+000110 /**********************************************************************/
+000120 /*  DEVELOPER: STEPHEN JOHNSTON                                       */
+000130 /*  THIS PROGRAM ASKS FOR YOUR NAME AND GREETS YOU.                   */
+000140 /**********************************************************************/
+000200 SAY "WHAT IS YOUR NAME?"
+000300 PULL NAME
+000400 SAY "HELLO," NAME ", NICE TO MEET YOU!"
+``` 
+
+### What about the Enter Key
+Tried smashing Enter in ISPF like you're raging in VSCode? Yeah, it's not that simple. Depending on your edit profile, <kbd>Enter</kbd> might toss in a new line if you're in a freeform or custom setup, but most of the time, it just submits commands or sits there, doing zilch. That's why the `I` command is your pal: it always adds lines exactly where you want. **No enter-tantrums needed**.
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to insert one or more lines in the ISPF editor using the I command. Like most things in ISPF, it might make you go "bwahhhhhh," like Hank Hill, at first, but once you get the hang of it, you'll see that ISPF's design encourages intentional programming, and often makes you faster.
+
+Until next time, may the code be with you.
