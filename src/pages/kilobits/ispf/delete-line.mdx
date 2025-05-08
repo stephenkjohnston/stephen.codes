@@ -1,0 +1,98 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "ISPF Editor: Delete Line Command"
+description: |
+    New to the ISPF Editor? Learn to quickly delete lines to mainframe code using the Delete Line command using this beginner-friendly guide.
+publishDate: 2025-05-07 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Publish
+---
+## The Delete Line Command
+As a child of the DOS era, the ISPF editor, with it's keyboard driven interface, is like a warm hug from my childhood. As I mentioned previously, the ISPF editor, encourages us to be precise, and like the [Insert Line](/kilobits/ispf/insert-line/) command, the Delete Line command allows you manipulate one or more lines in the ISPF editor. By typing `D` in the line number area, you can delete the current line, or by adding a number after the `D`, you can delete multiple lines. Additionally, allowing for greater precision (notice a theme here?), you can delete a block of lines using the `DD` command (more on that in a second).
+
+### How to Delete a Single Line
+In the REXX code below, we have a simple program that runs in a loop until the user types `QUIT`. Let's say that we want to delete the last line which says the program has ended.
+
+**Example:**
+```
+000100 /* REXX */
+000200 SAY 'Enter text to process (or QUIT to exit):'
+000300 DO WHILE lines_in \= 'QUIT'
+000400    PULL lines_in
+000500    IF lines_in \= 'QUIT' THEN
+000600       SAY 'Processed: ' || lines_in
+000700 END
+000800 SAY 'Program ended.'
+000900 EXIT
+``` 
+
+Here's how to delete a single line in the ISPF editor:
+1. Place your cursor at the start of line number area where you want to insert a line (e.g, `000800`).
+2. Type `D` and press <kbd>Enter</kbd>. The line is deleted.
+
+```
+000100 /* REXX */
+000200 SAY 'Enter text to process (or QUIT to exit):'
+000300 DO WHILE lines_in \= 'QUIT'
+000400    PULL lines_in
+000500    IF lines_in \= 'QUIT' THEN
+000600       SAY 'Processed: ' || lines_in
+000700 END
+000800 EXIT           
+``` 
+
+### How To Delete One or More Lines
+In our next example, we have a REXX program that has some comments that are no longer relevant. Let's say we want to delete lines `000200` through `000400`.
+
+```
+000100 /* REXX */
+000200 /* Comment: Old payroll cycle notes */
+000300 /* Comment: Temporary rate adjustments */
+000400 /* Comment: Legacy system reference */
+000500 /* We for some reason want to keep this comment */
+``` 
+Here's how to delete more than one line in the ISPF editor:
+
+1. Place your cursor at the start of line number area where you want to delete lines (e.g, `000200`).
+2. Type `D3` and press <kbd>Enter</kbd>. Lines `000200` thru `000400` are deleted.
+
+```
+000100 /* REXX */
+000200 /* We for some reason want to keep this comment */
+``` 
+
+### How To Delete a Block of Lines
+In the same REXX program from the previous example, we have comments that are no longer relevant. In the previous example, we explored using a single `D` followed by a number, to delete multiple lines. While this can be handy, I personally find it a little dangerous, because it's easy to add a `5`, instead of a `4`. In this regard, I feel like `DD` is better, because it encourages me to read each line, and make sure I'm only removing what I need. I'm still learning, so it's possible my opinion will change 😁.
+
+Here's how to use the DD command to delete the block of lines from `000200` through `000400`.
+
+
+1. Enter `DD` in the line number area of the first line you want to delete (e.g., 000200).
+2. Enter `DD` in the line number area of the last line you want to delete (e.g., 000400).
+3. Press <kbd>Enter</kbd>. The lines are deleted.
+
+```
+000100 /* REXX */
+000200 /* Comment: Old payroll cycle notes */
+000300 /* Comment: Temporary rate adjustments */
+000400 /* Comment: Legacy system reference */
+000500 /* We for some reason want to keep this comment */
+``` 
+
+The final result looks like this:
+
+```
+000100 /* REXX */
+000200 /* We for some reason want to keep this comment */
+``` 
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to delete one or more lines in the ISPF editor using the Line Delete commands. Like most things in ISPF, it can seem as little curious at first, but once you get the hang of it, you'll see that ISPF Edit's design encourages intentional programming, and often makes you faster.
+
+Here's a quick summary of the commands we covered:
+1. **D** - Delete a single line.
+2. **D** + **number** - Delete multiple lines.
+3. **DD** - Delete a block of lines.
+
+Until next time, may the code be with you.
