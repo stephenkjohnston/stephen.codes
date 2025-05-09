@@ -9,7 +9,7 @@ series: The ISPF Editor
 status: Publish
 ---
 ## The Insert Line Command
-While modern editors are designed for free-form editing, the ISPF editor encourages us to step back and be more intentional. Put another way, while you can smash the return key in rage in VSCode, it's not as easy (see [What about the enter key](#what-about-the-enter-key)) in the ISPF editor. One way it encourages intentional programming through the use of single and double letter commands. One such single letter command is the Insert Line Command. This command lets you insert one or more blank lines. By typing `I` in the line number area, you can precisely place one, or more, blank lines, ensuring deliberate control over your edits.
+While modern editors are designed for free-form editing, the ISPF editor encourages us to step back and be more intentional. Put another way, while you can smash the return key in rage in VSCode, it's not as easy (see [What about the enter key](#what-about-the-enter-key)) in the ISPF editor. One way it encourages intentional programming through the use of single and double letter commands. One such single letter command is the Insert Line Command. This command lets you insert one or more blank lines. By typing `I` in the prefix area, you can precisely place one, or more, blank lines, ensuring deliberate control over your edits. As with all line commands, it can be anywhere in the prefix-area, as long as you have enough room.
 
 ### How to Insert a Single Line
 Let's say that your code is missing a line. In the REXX code below, we want to insert a line after line 3, which will display a greeting with the persons name. 
@@ -22,7 +22,7 @@ Let's say that your code is missing a line. In the REXX code below, we want to i
 ``` 
 
 Here's how to insert a single line in the ISPF editor:
-1. Place your cursor at the start of line number area where you want to insert a line (e.g, `000003`).
+1. Place your cursor in the prefix area where you want to insert a line (e.g., `000003`).
 2. Type `I` and press <kbd>Enter</kbd>.
 
 ```rexx
@@ -42,7 +42,8 @@ You'll notice the new line shows six apostrophes (`''''''`) in the line-number a
 ### How to Insert Multiple Lines
 Now, let's add documentation to that REXX code--because all developers document their code... right?... right?! Suppose you want to insert four lines after line `000100` for a comment block explaining the program's purpose. The process is similar to inserting a single line, but you can specify the number of lines you want to insert.
 
-1. Place your cursor at the start of the line-number area where you want to insert lines (e.g., 000100).
+Here's how to insert a single line in the ISPF editor:
+1. Place your cursor in the prefix area where you want to insert a line (e.g., `000003`).
 2. Type `I4`, and press <kbd>Enter</kbd>.
 
 ```rexx
