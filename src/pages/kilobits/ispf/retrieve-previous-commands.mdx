@@ -1,0 +1,35 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "ISPF: Retrieve Previous Commands"
+description: |
+    What was that command again? Learn how to quickly retrieve previous commands in ISPF using the RETP command.
+publishDate: 2025-05-20 00:00:00-800
+language: ispf
+status: Publish
+---
+## What was that command again?
+In this [#kilobit](/kilobits), you will learn how to quickly retrieve previous commands in <abbr title="Interactive System Productivity Facility">ISPF</abbr> using the `RETP` command. The `RETP` command is a powerful tool that allows mere mortals, like myself, to quickly remember **up to 25** previous commands. This is especially useful when you are attempting to recall a recently used command that makes War and Peace look small, and can't afford to melt any more brain cells.
+
+## How does it work?
+At a high level, it works on the Last-In, First-Out (LIFO) principle. This means that the most recent command you entered is at the top of the stack, and the oldest command is at the bottom. If you have 25 commands, and enter a 26th command, the oldest command will be removed from the list.
+
+## How to Use the RETP Command
+1. Type `RETP` on any ISPF command line. It will display a pop-up panel.
+1. Scroll through the list using the <kbd>F7</kbd> and <kbd>F8</kbd> keys.
+1. Type the number of the command you want to retrieve and press <kbd>Enter</kbd>.
+
+![The retrieve panel showing two previous commands](assets/images/articles/ispf-previous-commands-panel.webp)
+
+### My command is cut off!
+If you have a command that's too long, it will be truncated with an `>` showing as the last visible character. 
+
+![The retrieve panel showing a long command](assets/images/articles/ispf-previous-commands-panel-long.webp)
+
+Don't worry though, the entire command is still there, and will be retrieved when the command is selected.
+
+![Long commands will be truncated with an &gt;](assets/images/articles/ispf-long-command-example.webp)
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to quickly retrieve previous commands in ISPF using the `RETP` command. This will save you time and effort when working with long commands. But remember, it's only going to hold your **last 25 commands**, so use it wisely.
+
+Until next time, may the code be with you.
