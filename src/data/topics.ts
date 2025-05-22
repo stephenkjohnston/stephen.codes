@@ -27,4 +27,11 @@ export default [
     meta_description:
       "Learn modern CSS techniques, including Flexbox, Grid, and animations, with practical examples.",
   },
+  {
+    name: "ISPF",
+    summary:
+      "Explore more detailed articles about ISPF and stretching it to its limits.",
+    meta_description:
+      "Articles about ISPF and its features, including ISPF commands, panels, and utilities.",
+  },
 ];

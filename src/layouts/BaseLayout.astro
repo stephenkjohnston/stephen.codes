@@ -1,8 +1,8 @@
 ---
 import { TITLE, DESCRIPTION, GTM_ID, MODE } from "astro:env/client";
 import { SEO } from "astro-seo";
-import GlobalHeader from "components/shared/GlobalHeader.astro";
-import GlobalFooter from "components/shared/GlobalFooter.astro";
+import GlobalHeader from "components/Shared/GlobalHeader.astro";
+import GlobalFooter from "components/Shared/GlobalFooter.astro";
 import GoogleTagManager from "components/Shared/GoogleTagManager.astro";
 
 import "styles/main.scss";
@@ -15,7 +15,7 @@ const googleTagManagerScript = `
       width="0"
       style="display:none;visibility:hidden"></iframe></noscript
   >`;
-const { pageType = "page" } = Astro.props;
+const { pageType = "page", title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,6 +24,8 @@ const { pageType = "page" } = Astro.props;
     <SEO
       charset="utf-8"
       ,
+      title={title ?? TITLE}
+      description={description ?? DESCRIPTION}
       extend={{
         meta: [
           {

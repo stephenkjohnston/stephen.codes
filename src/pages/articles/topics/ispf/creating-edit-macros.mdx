@@ -1,0 +1,147 @@
+---
+layout: layouts/ArticleLayout.astro
+title: Creating ISPF Edit Macros
+description: |
+    In this article, I walk through the process I used to create my first ISPF edit macro. This macro adds a job card to the top of your JCL.
+publishDate: 2025-05-21 00:00:00
+topic: ispf
+status: Publish
+---
+import EditMacroVideo from 'assets/images/first_edit_macro.gif';
+
+## Introduction
+I first learned about ISPF Edit Macros while taking a Coursera course on [IBM z/OS Rexx Programming](https://www.coursera.org/learn/zos-rexx-programming). The course highlighted two macros that I found particularly useful: `RXGET` and `JC`. `RXGET` retrieves the initial source code from a dataset and loads it into your current edit session. The `JC` macro allows you to add a job card to the top of your <abbr title="Job Control Language">JCL</abbr>. If I had been thinking, I would have copied them to study later, but I didn't. Being me, I couldn't get them out of my mind, so I decided to teach myself how to create my own edit macros.
+
+I'm currently going through the second part of my pre-apprenticeship training from [<abbr title="Eli Madison Memorial Mainframe Apprenticeship">EMMA</abbr>](https://www.emma.foundation/), and in this portion there is an emphasis on documentation. As a documentation enthusiast, I thought this would be a great opportunity to create a macro that would help me add comments to my code. For my first macro, I decided to recreate the JC macro, but I wanted to make it more flexible. My idea was to create a utility that would allow me to quickly add not only a job card but also various comment boxes based on the language I was using at the time. To start though, I focused on just the job card.
+
+## What we'll be creating
+In this article, I will walk you through the process of creating a simple edit macro that adds a job card to the top of your JCL. This macro will be written in `REXX` and stored in a dataset called `REXX.EXEC`. The macro will be called `DOCBOX` and, for now, will only accept a single parameter: `JC`. Here is what this macro will look like when it's finished:
+
+```
+//TRAIN96A JOB ,'your last name',MSGCLASS=H
+//*
+//*****************************************************************
+//*                                                               *
+//*  MAINFRAME              ASSIGNMENT n                          *
+//*                                                               *
+//*  DEVELOPER NAME: your full name                               *
+//*  DATE DUE: assignment due date                                *
+//*                                                               *
+//*  PURPOSE: The purpose of this job.                            *
+//*                                                               *
+//***************************************************************** 
+```
+
+## What Are Edit Macros?
+An edit macro allows you to add custom functionality to enhance the ISPF editor. It is most often used to automate repetitive tasks and can be written in either [REXX](https://en.wikipedia.org/wiki/Rexx) or [CLIST](https://en.wikipedia.org/wiki/CLIST). The macro is stored in a dataset and can be executed by typing the name of the macro in the command line. Common uses cases for edit macros include: repetitive tasks, custom commands, and data manipulation.
+
+## Creating an Edit Macro
+As this is my first macro, I'm sure there are some ways that I could have improved it, and with time, I will. But, considering I didn't know REXX existed until (April 2025), about a month ago, I'm not going to worry about that.
+
+```
+/* REXX */                                                              
+ADDRESS ISREDIT                                                         
+"MACRO (PARM)"                                                          
+                                                                        
+/**********************************************************************/
+/* VARIABLES                                                          */
+/*   JCL_CMT - A SIMPLE JCL COMMENT LINE                              */
+/*   SCR_WDTH - THE SCREEN WIDTH (TODO: DYNAMIC, INSTEAD OF STATIC?)  */
+/**********************************************************************/
+JCL_CMT = "//*"                                                         
+SCR_WDTH = 72                                                           
+PARM = TRANSLATE(PARM) /* CONVERT TO UPPERCASE */                       
+                                                                        
+SELECT                                                                  
+  WHEN PARM = 'JC' THEN DO                                              
+    CALL GENERATE_JOBCARD                                               
+  END                                                                   
+  OTHERWISE DO 
+     MSG = 'INVALID PARAMETER. USE: JC'    
+     ADDRESS ISPEXEC "VPUT (MSG) SHARED"   
+     ADDRESS ISPEXEC "SETMSG MSG(ISPZ000)" 
+   END                                     
+END                                       
+EXIT 0                                    
+
+/**********************************************************************/
+/* FUNCTION: GENERATE_JOBCARD                                         */
+/* PURPOSE : GENERATES A JCL JOB CARD HEADER WITH STUBBED COMMENTS    */
+/* RETURN  : NONE. WRITES TO THE TOP OF THE EDIT SESSION.             */
+/**********************************************************************/
+                                                                        
+GENERATE_JOBCARD: PROCEDURE EXPOSE JCL_CMT SCR_WDTH                     
+  /* THE REMAINING COLUMNS MINUS THE START OF THE COMMENT */            
+  SCRN_LEFT = (SCR_WDTH - LENGTH(STRIP(JCL_CMT, 'T')))                  
+                                                                        
+  /* AN EMPTY COMMENT LINE THE WIDTH OF THE SCREEN */                   
+  CMT_LNE = JCL_CMT || COPIES(" ", SCRN_LEFT - 1) || "*"                
+  FULL_CMT_LNE = JCL_CMT || COPIES("*", SCRN_LEFT -1) || "*"            
+
+  /* STRINGS */                                                    
+  PGM_NAME_LNE = "MAINFRAME" || COPIES(" ", 13) || "ASSIGNMENT N"  
+  DEV_NAME_LNE = "PROGRAMMER NAME: A. PROGRAMMER"                  
+  DUE_DATE_LNE = "DUE DATE: MM/DD/YYYY"                            
+  PURPOSE_LNE = "PURPOSE: THE PURPOSE OF THIS JOB"      
+
+                                                           
+  JC1 = "//"USERID()"A JOB ,'YOUR LAST NAME',MSGCLASS=H"   
+  JC2 = JCL_CMT                                            
+  JC3 = FULL_CMT_LNE                                       
+  JC4 = OVERLAY(PGM_NAME_LNE, CMT_LNE, LENGTH(JCL_CMT) + 2)
+  JC5 = CMT_LNE                                            
+  JC6 = OVERLAY(DEV_NAME_LNE, CMT_LNE, LENGTH(JCL_CMT) + 2)
+  JC7 = OVERLAY(DUE_DATE_LNE, CMT_LNE, LENGTH(JCL_CMT) + 2)
+  JC8 = CMT_LNE                                            
+  JC9 = OVERLAY(PURPOSE_LNE, CMT_LNE, LENGTH(JCL_CMT) + 2) 
+  JC10 = FULL_CMT_LNE 
+
+  /* WRITE THE JOB CARD AT THE TOP OF THE JCL */
+  'LINE_AFTER 0 = (JC1)'                        
+  'LINE_AFTER 1 = (JC2)'                        
+  'LINE_AFTER 2 = (JC3)'                        
+  'LINE_AFTER 3 = (JC4)'                        
+  'LINE_AFTER 4 = (JC5)'                        
+  'LINE_AFTER 5 = (JC6)'                        
+  'LINE_AFTER 6 = (JC7)'                        
+  'LINE_AFTER 7 = (JC8)'                        
+  'LINE_AFTER 8 = (JC9)'                        
+  'LINE_AFTER 9 = (JC10)'                       
+                                                 
+RETURN    
+```
+
+### What's Happening Here?
+
+* `/* REXX */ ` - On the mainframe a `REXX` program must start with this to be recognized as a `REXX` script.
+* `ADDRESS ISREDIT` - 'Tells the script to use the ISPF editor commands.
+* `MACRO (PARM)` - 'Defines the macro and accepts a single parameter, which is passed to the script as `PARM`. 
+* `JCL_CMT = "//*"` - I'm declaring a variable that I'm using to identify a standard JCL comment line.
+* `SCR_WDTH = 72` - Sets the screen width to 72 characters. I hardcoded this for now, but I plan to make it dynamic in the future, extracting the values from  `BOUNDS`.
+* `PARM = TRANSLATE(PARM)` - Converts the parameter to uppercase. It's just an easy to way to ensure the user doesn't have to worry about case sensitivity.
+* `SELECT` - Starts a conditional statement. It checks the value of `PARM` using `WHEN` and like other switch statements, it has a 'default' case, which is `OTHERWISE`. Of note, and this is thing I need to learn about, the `OTHERWISE` statement never seems to display an error message. I need to look into this further.
+* `WHEN PARM = 'JC' THEN DO` - Checks if the parameter is `JC`. If it is, it calls the `GENERATE_JOBCARD` function.
+* `GENERATE_JOBCARD: PROCEDURE EXPOSE JCL_CMT SCR_WDTH` - Defines the `GENERATE_JOBCARD` function and exposes the variables `JCL_CMT` and `SCR_WDTH`. Without `expose`, the function would not be able to access the variables.
+* `SCRN_LEFT = (SCR_WDTH - LENGTH(STRIP(JCL_CMT, 'T')))` - Calculates the remaining columns on the screen after the start of the comment. I use the `STRIP` function to remove any trailing spaces from `JCL_CMT`.
+* `CMT_LNE = JCL_CMT || COPIES(" ", SCRN_LEFT - 1) || "*"` - Creates an empty comment line the width of the screen. It uses the `COPIES` function to create a string of spaces.
+* `FULL_CMT_LNE = JCL_CMT || COPIES("*", SCRN_LEFT -1) || "*"` - Creates a full comment line the width of the screen. 
+* `PGM_NAME_LNE = "MAINFRAME" || COPIES(" ", 13) || "ASSIGNMENT N"` - A string for the program name. 
+* `DEV_NAME_LNE = "PROGRAMMER NAME: A. PROGRAMMER"` - A string for the developer name.
+* `DUE_DATE_LNE = "DUE DATE: MM/DD/YYYY"` - A string for the due date.
+* `PURPOSE_LNE = "PURPOSE: THE PURPOSE OF THIS JOB"` - A string for the purpose of the job.
+* `JC1` through `JC10` - These lines define the job card and comment lines. Of note are:
+   * `USERID()` - The `USERID()` function to get the current user ID
+   * `OVERLAY`  - The `OVERLAY` function take three parameters: the string to overlay, the string to overlay on, and the length of the string to overlay. This is a bit like using whiteout to make a correction on a piece of paper. It allows you to change the text in a specific location without affecting the rest of the line. I chose this method because I felt like using `OVERLAY` would be easier than trying to calculate the position of the string. I could be wrong, but it works for me.
+* `LINE_AFTER` - The `LINE_AFTER` command is used to insert the lines after line a line (0 = the top of the edit session).
+
+## Testing the Macro
+To test the macro, I needed to tell ISPF where to find it. I did this by executing the following command `TSO ALLOC FI(SYSEXEC) DA(REXX.EXEC) SHR REUSE` in the command shell. Note that this isn't a permanent allocation. If you want to make it permanent there is another command you can use, but considering I'm still learning, I didn't want to mess with that yet.
+
+After that, I opened an empty member and typed `DOCBOX JC` in the command line.
+
+<img src={EditMacroVideo.src} alt="A video showing the macro in action" loading="lazy" width={768}/>
+
+## Summary
+In this article, I've introduced ISPF edit macros and shared my process for developing a documentation automation tool. The `DOCBOX` macro represents just the beginning of what's possible with REXX scripting in z/OS environments.
+
+Until next time, may the code be with you.

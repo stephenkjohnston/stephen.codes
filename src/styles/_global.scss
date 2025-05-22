@@ -133,6 +133,12 @@ ul:not(nav ul) {
     list-style-type: "* ";
 }
 
+ul {
+    li {
+        margin-block-end: .5rem;
+    }
+}
+
 .astro-code {
     code {
         padding: 0;

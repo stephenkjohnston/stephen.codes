@@ -41,8 +41,10 @@ const { topic } = Astro.params;
 const { name, summary, meta_description, articles } = Astro.props;
 ---
 
-<SEO title={`${TITLE} - Discusses ${name}`} description={meta_description} />
-<BaseLayout>
+<BaseLayout
+  title={`${TITLE} - Discusses ${name} !!!`}
+  description={meta_description}
+>
   <section class="topic-header">
     <span>[<a href="/articles/topics">View All Topics</a>]</span>
     <div class="topic-metadata">

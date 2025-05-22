@@ -2,9 +2,13 @@
 import BaseLayout from "layouts/BaseLayout.astro";
 import topics from "data/topics";
 import { slugify } from "utils/slugify";
+import { TITLE } from "astro:env/client";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${TITLE} - Topics`}
+  description="A collection of topics I have written on everything from Front-End Development to COBOL."
+>
   <h1>Topics</h1>
   <p>
     This is my Topics page! I've got a lot of interests and write about all
