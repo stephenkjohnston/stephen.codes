@@ -1,0 +1,67 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "ISPF Editor: Overlay Line Command"
+description: |
+    I explore how to overlay lines in ISPF Editor with using the O and OO line commands. 
+publishDate: 2025-06-06 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Publish
+---
+## The Overlay Line Command?
+The overlay line command is used with the [`COPY`](/kilobits/ispf/copy-line/) or `MOVE` line commands. It allows you to copy or move non-blank characters from one line to another line using `O` (single line) or from multiple lines using `OO` (block of lines). If a non-blank character is encountered in the destination line(s), it will skip over it, leaving it unchanged.
+
+I will note, for the sake of my sanity, you should reset your bounds before messing with the `OVERLAY` command. This is because if the destination line has data outside the defined bounds, the `OVERLAY` command will not affect those columns. For example, let's say your bounds are set to columns 10 to 60 (for whatever reason), any data in columns 1 to 9 or 61 to 72 will be ignored during the overlay. I haven't encountered this paraticular issue, but from what I've read it can happen, so I thought I'd mention it.
+
+### The Dataset
+In the example below, we have a dataset containing employee names and IDs. But it's not very readable. Since this dataset is small, we could manaually add the column separators, but instead, we can use the overlay line command to add them.
+
+```
+000100 |                |                   |                |       |
+000200   SMITH            JOHN                JSMITH           34567  
+000300   SMITH            SALLY               SSMITH           12345  
+```
+
+### How to Copy One or More Lines
+1. First, type `C` in the prefix area of the first line you want to move or copy data from. But, don't press <kbd>Enter</kbd> just yet!
+2. Next, type `C` in the prefix area of the line you want to overlay. If you want to copy many lines, you can also type a number after the `O` (e.g., `C2).
+3. Finally, press <kbd>Enter</kbd> to execute the command.
+
+Example: Overlay the first line onto the second.
+``` 
+c00100 |                |                   |                |       |
+o00020   SMITH            JOHN                JSMITH           34567  
+000300   SMITH            SALLY               SSMITH           12345  
+```
+
+Example: After the overlay, the second line now has the column separators.
+```
+000100 |                |                   |                |       |
+000200 | SMITH          | JOHN              | JSMITH         | 34567 |
+000300   SMITH            SALLY               SSMITH           12345  
+```
+
+### How to Overlay a Block of Lines
+1. First, type `C` or `M` in the prefix area of the first line you want to move or copy data from (e.g., 000100). Again, take your finger off <kbd>Enter</kbd> key!
+2. Next, type `OO` in the prefix area of the first line your want to overlay (e.g., 000200). 
+3. Then, type `OO` in the prefix area of hte last line you want to overlay (e.g., 000300).
+4. Finally, slowly place your finger back on the <kbd>Enter</kbd> key and press it to execute the action.
+
+Example: Overlay the first line onto the second.
+``` 
+o00100 |                |                   |                |       |
+cc0200   SMITH            JOHN                JSMITH           34567  
+cc0300   SMITH            SALLY               SSMITH           12345  
+```
+Example: After the block overlay.
+```
+000100 |                |                   |                |       |
+000200 | SMITH          | JOHN              | JSMITH         | 34567 |
+000300 | SMITH          | SALLY             | SSMITH         | 12345 |
+```
+
+### What's the difference betwene `COPY` and `MOVE`?
+The difference between the `COPY` and `MOVE` commands is that `COPY` duplicates the data, while `MOVE` picks it up and moves it to a new location(s).
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to copy one or more lines in the ISPF editor using the `COPY` line command. Until next time, may the code be with you.
