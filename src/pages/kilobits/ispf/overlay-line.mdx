@@ -9,7 +9,7 @@ series: The ISPF Editor
 status: Publish
 ---
 ## The Overlay Line Command?
-The overlay line command is used with the [`COPY`](/kilobits/ispf/copy-line/) or `MOVE` line commands. It allows you to copy or move non-blank characters from one line to another line using `O` (single line) or from multiple lines using `OO` (block of lines). If a non-blank character is encountered in the destination line(s), it will skip over it, leaving it unchanged.
+The `O` (overlay) line command is used with the [`COPY`](/kilobits/ispf/copy-line/) or [`MOVE`](/kilobits/ispf/move-line/) line commands. It allows you to copy or move non-blank characters from one line to another line using `O` (single line) or from multiple lines using `OO` (block of lines). If a non-blank character is encountered in the destination line(s), it will skip over it, leaving it unchanged.
 
 I will note, for the sake of my sanity, you should reset your bounds before messing with the `OVERLAY` command. This is because if the destination line has data outside the defined bounds, the `OVERLAY` command will not affect those columns. For example, let's say your bounds are set to columns 10 to 60 (for whatever reason), any data in columns 1 to 9 or 61 to 72 will be ignored during the overlay. I haven't encountered this paraticular issue, but from what I've read it can happen, so I thought I'd mention it.
 
