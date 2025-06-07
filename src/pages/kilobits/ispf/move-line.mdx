@@ -42,31 +42,44 @@ There, that's more realistic! Sp, let's say we want to move the `GO GROCERY SHOP
 
 This will pick the first line and move it the last task in the list, which moves the gym task up, resulting in:
 
+Example: Move an item after another.
+
+```
+000100 TODO: DROP KIDS OFF AT SCHOOL
+M00200 TODO: GO GROCERY SHOPPING
+000300 TODO: GO TO THE GYM
+000400 TODO: PLAY LOTS OF DOOM
+A00500 TODO: PICK KIDS UP FROM SCHOOL
+```
+
+Example: After the move, the grocery shopping task is now at the end of the list.
 ```
 000100 TODO: DROP KIDS OFF AT SCHOOL 
 000300 TODO: GO TO THE GYM       
 000400 TODO: PLAY LOTS OF DOOM       
 000500 TODO: PICK KIDS UP FROM SCHOOL
-000600 TODO: GO GROCERY SHOPPING     
+000600 TODO: GO GROCERY SHOPPING   <-- moved here -->  
 ```
 
 ### How to Move a Block of Lines
 Using the same todo list, let's say we want to move the `GO TO THE GYM` and `PLAY LOTS OF DOOM` tasks to the end of the list. We can do that with the `MM` and `A` line commands.
-
-```
-000100 TODO: DROP KIDS OFF AT SCHOOL 
-000300 TODO: GO TO THE GYM       
-000400 TODO: PLAY LOTS OF DOOM       
-000500 TODO: PICK KIDS UP FROM SCHOOL
-000600 TODO: GO GROCERY SHOPPING   <-- moved here -->
-```
 
 1. First, type `MM` in the prefix area of first tasks we want to move (e.g., 000300).
 2. Next, type `MM` in the prefix area of last one (e.g., 000400).
 3. Then, type `A` (for after) in the prefix area of the last task (e.g., 000600).
 3. Now you can press the <kbd>Enter</kbd> key.
 
-This will copy the comment block to the new location, resulting in:
+
+Example: Copy a block of lines after the last task.
+```
+000100 TODO: DROP KIDS OFF AT SCHOOL 
+MM0300 TODO: GO TO THE GYM       
+MM0400 TODO: PLAY LOTS OF DOOM       
+000500 TODO: PICK KIDS UP FROM SCHOOL
+A00600 TODO: GO GROCERY SHOPPING 
+```
+
+Example: After the move, the gym and doom tasks are now at the end of the list.
 
 ```
 000100 TODO: DROP KIDS OFF AT SCHOOL 
