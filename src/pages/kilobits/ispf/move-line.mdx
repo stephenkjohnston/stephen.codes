@@ -1,0 +1,80 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "ISPF Editor: Move Line Command"
+description: |
+    I explore how to move one or more lines in ISPF Editor with using the M and MM line commands. 
+publishDate: 2025-06-06 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Publish
+---
+## The Move Line Command?
+The `M` (move) line command is used with the `B` (before) or `A` (after) line commands. Unlike the [copy](/kilobits/ispf/copy-line) command, it allows you to move one or more lines to another `M` (single line) or from multiple lines using `MM` (block of lines). Note, that if you get <kbd>ENTER</kbd> happy, and forget to specifiy where you want to copy the line to, a `MOVE/COPY pending` message at the top right of your screen. If you see this message, you can either type `B` or `A` in the prefix area of the line you want to move your data to, and then press <kbd>Enter</kbd> to complete the action.
+
+### What we'll be working with
+Like with our copy example, let's say we have a list of tasks. Now, I don't know if you're a fortunate person who never has to rearrage your tasks, but I'm not! So, let's look at how we can re-arrange our chaotic days.
+
+```
+000100 TODO: DROP KIDS OFF AT SCHOOL
+000200 TODO: GO GROCERY SHOPPING
+000300 TODO: GO TO THE GYM
+000400 TODO: PLAY LOTS OF DOOM
+000500 TODO: TAKE A NAP
+000600 TODO: PICK KIDS UP FROM SCHOOL
+```
+So, you can see we have a lot of to do, and I see one task that needs to be removed. Who has time for a nap? Why not check out how to remove that item using the [delete line command](/kilobits/ispf/delete-line) instead? 
+
+```
+000100 TODO: DROP KIDS OFF AT SCHOOL
+000200 TODO: GO GROCERY SHOPPING
+000300 TODO: GO TO THE GYM
+000400 TODO: PLAY LOTS OF DOOM
+000500 TODO: PICK KIDS UP FROM SCHOOL
+```
+
+There, that's more realistic! Sp, let's say we want to move the `GO GROCERY SHOPPING` task to the end of the list. We can do that with the `M` and `A` line commands.
+
+### How to Move One or More Lines
+1. First, type `M` in the prefix area of the `GO GROCERY SHOPPING` todo (e.g., 000100). Remember that if you needed to move 2 todo's, we could type a number after the `C` (e.g., `C2`). 
+2. I see you! Don't press <kbd>Enter</kbd> yet!
+3. Next, type `A` (for after) in the prefix area of last line (e.g., 000500). Remember, if you also use `B` (for before) to move it above.
+4. Finally, press <kbd>Enter</kbd> to execute the command.
+
+This will pick the first line and move it the last task in the list, which moves the gym task up, resulting in:
+
+```
+000100 TODO: DROP KIDS OFF AT SCHOOL 
+000300 TODO: GO TO THE GYM       
+000400 TODO: PLAY LOTS OF DOOM       
+000500 TODO: PICK KIDS UP FROM SCHOOL
+000600 TODO: GO GROCERY SHOPPING     
+```
+
+### How to Move a Block of Lines
+Using the same todo list, let's say we want to move the `GO TO THE GYM` and `PLAY LOTS OF DOOM` tasks to the end of the list. We can do that with the `MM` and `A` line commands.
+
+```
+000100 TODO: DROP KIDS OFF AT SCHOOL 
+000300 TODO: GO TO THE GYM       
+000400 TODO: PLAY LOTS OF DOOM       
+000500 TODO: PICK KIDS UP FROM SCHOOL
+000600 TODO: GO GROCERY SHOPPING   <-- moved here -->
+```
+
+1. First, type `MM` in the prefix area of first tasks we want to move (e.g., 000300).
+2. Next, type `MM` in the prefix area of last one (e.g., 000400).
+3. Then, type `A` (for after) in the prefix area of the last task (e.g., 000600).
+3. Now you can press the <kbd>Enter</kbd> key.
+
+This will copy the comment block to the new location, resulting in:
+
+```
+000100 TODO: DROP KIDS OFF AT SCHOOL 
+000400 TODO: PICK KIDS UP FROM SCHOOL
+000500 TODO: GO GROCERY SHOPPING     
+000600 TODO: GO TO THE GYM           <-- moved here -->
+000700 TODO: PLAY LOTS OF DOOM       <-- moved here-->
+```
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to move one or more lines in the ISPF editor using the `MOVE` line command. Until next time, may the code be with you.
