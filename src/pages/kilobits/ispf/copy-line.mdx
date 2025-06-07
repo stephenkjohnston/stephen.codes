@@ -1,0 +1,73 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "ISPF Editor: Copy Line Command"
+description: |
+    I explore how to copy one or more lines in ISPF Editor with using the C and CC line commands. 
+publishDate: 2025-06-06 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Publish
+---
+## The Copy Line Command?
+The copy line command is used with the `B` (before) or `A` (after) line commands. It allows you to copy one or more lines to another `C` (single line) or from multiple lines using `CC` (block of lines). Note, that if you get <kbd>ENTER</kbd> happy, and forget to specifiy where you want to copy the line to, a `MOVE/COPY pending` message at the top right of your screen. If you see this message, you can either type `B` or `A` in the prefix area of the line you want to copy to, and then press <kbd>Enter</kbd> to complete the action.
+
+### What we'll be working with
+Let's say we have a list of tasks. Like most task lists, sometimes we need to add more. Now, we could manually type them in, after all this isn't rocket science, however, for the sake of this, let's say I'm really lazy, and don't want to type "TODO:" before a new task. Don't judge me, I have a lot of tasks to do! So, I've just typed "TODO:" in the first line, and I want to copy it everytime I need to add a new task.
+
+```
+000100 TODO:
+000200 TODO: DO SOMETHING
+000300 TODO: DO SOMETHING ELSE
+000400 TODO: DO SOMETHING MORE
+```
+
+### How to Copy One or More Lines
+1. First, type `C` in the prefix area of the first line you want to move or copy data from (e.g., 000100). Remember, you can also type a number after the `C` (e.g., `C2`), but we don't need to for this. Also, act like the <kbd>Enter</kbd> doesn't exist just yet!
+2. Next, type `A` (for after) in the prefix area of the line you want to copy after (e.g., 000400). Likewise, if you wanted to insert it before the last line, you could type `B` (for before).
+3. Finally, press <kbd>Enter</kbd> to execute the command.
+
+This will copy the first line after the last task in the list, resulting in:
+```
+000100 TODO:                      
+000200 TODO: DO SOMETHING         
+000300 TODO: DO SOMETHING ELSE    
+000400 TODO: DO SOMETHING MORE    
+000500 TODO: 
+```
+
+### How to Copy a Block of Lines
+In this example, we'll do something slightly more useful. Let's say we're writing a program and want to copy a comment block to another part of the code. If you don't have an [edit macro](/articles/topics/ispf/creating-edit-macros) to create comments, this is a faily nice way to handle this.
+
+```
+016100       ***********************************************************
+016200       * 2000-DO-SOMETHING - THIS DOES SOMETHING REALLY COOL,    *
+016210       * BUT I DON'T KNOW WHAT IT IS YET.                        *
+016300       ***********************************************************
+016400        2000-DO-SOMETHING.
+016410            DISPLAY "DOING SOMETHING".
+[...]
+018100        3000-DO-SOMETHING-ELSE.
+018120            DISPLAY "DOING SOMETHING ELSE".
+018130
+018140        3000-EXIT.
+018150             EXIT.
+```
+1. First, type `CC` in the prefix area of the first line you want to move or copy data from (e.g., 016100). Don't touch that <kbd>Enter</kbd> key!
+2. Next, type `CC` (for after) in the prefix area of the line you want to copy after (e.g., 016300).
+3. Then, type `B` (for before) in the prefix area of the line you want to copy before (e.g., 018100).
+3. Now you can press the <kbd>Enter</kbd> key.
+
+This will copy the comment block to the new location, resulting in:
+```
+018010       ***********************************************************
+018020       * 2000-DO-SOMETHING - THIS DOES SOMETHING REALLY COOL,    *
+018030       * BUT I DON'T KNOW WHAT IT IS YET.                        *
+018040       ***********************************************************
+018050        3000-DO-SOMETHING-ELSE.
+01820            DISPLAY "DOING SOMETHING ELSE".
+[...]
+```
+Now you just need to upodate the comment block 🙂
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to copy one or more lines in the ISPF editor using the `COPY` line command. Until next time, may the code be with you.
