@@ -22,15 +22,15 @@ In the example below, we have a dataset containing employee names and IDs. But i
 000300   SMITH            SALLY               SSMITH           12345  
 ```
 
-### How to Copy One or More Lines
+### How to Overlay One or More Lines
 1. First, type `C` in the prefix area of the first line you want to move or copy data from. But, don't press <kbd>Enter</kbd> just yet!
-2. Next, type `C` in the prefix area of the line you want to overlay. If you want to copy many lines, you can also type a number after the `O` (e.g., `C2).
+2. Next, type `C` in the prefix area of the line you want to overlay. If you want to copy many lines, you can also type a number after the `O` (e.g., `O2`).
 3. Finally, press <kbd>Enter</kbd> to execute the command.
 
 Example: Overlay the first line onto the second.
 ``` 
-c00100 |                |                   |                |       |
-o00020   SMITH            JOHN                JSMITH           34567  
+C00100 |                |                   |                |       |
+O00020   SMITH            JOHN                JSMITH           34567  
 000300   SMITH            SALLY               SSMITH           12345  
 ```
 
@@ -44,14 +44,14 @@ Example: After the overlay, the second line now has the column separators.
 ### How to Overlay a Block of Lines
 1. First, type `C` or `M` in the prefix area of the first line you want to move or copy data from (e.g., 000100). Again, take your finger off <kbd>Enter</kbd> key!
 2. Next, type `OO` in the prefix area of the first line your want to overlay (e.g., 000200). 
-3. Then, type `OO` in the prefix area of hte last line you want to overlay (e.g., 000300).
+3. Then, type `OO` in the prefix area of the last line you want to overlay (e.g., 000300).
 4. Finally, slowly place your finger back on the <kbd>Enter</kbd> key and press it to execute the action.
 
 Example: Overlay the first line onto the second.
 ``` 
-o00100 |                |                   |                |       |
-cc0200   SMITH            JOHN                JSMITH           34567  
-cc0300   SMITH            SALLY               SSMITH           12345  
+C00100 |                |                   |                |       |
+OO0200   SMITH            JOHN                JSMITH           34567  
+OO0300   SMITH            SALLY               SSMITH           12345  
 ```
 Example: After the block overlay.
 ```
