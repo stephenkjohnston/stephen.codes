@@ -25,6 +25,7 @@ export async function getStaticPaths() {
         (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
       );
 
+    console.log({ topic });
     return {
       params: { topic: slugify(topic.name) },
       props: {

@@ -34,4 +34,11 @@ export default [
     meta_description:
       "Articles about ISPF and its features, including ISPF commands, panels, and utilities.",
   },
+  {
+    name: "Stories",
+    summary:
+      "Explore my short stories, where reality is twisted with exaggerated characters and events.",
+    meta_description:
+      "Original short stories written by me, where reality is twisted with exaggerated characters and events.",
+  },
 ];
