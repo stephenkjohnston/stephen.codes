@@ -1,0 +1,45 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "ISPF Editor: Text Entry Line Command"
+description: |
+    I explore how to use the TE (Text Entry) line command to enter long strings of text in the ISPF editor.
+publishDate: 2025-06-26 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Publish
+---
+import TextEntryMode01 from "assets/images/kilobits/text-entry-mode-01.png"
+
+## What does the `TE` command do?
+The wise philosopher Uncle Ben once said "With great power comes great reponsibility." With that in mind, allow me to introduce to you to the `TE` (Text Entry) line command. This powerful command allows you to unlock power typing mode in the ISPF editor. In power typing mode you can enter multiple lines of text that will automagically word-wrap. This is probably the closest to a standard text editor you can get with the ISPF editor. Just remember that if you want to add a line break, you cannot use the <kbd>Enter</kbd> key. Doing so will exit text entry mode. Instead, if you want a line break, you'll have to use <kbd>SHIFT</kbd> + <kbd>ENTER</kbd>, or arrow keys to move to the next line.
+
+### Things to note about text entry mode
+1. When you type `TE` and press enter, the editor will clear all the lines below the line you enter the command on. **Don't panic**, this is normal.
+2. When in text entry mode, look in the bottom right corner of the screen. You should see a pipe (`|`) character. This is a visual indicator of where you'll run out of room. But this doesn't mean you can't type more. If you scroll down, additional blank lines will appear for you to type in. 
+3. If you want have your text wrap between particular columns, ensure you set your `BOUNDS`. If you're not familiar with the `BOUNDS` command, it's basically a way to set the left and right margins.
+4. While you're typing you may notice that some longer words appear split between two lines. Once you leave text entry mode, the editor will take over and format them correctly.
+
+### How to enter text entry mode
+To enter text entry mode:
+1. Type `TE` in the line command area where you want to start enter free-form text, and press <kbd>Enter</kbd>.
+2. You're not in power typing mode! You can type freely, and the text will automagically wrap to the next line when it reaches the right margin. 
+3. When you're done typing, press <kbd>ENTER</kbd> to exit text entry mode.
+
+### Visual Examples
+**Figure 1**: Shows the editor before text entry mode, with the `TE` command typed into the line command field.
+![Figure 1. Before TE mode is activated.](assets/images/kilobits/text-entry-mode-01.png)
+
+**Figure 2** Shows text entry mode has been activated and the pipe in the lower right corner.
+
+![Figure 2. After TE mode has been activated.](assets/images/kilobits/text-entry-mode-02.png)'
+
+**Figure 3** - Shows a very long string of text (note that super is cut off).
+
+![Figure 3. Shows long text with split text.](assets/images/kilobits/text-entry-mode-03.png)
+
+**Figure 4** - Shows that the long text has been properly formatted after <kbd>Enter</kbd> has been pressed.
+
+![Figure 4. Shows the formatted text after exiting text entry mode.](assets/images/kilobits/text-entry-mode-04.png)
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to use the `TE` line command. Until next time, may the code be with you.
