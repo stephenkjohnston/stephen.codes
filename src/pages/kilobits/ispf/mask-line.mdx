@@ -1,0 +1,40 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "z/OS ISPF Editor: Mask Line Command"
+description: |
+    I explore how to use the MASK line command to automate character insertion in the ISPF editor.
+publishDate: 2025-07-18 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Publish
+---
+
+
+## What does the `MASK` line command do?
+The `MASK` line command allows you to specify a specific character or characters to create a mask, and this mask will automagically appear on each new line. So, if you define a mask, and use line commands like [Text Entry (TE)](/kilobits/ispf/text-entry/), [Insert (I)](/kilobits/ispf/insert-line/), Text Split (TS), the mask will appear on each new line. This will continue until you remove the mask or exit the editor.
+
+### How do you add a line `MASK`?
+To add a line mask:
+
+1. First, type `MASK` in any line command area, then press <kbd>Enter</kbd>. The line changes to `=MASK>` and will initially be blank (it's waiting for you to paint some happy little trees).
+2. Now, type the characters you want to use for your mask on this line. For instance, if you're making a to-do list, you might enter `[ ]` to create a checkbox for each item.
+3. Next, when you're done, press <kbd>Enter</kbd> to set your mask.
+4. Finally, to see this in action, type `i` into the line command area, and press <kbd>Enter</kbd>. If everything goes as expected, you will something like this example: `000000 [ ] `. Now start working on that grocery list 🤣
+
+### How do to remove the line `MASK`?
+You can remove the mask using one of these methods:
+1. Use the [Delete (D)](/kilobits/ispf/delete-line/) command on the `=MASK>` line, followed by <kbd>Enter</kbd>.
+2. Typing `RESET` or `END` into the primary command line, followed by <kbd>Enter</kbd>.
+3. Ending your edit session by pressing <kbd>F3</kbd>. 
+
+### A Real-World Use for MASK
+I love writing documentation (in-code and other places), and I recently had the honor of doing a presentation at [EMMA's](https://www.emma.foundation/) Tech Talk Tuesdays. That night while going over some other commands like [Overlay](/kilobits/ispf/overlay-line/), I demonstrated how you could use a combination of `BOUNDS`, `TE`, and `MASK` to create documentation blocks in your code. Here is a summary of that portion of the talk:
+
+1. First, using the primary command `BOUNDS`, which is like setting the left and right margins in Microsoft Word, I set the boundaries to `9` and `63`. This gave me some breathing room in my doc block. 
+2. Next, I added two lines of asterisks (*) from column 7 (left) to 65 (right).
+3. Afterward, I typed `MASK` and added one asterisk at column 7 and one at column 65.
+4. Following this, I typed `TE` on the `=MASK>` line, and pressed <kbd>Enter</kbd> to use power typing mode (think free-form editing with word wrapping). 
+5. Finally, I typed a few meaningless comments and pressed Enter once more to exit power typing mode. The end result was a nice looking doc block.
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to use the `MASK` line command, and I presented a real-world use case for it. Until next time, may the code be with you.
