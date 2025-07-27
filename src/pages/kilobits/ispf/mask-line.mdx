@@ -11,7 +11,7 @@ status: Publish
 
 
 ## What does the `MASK` line command do?
-The `MASK` line command allows you to specify a specific character or characters to create a mask, and this mask will automagically appear on each new line. So, if you define a mask, and use line commands like [Text Entry (TE)](/kilobits/ispf/text-entry/), [Insert (I)](/kilobits/ispf/insert-line/), Text Split (TS), the mask will appear on each new line. This will continue until you remove the mask or exit the editor.
+The `MASK` line command allows you to specify a specific character or characters to create a mask, and this mask will automagically appear on each new line. So, if you define a mask, and use line commands like [Text Entry (TE)](/kilobits/ispf/text-entry/), [Insert (I)](/kilobits/ispf/insert-line/), Text Split (TS), the mask will appear on each new line. This will continue until you remove the mask because, as Dan Dirske pointed out to me, "The contents of the mask are retained in the current edit profile and are automatically used the next time you edit the same kind of data."
 
 ### How do you add a line `MASK`?
 To add a line mask:
@@ -22,10 +22,7 @@ To add a line mask:
 4. Finally, to see this in action, type `i` into the line command area, and press <kbd>Enter</kbd>. If everything goes as expected, you will something like this example: `000000 [ ] `. Now start working on that grocery list 🤣
 
 ### How do to remove the line `MASK`?
-You can remove the mask using one of these methods:
-1. Use the [Delete (D)](/kilobits/ispf/delete-line/) command on the `=MASK>` line, followed by <kbd>Enter</kbd>.
-2. Typing `RESET` or `END` into the primary command line, followed by <kbd>Enter</kbd>.
-3. Ending your edit session by pressing <kbd>F3</kbd>. 
+You can remove the mask by deleting the characters on `=MASK>` line, followed by <kbd>Enter</kbd>.
 
 ### A Real-World Use for MASK
 I love writing documentation (in-code and other places), and I recently had the honor of doing a presentation at [EMMA's](https://www.emma.foundation/) Tech Talk Tuesdays. That night while going over some other commands like [Overlay](/kilobits/ispf/overlay-line/), I demonstrated how you could use a combination of `BOUNDS`, `TE`, and `MASK` to create documentation blocks in your code. Here is a summary of that portion of the talk:
