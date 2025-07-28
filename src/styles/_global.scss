@@ -174,3 +174,35 @@ kbd {
 .cp_embed_wrapper {
     margin-block: 1rem;
 }
+
+table {
+    border: 2px solid var(--clr-gray-100);
+    border-collapse: collapse;
+
+    thead {
+        th {
+            padding: 0 .5rem;
+            background: var(--clr-gray-100);
+            color: var(--clr-white);
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                padding: 0 .5rem;
+
+                &:not(:last-child) {
+                    border-left: 2px solid var(--clr-gray-100);
+                    border-right: 2px solid var(--clr-gray-100);
+                }
+            }
+
+            &:not(:last-child) {
+                td {
+                    border-bottom: 2px solid var(--clr-gray-100);
+                }
+            }
+        }
+    }
+}

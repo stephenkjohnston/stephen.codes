@@ -1,0 +1,33 @@
+---
+layout: layouts/ArticleLayout.astro
+title: "Creating a Job Search Log Report"
+description: |
+    Explore how to boss COBOL with conditional statements -- the secret sauce for controlling your code's flow!
+publishDate: 2025-07-27 00:00:00
+topic: cobol
+status: Draft
+---
+## Overview
+In Washington State, when you're unemployed, you are required to maintain a [job search log](https://esd.wa.gov/media/pdf/1045/esd-job-search-logpdf/download?inline). Periodically, you'll meet with a representative and provide them with the searches you've done within the last two weeks. Since I store my logs in Excel, I can export this data quickly. However, because I love COBOL and need more practice writing reports, I decided to create a Job Search Log Report using GnuCOBOL. I also thought this would be a good opportunity to show how I approach writing a program in COBOL.
+
+## The Data
+Having created several reports on the mainframe—thanks to my pre-apprenticeship with [EMMA](https://emma.foundation)—I had a basic idea of how I wanted to structure my data. After doing a little normalization, here’s what I ended up with:
+
+| Field | Size | Type |
+|---|---|---|
+| Week Ending         | 8 bytes  | *Numeric*      |
+| Contact Date        | 8 bytes  | *Numeric*      |
+| Employer            | 47 bytes | *Alphanumeric* |
+| Job Title           | 77 bytes | *Alphanumeric* |
+| Contact Method      | 1 byte   | *Numeric*      |
+| Contact Type        | 1 byte   | *Numeric*      |
+| WorkSource Activity | 1 byte   | *Numeric*      |
+
+### Understanding the Data
+Now that 
+
+**Note**: For this sample, I have condensed the data for easier viewing.
+```
+0726202507252025  WorkSource Lewis  County Job Fair  122
+```
+
