@@ -1,0 +1,32 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "z/OS ISPF Editor: COLS Command"
+description: |
+    I explore the COLS command. This is a helpful tool for new programmers in ISPF Edit. It displays a column ruler on screen, which provides a visual guide for aligning code and data.
+publishDate: 2025-08-11 00:00:00-800
+language: ispf
+series: The ISPF Editor
+status: Draft
+---
+import CompanionVideo from 'components/Shared/CompanionVideo.astro';
+
+## The COLS Command
+
+<CompanionVideo video_id="9Qseiq-j7eE?si=iYxDZb3hIC6o9e6m" />
+
+New programmers tend to struggle to align code in fixed-column languages. The `COLS` (or COL) command provides a visual guide for aligning code and data. Both a primary and line command, but there are some differences, and we'll cover those as we dive more. You can also use the `COLS` command with the `BOUNDS` and `TABS` commands. These are more advanced topics, and we will not cover them today.
+
+### Reading the column indicator
+A common frustration is understaning how to read the column indicators.
+
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7--
+
+### The `COLS` Primary Command
+
+The `COLS` primary command displays a column indicator at the top of the data area. There are a few things of note here. First, you cannot interact with it, like you can with a line command. Second, it is sticky and does not scroll with the data. If you want to hide it, you must issue the COLS command in the command line area. RESET will not work.
+
+### The `COLS` Line Command
+
+### S
+
+
