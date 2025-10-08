@@ -17,5 +17,7 @@ export default function formatLanguage(language: string) {
       return "COBOL";
     case "ispf":
       return "ISPF";
+    case "rexx":
+      return "REXX";
   }
 }

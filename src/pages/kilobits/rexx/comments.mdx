@@ -1,0 +1,55 @@
+---
+layout: layouts/KilobitLayout.astro
+title: "Adding Comments in REXX"
+description: |
+    I cover how to add single-line and multi-line comments with REXX.
+publishDate: 2025-10-07 00:00:00-800
+language: rexx
+series: REXX Foundations
+status: Publish
+---
+import CompanionVideo from 'components/Shared/CompanionVideo.astro';
+
+<CompanionVideo video_id="ocAMTT0Y6WE?si=H8vV-57kmxN-8-zO" />
+
+Comments in REXX can be added using C-style comments. A C-style comment begins with `/*` and ends with `*/`. Everything in between is considered a comment and is ignored by the compiler. The very first comment you'll add to your exec: `/* REXX */`. While this is technically only required when writing a REXX script (or EXEC) on the mainframe (e.g., z/OS), it is still a good best practice. So, why is it required on the mainframe? When you're using an interpreter like Regina on a system like Windows, for instance, you have a file extension (e.g., .rexx). You don't have this luxury on the mainframe, so `/* REXX */` is how you can identify a REXX script from a <abbr title="Command List">CLIST</abbr> script.
+
+### How to add inline comments
+This is straightforward. Simply find the line of code you want to document and add a message between the /* */ next to it.
+
+```
+say "Hello, World" /* Display a message */
+```
+
+### How to add multi-line comments
+With multi-line comments you have a couple options. The first looks like this:
+```
+/*
+  this is an example
+  of a comment which spans
+  multiple lines
+*/
+```
+Since anything between the `/* */` is treated as a comment this is an easy way to achieve multi-line comments. However, the second option is my preferred method, and it's called a flower box.
+
+```
+/*******************************************************************/
+/* this is also an example                                         */
+/* of a comment which spans                                        */
+/* multiple lines                                                  */
+/*******************************************************************/
+```
+
+I use the flower box when writing lengthy comments or documenting procedures, like this:
+
+```
+/*******************************************************************/
+/* FUNCTION: ADD_JCL_COMMENT                                       */
+/* PURPOSE : HANDLES COMMENT CREATION IN JCL                       */
+/* RETURN  : NONE                                                  */
+/*******************************************************************/
+```
+
+
+## Summary
+In this [#kilobit](/kilobits), you learned how to use the and single and multi-line comments in REXX. Until next time, may the code be with you.
