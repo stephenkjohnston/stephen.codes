@@ -12,7 +12,7 @@ import BaseLayout from "layouts/BaseLayout.astro";
 export async function getStaticPaths({ paginate }) {
   const articles = (await getCollection("articles")).sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
-  );
+  ).filter(article => article.data.status === "Publish");
   return paginate(articles, {
     pageSize: 8,
   });

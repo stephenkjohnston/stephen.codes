@@ -1,0 +1,65 @@
+---
+import { TITLE } from "astro:env/client";
+import { SEO } from "astro-seo";
+import BaseLayout from "layouts/BaseLayout.astro";
+
+import RexxFoundationsIcon from 'assets/images/rexx/REXX_Foundations.png'
+---
+
+<SEO
+  title={`Kilobits &ndash; ${TITLE}`}
+  description="Fresh, byte-sized coding tips and tricks delivered weekly — HTML, CSS, JS, and more!"
+/>
+<BaseLayout>
+  <h1>REXX</h1>
+  <ul class="courses">
+    <li class="course">
+      <img src={RexxFoundationsIcon.src} alt="REXX Foundations" />
+      <div class="course-details">
+        <h3 class="course-title">REXX Foundations</h3>
+        <h4 class="course-meta">## Lessons &bull; ## Excercises</h4>
+        <p class="course-description">In this course, you'll learn the foundational concepts necessary for building effective REXX scripts using REGINA, a cross-platform interpreter (no mainframe required). You'll then apply your learning through engaging projects that reinforce each topic, solidifying your knowledge and skills.</p>
+      </div>
+    </li>
+  </ul>
+</BaseLayout>
+<style lang="scss">
+  .courses {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }  
+
+  .course {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+
+    @media (max-width: 48rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .course-icon {
+
+  }
+  .course-details {
+    display: flex;
+    flex-direction: column;
+    .course-title {
+      margin: 0;
+      font-size: var(--fs-xl);
+    }
+
+    .course-meta {
+      margin-block-start: 0;
+      color: var(--clr-purple-60);
+    }
+
+    .course-description {
+      margin: 0;
+      flex-grow: 1;
+      align-content: flex-end;
+    }
+  }
+</style>
