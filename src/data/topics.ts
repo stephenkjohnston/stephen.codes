@@ -41,4 +41,11 @@ export default [
     meta_description:
       "Original short stories written by me, where reality is twisted with exaggerated characters and events.",
   },
+  {
+    name: "REXX",
+    summary:
+      "Dive into comprehensive articles that delve into advanced REXX programming concepts and techniques.",
+    meta_description:
+      "In-depth REXX programming tutorials focusing on advanced topics for seasoned developers."
+  }
 ];

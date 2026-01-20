@@ -1,0 +1,95 @@
+---
+interface Props {
+  type: "info" | "warning" | "error" | "success";
+  title?: string;
+}
+
+const { type, title = type } = Astro.props;
+---
+
+<div
+  class={`notification ${type}`}
+  style={{ "--notification-title": `'${title}'` }}
+>
+  <slot />
+</div>
+<style lang="scss">
+  :root {
+    --notification-background-error: hsl(0, 100%, 90%);
+    --notification-title-background-error: hsl(0, 100%, 40%);
+
+    --notification-background-info: hsl(220, 100%, 90%);
+    --notification-title-background-info: hsl(220, 100%, 40%);
+
+    --notification-background-success: hsl(145, 100%, 90%);
+    --notification-title-background-success: hsl(145, 100%, 30%);
+
+    --notification-background-warning: hsl(47, 88%, 80%);
+    --notification-title-background-warning: hsl(47, 88%, 50%);
+  }
+  .notification {
+    margin-block: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--clr-gray-100);
+    position: relative;
+
+    & > :global(p) {
+      margin: 0.5rem 0 0;
+    }
+
+    &.info {
+      background-color: var(--notification-background-info);
+      color: var(--clr-gray-100);
+      border: 1px solid var(--notification-title-background-info);
+
+      &::before {
+        background-color: var(--notification-title-background-info);
+        color: var(--clr-white);
+      }
+    }
+
+    &.warning {
+      background-color: var(--notification-background-warning);
+      color: var(--clr-gray-100);
+      &::before {
+        background-color: var(--notification-title-background-warning);
+        border: 1px solid var(--clr-gray-100);
+      }
+    }
+
+    &.error {
+      background-color: var(--notification-background-error);
+      color: var(--clr-gray-100);
+      border: 1px solid var(--notification-title-background-error);
+
+      &::before {
+        background-color: var(--notification-title-background-error);
+        color: var(--clr-white);
+      }
+    }
+
+    &.success {
+      background-color: var(--notification-background-success);
+      color: var(--clr-gray-100);
+      border: 1px solid var(--notification-title-background-success);
+
+      &::before {
+        background-color: var(--notification-title-background-success);
+        color: var(--clr-white);
+      }
+    }
+
+    &::before {
+      content: var(--notification-title);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-700);
+      left: 50%;
+      line-height: 0.75;
+      padding: 0.5em 1rem;
+      position: absolute;
+      text-transform: uppercase;
+      top: -0.75rem;
+      transform: translateX(-50%);
+    }
+  }
+</style>

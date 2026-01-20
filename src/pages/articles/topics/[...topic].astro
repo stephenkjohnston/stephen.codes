@@ -22,10 +22,9 @@ export async function getStaticPaths() {
     const topicArticles = articles
       .filter((article) => slugify(article.data.topic) === slugify(topic.name))
       .sort(
-        (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+        (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
       );
 
-    console.log({ topic });
     return {
       params: { topic: slugify(topic.name) },
       props: {
